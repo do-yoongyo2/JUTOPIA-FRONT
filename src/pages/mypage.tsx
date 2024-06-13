@@ -19,16 +19,40 @@ import { useRouter } from "next/router";
 
 const MyPage: NextPage = () => {
   const [updateState, setUpdateState] = useState<"update" | "view">("view");
+  const name = useBoundStore((x) => x.name);
+  const setName = useBoundStore((x) => x.setName);
+  const [localName, setLocalName] = useState(name);
+
+  const username = useBoundStore((x) => x.username);
+  const setUsername = useBoundStore((x) => x.setUsername);
+  const [localUsername, setLocalUsername] = useState(username);
+
+  const updateProfile = () => {
+    setUpdateState("view");
+    setName(localName);
+    setUsername(localUsername);
+  };
 
   return (
     <div>
-      <MyPageTopBar updateState={updateState} setUpdateState={setUpdateState} />
+      <MyPageTopBar
+        updateState={updateState}
+        setUpdateState={setUpdateState}
+        updateProfile={updateProfile}
+      />
       <LeftBar selectedTab="마이페이지" />
       <div className="flex justify-center gap-3 pt-14 md:ml-24 lg:ml-64 lg:gap-12">
         <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
           <MypageTopSection
             updateState={updateState}
             setUpdateState={setUpdateState}
+            name={name}
+            localName={localName}
+            setLocalName={setLocalName}
+            username={username}
+            localUsername={localUsername}
+            setLocalUsername={setLocalUsername}
+            updateProfile={updateProfile}
           />
           <MypageStatsSection />
           <MypageRewardSection />
@@ -45,11 +69,19 @@ export default MyPage;
 type MyPageTopBarProps = {
   updateState: "update" | "view";
   setUpdateState: (state: "update" | "view") => void;
+  updateProfile: () => void;
 };
 
 type MypageTopSectionProps = {
   updateState: "update" | "view";
+  name: string;
+  localName: string;
+  setLocalName: (state: string) => void;
+  username: string;
+  localUsername: string;
+  setLocalUsername: (state: string) => void;
   setUpdateState: (state: "update" | "view") => void;
+  updateProfile: () => void;
 };
 
 const MyPageTopBar = (props: MyPageTopBarProps) => {
@@ -60,8 +92,8 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
   const router = useRouter();
 
   const handleLogOut = () => {
-    logOut();
-    router.push("/");
+    void logOut();
+    void router.push("/");
   };
 
   return (
@@ -123,10 +155,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
           <EditPencilSvg iconColor="darkgray" />
         </div>
       ) : (
-        <div
-          onClick={() => props.setUpdateState("view")}
-          style={{ cursor: "pointer" }}
-        >
+        <div onClick={props.updateProfile} style={{ cursor: "pointer" }}>
           <CheckSvg />
         </div>
       )}
@@ -137,22 +166,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
 const MypageTopSection = (props: MypageTopSectionProps) => {
   const router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);
-
-  const name = useBoundStore((x) => x.name);
-  const setName = useBoundStore((x) => x.setName);
-  const [localName, setLocalName] = useState(name);
-
-  const username = useBoundStore((x) => x.username);
-  const setUsername = useBoundStore((x) => x.setUsername);
-  const [localUsername, setLocalUsername] = useState(username);
-
   const joinedAt = useBoundStore((x) => x.joinedAt).format("MMMM YYYY");
-
-  const updateProfile = () => {
-    props.setUpdateState("view");
-    setName(localName);
-    setUsername(localUsername);
-  };
 
   useEffect(() => {
     if (!loggedIn) {
@@ -163,32 +177,39 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
   return (
     <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
       <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl">
-        {username.charAt(0).toUpperCase()}
+        {props.username.charAt(0).toUpperCase()}
       </div>
-      <div className="flex grow flex-col justify-between gap-3">
+      <div
+        className="flex grow flex-col justify-between gap-3"
+        style={{ width: "70%" }}
+      >
         <div className="flex flex-col gap-2">
           <div>
             {props.updateState === "view" ? (
               <div>
-                <h1 className="text-2xl font-bold">{name}</h1>
-                <div className="text-sm text-gray-400">{username}</div>
+                <h1 className="text-2xl font-bold">{props.name}</h1>
+                <div className="text-sm text-gray-400">{props.username}</div>
               </div>
             ) : (
               <div>
                 <input
                   type="text"
                   className="text-2xl font-bold"
-                  value={localName}
-                  style={{ borderBottom: "1px solid gray", outline: "none" }}
-                  onChange={(e) => setLocalName(e.target.value)}
+                  value={props.localName}
+                  style={{
+                    borderBottom: "1px solid gray",
+                    outline: "none",
+                    maxWidth: "95%",
+                  }}
+                  onChange={(e) => props.setLocalName(e.target.value)}
                 />
                 <br />
                 <input
                   type="text"
                   className="text-sm text-gray-400"
-                  value={localUsername}
+                  value={props.localUsername}
                   style={{ borderBottom: "1px solid gray", outline: "none" }}
-                  onChange={(e) => setLocalUsername(e.target.value)}
+                  onChange={(e) => props.setLocalUsername(e.target.value)}
                 />
               </div>
             )}
@@ -211,7 +232,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
       ) : (
         <div
           className="hidden items-center gap-2 self-start rounded-2xl border-b-4 border-blue-500 bg-blue-400 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 md:flex"
-          onClick={updateProfile}
+          onClick={props.updateProfile}
           style={{ cursor: "pointer" }}
         >
           Save changes

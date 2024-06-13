@@ -1,9 +1,10 @@
 import type { ComponentProps } from "react";
 import React from "react";
 
-export const LogoutIconSvg = (props: ComponentProps<"svg">) => {
+export const LogoutIconSvg = ({ className }: ComponentProps<"svg">) => {
   return (
     <svg
+      className={className}
       width="46"
       height="46"
       viewBox="0 0 46 46"

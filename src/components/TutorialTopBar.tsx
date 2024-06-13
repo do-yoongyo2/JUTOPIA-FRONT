@@ -51,8 +51,8 @@ export const TutorialTopBar = ({
   const router = useRouter();
 
   const handleLogOut = () => {
-    logOut();
-    router.push("/");
+    void logOut();
+    void router.push("/");
   };
 
   return (

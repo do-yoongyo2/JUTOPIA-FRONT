@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Image from "next/image";
 import React from "react";
 import { LandingPageHeader } from "~/components/LandingPageHeader";
 import { useLoginScreen, LoginScreen } from "~/components/LoginScreen";
@@ -9,7 +10,11 @@ const Home: NextPage = () => {
     <main className="flex min-h-screen flex-col items-center justify-center text-black">
       <LandingPageHeader />
       <div className="flex w-full flex-col items-center justify-center gap-3 px-4 py-16 md:flex-row md:gap-36">
-        <img src="mainimg.svg" style={{ maxWidth: "360px", width: "50vw" }} />
+        <Image
+          alt="stock image"
+          src="mainimg.svg"
+          style={{ maxWidth: "360px", width: "50vw" }}
+        />
         <div>
           <p style={{ fontFamily: "TTLaundryGothicB", fontSize: "50px" }}>
             주식 첫걸음, <br />
