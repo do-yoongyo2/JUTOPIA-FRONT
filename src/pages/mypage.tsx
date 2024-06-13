@@ -41,7 +41,7 @@ const MyPage: NextPage = () => {
         updateProfile={updateProfile}
       />
       <LeftBar selectedTab="마이페이지" />
-      <div className="flex justify-center gap-3 pt-14 md:ml-24 lg:ml-64 lg:gap-12">
+      <div className="flex justify-center gap-3 pt-14 md:ml-[8rem] lg:ml-64 lg:gap-12">
         <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
           <MypageTopSection
             updateState={updateState}
@@ -176,15 +176,15 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
 
   return (
     <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
-      <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl">
+      <div
+        className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl"
+        style={{ minWidth: "80px" }}
+      >
         {props.username.charAt(0).toUpperCase()}
       </div>
-      <div
-        className="flex grow flex-col justify-between gap-3"
-        style={{ width: "70%" }}
-      >
+      <div className="flex grow flex-col justify-between gap-3">
         <div className="flex flex-col gap-2">
-          <div>
+          <div style={{ maxWidth: "16rem" }}>
             {props.updateState === "view" ? (
               <div>
                 <h1 className="text-2xl font-bold">{props.name}</h1>
