@@ -162,11 +162,9 @@ const getTileTooltipLeftOffset = ({
 };
 
 const getTileColors = ({
-  tileType,
   status,
   defaultColors,
 }: {
-  tileType: TileType;
   status: TileStatus;
   defaultColors: `border-${string} bg-${string}`;
 }): `border-${string} bg-${string}` => {
@@ -360,7 +358,6 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                           className={[
                             "absolute m-3 rounded-full border-b-8 p-4",
                             getTileColors({
-                              tileType: tile.type,
                               status,
                               defaultColors: `${unit.borderColor} ${unit.backgroundColor}`,
                             }),

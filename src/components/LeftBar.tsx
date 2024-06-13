@@ -18,8 +18,8 @@ export const LeftBar = ({ selectedTab }: { selectedTab: Tab | null }) => {
   const bottomBarItems = useBottomBarItems();
 
   const handleLogOut = () => {
-    logOut();
-    router.push("/");
+    void logOut();
+    void router.push("/");
   };
 
   return (

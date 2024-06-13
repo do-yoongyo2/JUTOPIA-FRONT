@@ -17,8 +17,8 @@ const TopBar = (props: TopBarProps) => {
   const router = useRouter();
 
   const handleLogOut = () => {
-    logOut();
-    router.push("/");
+    void logOut();
+    void router.push("/");
   };
 
   return (
