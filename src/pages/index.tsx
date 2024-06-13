@@ -13,6 +13,8 @@ const Home: NextPage = () => {
         <Image
           alt="stock image"
           src="mainimg.svg"
+          width={560}
+          height={560}
           style={{ maxWidth: "360px", width: "50vw" }}
         />
         <div>
