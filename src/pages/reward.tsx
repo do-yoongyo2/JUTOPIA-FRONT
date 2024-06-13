@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import TopBar from "~/components/TopBar";

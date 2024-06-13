@@ -13,7 +13,6 @@ import {
   MoreOptionsSvg,
   LogoutIconSvg,
 } from "~/components/Svgs";
-import { Flag } from "~/components/Flag";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -148,7 +147,6 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
   const [localUsername, setLocalUsername] = useState(username);
 
   const joinedAt = useBoundStore((x) => x.joinedAt).format("MMMM YYYY");
-  const language = useBoundStore((x) => x.language);
 
   const updateProfile = () => {
     props.setUpdateState("view");
@@ -200,8 +198,6 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
             <span className="text-gray-500">{`Joined ${joinedAt}`}</span>
           </div>
         </div>
-
-        <Flag language={language} width={40} />
       </div>
       {props.updateState === "view" ? (
         <div

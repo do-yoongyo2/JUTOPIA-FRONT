@@ -1,21 +1,13 @@
 import type { NextPage } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import {
-  AppleSvg,
   BigCloseSvg,
-  BoySvg,
   CloseSvg,
   DoneSvg,
-  LessonFastForwardEndFailSvg,
-  LessonFastForwardEndPassSvg,
-  LessonFastForwardStartSvg,
   LessonTopBarEmptyHeart,
   LessonTopBarHeart,
-  WomanSvg,
 } from "~/components/Svgs";
-import womanPng from "../../public/woman.png";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useRouter } from "next/router";
 
@@ -23,21 +15,21 @@ const lessonProblem1 = {
   type: "SELECT_1_OF_3",
   question: `Which one of these is "the apple"?`,
   answers: [
-    { icon: <AppleSvg />, name: "la manzana" },
-    { icon: <BoySvg />, name: "el niño" },
-    { icon: <WomanSvg />, name: "la mujer" },
+    { icon: <LessonTopBarEmptyHeart />, name: "la manzana" },
+    { icon: <LessonTopBarEmptyHeart />, name: "el niño" },
+    { icon: <LessonTopBarEmptyHeart />, name: "la mujer" },
   ],
   correctAnswer: 0,
 } as const;
 
-const lessonProblem2 = {
-  type: "WRITE_IN_ENGLISH",
-  question: "El niño",
-  answerTiles: ["woman", "milk", "water", "I", "The", "boy"],
-  correctAnswer: [4, 5],
-} as const;
+// const lessonProblem2 = {
+//   type: "WRITE_IN_ENGLISH",
+//   question: "El niño",
+//   answerTiles: ["woman", "milk", "water", "I", "The", "boy"],
+//   correctAnswer: [4, 5],
+// } as const;
 
-const lessonProblems = [lessonProblem1, lessonProblem2];
+const lessonProblems = [lessonProblem1, lessonProblem1];
 
 const numbersEqual = (a: readonly number[], b: readonly number[]): boolean => {
   return a.length === b.length && a.every((_, i) => a[i] === b[i]);
@@ -78,7 +70,6 @@ const Lesson: NextPage = () => {
 
   const totalCorrectAnswersNeeded = 2;
 
-  const [isStartingLesson, setIsStartingLesson] = useState(true);
   const hearts =
     "fast-forward" in router.query &&
     !isNaN(Number(router.query["fast-forward"]))
@@ -101,17 +92,23 @@ const Lesson: NextPage = () => {
       ...questionResults,
       {
         question: problem.question,
-        yourResponse:
-          problem.type === "SELECT_1_OF_3"
-            ? problem.answers[selectedAnswer ?? 0]?.name ?? ""
-            : selectedAnswers.map((i) => problem.answerTiles[i]).join(" "),
-        correctResponse:
-          problem.type === "SELECT_1_OF_3"
-            ? problem.answers[problem.correctAnswer].name
-            : problem.correctAnswer
-                .map((i) => problem.answerTiles[i])
-                .join(" "),
+        yourResponse: problem.answers[selectedAnswer ?? 0]?.name ?? "",
+        correctResponse: problem.answers[problem.correctAnswer].name,
       },
+      // 기존 코드 (타입 2개)
+      // {
+      //   question: problem.question,
+      //   yourResponse:
+      //     problem.type === "SELECT_1_OF_3"
+      //       ? problem.answers[selectedAnswer ?? 0]?.name ?? ""
+      //       : selectedAnswers.map((i) => problem.answerTiles[i]).join(" "),
+      //   correctResponse:
+      //     problem.type === "SELECT_1_OF_3"
+      //       ? problem.answers[problem.correctAnswer].name
+      //       : problem.correctAnswer
+      //           .map((i) => problem.answerTiles[i])
+      //           .join(" "),
+      // },
     ]);
   };
 
@@ -127,44 +124,6 @@ const Lesson: NextPage = () => {
     setSelectedAnswer(null);
     setCorrectAnswerShown(true);
   };
-
-  const unitNumber = Number(router.query["fast-forward"]);
-
-  if (hearts !== null && hearts < 0 && !correctAnswerShown) {
-    return (
-      <LessonFastForwardEndFail
-        unitNumber={unitNumber}
-        reviewLessonShown={reviewLessonShown}
-        setReviewLessonShown={setReviewLessonShown}
-        questionResults={questionResults}
-      />
-    );
-  }
-
-  if (
-    hearts !== null &&
-    hearts >= 0 &&
-    !correctAnswerShown &&
-    correctAnswerCount >= totalCorrectAnswersNeeded
-  ) {
-    return (
-      <LessonFastForwardEndPass
-        unitNumber={unitNumber}
-        reviewLessonShown={reviewLessonShown}
-        setReviewLessonShown={setReviewLessonShown}
-        questionResults={questionResults}
-      />
-    );
-  }
-
-  if (hearts !== null && isStartingLesson) {
-    return (
-      <LessonFastForwardStart
-        unitNumber={unitNumber}
-        setIsStartingLesson={setIsStartingLesson}
-      />
-    );
-  }
 
   if (correctAnswerCount >= totalCorrectAnswersNeeded && !correctAnswerShown) {
     return (
@@ -201,25 +160,25 @@ const Lesson: NextPage = () => {
       );
     }
 
-    case "WRITE_IN_ENGLISH": {
-      return (
-        <ProblemWriteInEnglish
-          problem={problem}
-          correctAnswerCount={correctAnswerCount}
-          totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
-          selectedAnswers={selectedAnswers}
-          setSelectedAnswers={setSelectedAnswers}
-          quitMessageShown={quitMessageShown}
-          correctAnswerShown={correctAnswerShown}
-          setQuitMessageShown={setQuitMessageShown}
-          isAnswerCorrect={isAnswerCorrect}
-          onCheckAnswer={onCheckAnswer}
-          onFinish={onFinish}
-          onSkip={onSkip}
-          hearts={hearts}
-        />
-      );
-    }
+    // case "WRITE_IN_ENGLISH": {
+    //   return (
+    //     <ProblemWriteInEnglish
+    //       problem={problem}
+    //       correctAnswerCount={correctAnswerCount}
+    //       totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
+    //       selectedAnswers={selectedAnswers}
+    //       setSelectedAnswers={setSelectedAnswers}
+    //       quitMessageShown={quitMessageShown}
+    //       correctAnswerShown={correctAnswerShown}
+    //       setQuitMessageShown={setQuitMessageShown}
+    //       isAnswerCorrect={isAnswerCorrect}
+    //       onCheckAnswer={onCheckAnswer}
+    //       onFinish={onFinish}
+    //       onSkip={onSkip}
+    //       hearts={hearts}
+    //     />
+    //   );
+    // }
   }
 };
 
@@ -519,131 +478,131 @@ const ProblemSelect1Of3 = ({
   );
 };
 
-const ProblemWriteInEnglish = ({
-  problem,
-  correctAnswerCount,
-  totalCorrectAnswersNeeded,
-  selectedAnswers,
-  setSelectedAnswers,
-  quitMessageShown,
-  correctAnswerShown,
-  setQuitMessageShown,
-  isAnswerCorrect,
-  onCheckAnswer,
-  onFinish,
-  onSkip,
-  hearts,
-}: {
-  problem: typeof lessonProblem2;
-  correctAnswerCount: number;
-  totalCorrectAnswersNeeded: number;
-  selectedAnswers: number[];
-  setSelectedAnswers: React.Dispatch<React.SetStateAction<number[]>>;
-  correctAnswerShown: boolean;
-  quitMessageShown: boolean;
-  setQuitMessageShown: React.Dispatch<React.SetStateAction<boolean>>;
-  isAnswerCorrect: boolean;
-  onCheckAnswer: () => void;
-  onFinish: () => void;
-  onSkip: () => void;
-  hearts: number | null;
-}) => {
-  const { question, correctAnswer, answerTiles } = problem;
+// const ProblemWriteInEnglish = ({
+//   problem,
+//   correctAnswerCount,
+//   totalCorrectAnswersNeeded,
+//   selectedAnswers,
+//   setSelectedAnswers,
+//   quitMessageShown,
+//   correctAnswerShown,
+//   setQuitMessageShown,
+//   isAnswerCorrect,
+//   onCheckAnswer,
+//   onFinish,
+//   onSkip,
+//   hearts,
+// }: {
+//   problem: typeof lessonProblem2;
+//   correctAnswerCount: number;
+//   totalCorrectAnswersNeeded: number;
+//   selectedAnswers: number[];
+//   setSelectedAnswers: React.Dispatch<React.SetStateAction<number[]>>;
+//   correctAnswerShown: boolean;
+//   quitMessageShown: boolean;
+//   setQuitMessageShown: React.Dispatch<React.SetStateAction<boolean>>;
+//   isAnswerCorrect: boolean;
+//   onCheckAnswer: () => void;
+//   onFinish: () => void;
+//   onSkip: () => void;
+//   hearts: number | null;
+// }) => {
+//   const { question, correctAnswer, answerTiles } = problem;
 
-  return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
-      <div className="flex grow flex-col items-center gap-5">
-        <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
-          <ProgressBar
-            correctAnswerCount={correctAnswerCount}
-            totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
-            setQuitMessageShown={setQuitMessageShown}
-            hearts={hearts}
-          />
-        </div>
-        <section className="flex max-w-2xl grow flex-col gap-5 self-center sm:items-center sm:justify-center sm:gap-24">
-          <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
-            Write this in English
-          </h1>
+//   return (
+//     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+//       <div className="flex grow flex-col items-center gap-5">
+//         <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
+//           <ProgressBar
+//             correctAnswerCount={correctAnswerCount}
+//             totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
+//             setQuitMessageShown={setQuitMessageShown}
+//             hearts={hearts}
+//           />
+//         </div>
+//         <section className="flex max-w-2xl grow flex-col gap-5 self-center sm:items-center sm:justify-center sm:gap-24">
+//           <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
+//             Write this in English
+//           </h1>
 
-          <div className="w-full">
-            <div className="flex items-center gap-2 px-2">
-              <Image src={womanPng} alt="" width={92} height={115} />
-              <div className="relative ml-2 w-fit rounded-2xl border-2 border-gray-200 p-4">
-                {question}
-                <div
-                  className="absolute h-4 w-4 rotate-45 border-b-2 border-l-2 border-gray-200 bg-white"
-                  style={{
-                    top: "calc(50% - 8px)",
-                    left: "-10px",
-                  }}
-                ></div>
-              </div>
-            </div>
+//           <div className="w-full">
+//             <div className="flex items-center gap-2 px-2">
+//               <Image src={challengeSvg} alt="" width={92} height={115} />
+//               <div className="relative ml-2 w-fit rounded-2xl border-2 border-gray-200 p-4">
+//                 {question}
+//                 <div
+//                   className="absolute h-4 w-4 rotate-45 border-b-2 border-l-2 border-gray-200 bg-white"
+//                   style={{
+//                     top: "calc(50% - 8px)",
+//                     left: "-10px",
+//                   }}
+//                 ></div>
+//               </div>
+//             </div>
 
-            <div className="flex min-h-[60px] flex-wrap gap-1 border-b-2 border-t-2 border-gray-200 py-1">
-              {selectedAnswers.map((i) => {
-                return (
-                  <button
-                    key={i}
-                    className="rounded-2xl border-2 border-b-4 border-gray-200 p-2 text-gray-700"
-                    onClick={() => {
-                      setSelectedAnswers((selectedAnswers) => {
-                        return selectedAnswers.filter((x) => x !== i);
-                      });
-                    }}
-                  >
-                    {answerTiles[i]}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex flex-wrap justify-center gap-1">
-            {answerTiles.map((answerTile, i) => {
-              return (
-                <button
-                  key={i}
-                  className={
-                    selectedAnswers.includes(i)
-                      ? "rounded-2xl border-2 border-b-4 border-gray-200 bg-gray-200 p-2 text-gray-200"
-                      : "rounded-2xl border-2 border-b-4 border-gray-200 p-2 text-gray-700"
-                  }
-                  disabled={selectedAnswers.includes(i)}
-                  onClick={() =>
-                    setSelectedAnswers((selectedAnswers) => {
-                      if (selectedAnswers.includes(i)) {
-                        return selectedAnswers;
-                      }
-                      return [...selectedAnswers, i];
-                    })
-                  }
-                >
-                  {answerTile}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-      </div>
+//             <div className="flex min-h-[60px] flex-wrap gap-1 border-b-2 border-t-2 border-gray-200 py-1">
+//               {selectedAnswers.map((i) => {
+//                 return (
+//                   <button
+//                     key={i}
+//                     className="rounded-2xl border-2 border-b-4 border-gray-200 p-2 text-gray-700"
+//                     onClick={() => {
+//                       setSelectedAnswers((selectedAnswers) => {
+//                         return selectedAnswers.filter((x) => x !== i);
+//                       });
+//                     }}
+//                   >
+//                     {answerTiles[i]}
+//                   </button>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//           <div className="flex flex-wrap justify-center gap-1">
+//             {answerTiles.map((answerTile, i) => {
+//               return (
+//                 <button
+//                   key={i}
+//                   className={
+//                     selectedAnswers.includes(i)
+//                       ? "rounded-2xl border-2 border-b-4 border-gray-200 bg-gray-200 p-2 text-gray-200"
+//                       : "rounded-2xl border-2 border-b-4 border-gray-200 p-2 text-gray-700"
+//                   }
+//                   disabled={selectedAnswers.includes(i)}
+//                   onClick={() =>
+//                     setSelectedAnswers((selectedAnswers) => {
+//                       if (selectedAnswers.includes(i)) {
+//                         return selectedAnswers;
+//                       }
+//                       return [...selectedAnswers, i];
+//                     })
+//                   }
+//                 >
+//                   {answerTile}
+//                 </button>
+//               );
+//             })}
+//           </div>
+//         </section>
+//       </div>
 
-      <CheckAnswer
-        correctAnswer={correctAnswer.map((i) => answerTiles[i]).join(" ")}
-        correctAnswerShown={correctAnswerShown}
-        isAnswerCorrect={isAnswerCorrect}
-        isAnswerSelected={selectedAnswers.length > 0}
-        onCheckAnswer={onCheckAnswer}
-        onFinish={onFinish}
-        onSkip={onSkip}
-      />
+//       <CheckAnswer
+//         correctAnswer={correctAnswer.map((i) => answerTiles[i]).join(" ")}
+//         correctAnswerShown={correctAnswerShown}
+//         isAnswerCorrect={isAnswerCorrect}
+//         isAnswerSelected={selectedAnswers.length > 0}
+//         onCheckAnswer={onCheckAnswer}
+//         onFinish={onFinish}
+//         onSkip={onSkip}
+//       />
 
-      <QuitMessage
-        quitMessageShown={quitMessageShown}
-        setQuitMessageShown={setQuitMessageShown}
-      />
-    </div>
-  );
-};
+//       <QuitMessage
+//         quitMessageShown={quitMessageShown}
+//         setQuitMessageShown={setQuitMessageShown}
+//       />
+//     </div>
+//   );
+// };
 
 const LessonComplete = ({
   correctAnswerCount,
@@ -666,8 +625,6 @@ const LessonComplete = ({
   const isPractice = "practice" in router.query;
 
   const increaseXp = useBoundStore((x) => x.increaseXp);
-  const addToday = useBoundStore((x) => x.addToday);
-  const increaseLingots = useBoundStore((x) => x.increaseLingots);
   const increaseLessonsCompleted = useBoundStore(
     (x) => x.increaseLessonsCompleted,
   );
@@ -718,8 +675,6 @@ const LessonComplete = ({
             href="/tutorial"
             onClick={() => {
               increaseXp(correctAnswerCount);
-              addToday();
-              increaseLingots(isPractice ? 0 : 1);
               if (!isPractice) {
                 increaseLessonsCompleted();
               }
@@ -837,139 +792,6 @@ const ReviewLesson = ({
           })}
         </div>
       </div>
-    </div>
-  );
-};
-
-const LessonFastForwardStart = ({
-  unitNumber,
-  setIsStartingLesson,
-}: {
-  unitNumber: number;
-  setIsStartingLesson: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  return (
-    <div className="flex min-h-screen flex-col px-5 py-8 text-center">
-      <div className="flex grow flex-col items-center justify-center gap-5">
-        <LessonFastForwardStartSvg />
-        <h1 className="text-lg font-bold">
-          Want to jump to Unit {unitNumber}?
-        </h1>
-        <p className="text-sm text-gray-400">
-          {`Pass the test to jump ahead. We won't make it easy for you though.`}
-        </p>
-      </div>
-      <div className="flex flex-col gap-5"></div>
-      <section className="border-gray-200 sm:border-t-2 sm:p-10">
-        <div className="mx-auto flex max-w-5xl flex-col-reverse items-center gap-5 sm:flex-row sm:justify-between">
-          <Link
-            href="/tutorial"
-            className="font-bold uppercase text-blue-400 transition hover:brightness-110"
-          >
-            Maybe later
-          </Link>
-          <button
-            className="w-full rounded-2xl border-b-4 border-blue-500 bg-blue-400 p-3 font-bold uppercase text-white transition hover:brightness-110 sm:min-w-[150px] sm:max-w-fit"
-            onClick={() => setIsStartingLesson(false)}
-          >
-            {`Let's go`}
-          </button>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-const LessonFastForwardEndFail = ({
-  unitNumber,
-  reviewLessonShown,
-  setReviewLessonShown,
-  questionResults,
-}: {
-  unitNumber: number;
-  reviewLessonShown: boolean;
-  setReviewLessonShown: React.Dispatch<React.SetStateAction<boolean>>;
-  questionResults: QuestionResult[];
-}) => {
-  return (
-    <div className="flex min-h-screen flex-col px-5 py-8 text-center">
-      <div className="flex grow flex-col items-center justify-center gap-5">
-        <LessonFastForwardEndFailSvg />
-        <h1 className="text-2xl font-bold">
-          {`You didn't unlock Unit ${unitNumber}`}
-        </h1>
-        <p className="text-lg text-gray-500">
-          {`Don't worry! Practice makes perfect.`}
-        </p>
-      </div>
-      <section className="border-gray-200 sm:border-t-2 sm:p-10">
-        <div className="mx-auto flex max-w-5xl sm:justify-between">
-          <button
-            className="hidden rounded-2xl border-2 border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:block sm:min-w-[150px] sm:max-w-fit"
-            onClick={() => setReviewLessonShown(true)}
-          >
-            Review lesson
-          </button>
-          <Link
-            className="flex w-full items-center justify-center rounded-2xl border-b-4 border-blue-600 bg-blue-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
-            href="/tutorial"
-          >
-            Continue
-          </Link>
-        </div>
-      </section>
-      <ReviewLesson
-        reviewLessonShown={reviewLessonShown}
-        setReviewLessonShown={setReviewLessonShown}
-        questionResults={questionResults}
-      />
-    </div>
-  );
-};
-
-const LessonFastForwardEndPass = ({
-  unitNumber,
-  reviewLessonShown,
-  setReviewLessonShown,
-  questionResults,
-}: {
-  unitNumber: number;
-  reviewLessonShown: boolean;
-  setReviewLessonShown: React.Dispatch<React.SetStateAction<boolean>>;
-  questionResults: QuestionResult[];
-}) => {
-  const jumpToUnit = useBoundStore((x) => x.jumpToUnit);
-  return (
-    <div className="flex min-h-screen flex-col px-5 py-8 text-center">
-      <div className="flex grow flex-col items-center justify-center gap-5">
-        <LessonFastForwardEndPassSvg />
-        <h1 className="text-2xl font-bold">You unlocked Unit {unitNumber}!</h1>
-        <p className="text-lg text-gray-500">
-          Way to go! You’re making great strides!
-        </p>
-      </div>
-      <section className="border-gray-200 sm:border-t-2 sm:p-10">
-        <div className="mx-auto flex max-w-5xl sm:justify-between">
-          <button
-            className="hidden rounded-2xl border-2 border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:block sm:min-w-[150px] sm:max-w-fit"
-            onClick={() => setReviewLessonShown(true)}
-          >
-            Review lesson
-          </button>
-          <Link
-            className="flex w-full items-center justify-center rounded-2xl border-b-4 border-blue-600 bg-blue-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
-            href="/tutorial"
-            onClick={() => jumpToUnit(unitNumber)}
-          >
-            Continue
-          </Link>
-        </div>
-      </section>
-      <ReviewLesson
-        reviewLessonShown={reviewLessonShown}
-        setReviewLessonShown={setReviewLessonShown}
-        questionResults={questionResults}
-      />
     </div>
   );
 };
