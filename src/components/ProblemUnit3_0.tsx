@@ -88,17 +88,18 @@ const ProblemUnit3_0 = () => {
         </div>
         <div className="max-w-2xl">
           <h1 className="mb-4 text-2xl font-bold">{currentProblem.problem}</h1>
-          {currentProblem.problemDetail && (
-            <div className="mb-4">
-              {Array.isArray(currentProblem.problemDetail) ? (
-                currentProblem.problemDetail.map((detail, index) => (
-                  <p key={index}>{detail}</p>
-                ))
-              ) : (
-                <p>{currentProblem.problemDetail}</p>
-              )}
-            </div>
-          )}
+          {currentProblem.problemDetail &&
+            currentProblem.problemDetail !== "null" && (
+              <div className="mb-4">
+                {Array.isArray(currentProblem.problemDetail) ? (
+                  currentProblem.problemDetail.map((detail, index) => (
+                    <p key={index}>{detail}</p>
+                  ))
+                ) : (
+                  <p>{currentProblem.problemDetail}</p>
+                )}
+              </div>
+            )}
           <ul>
             {currentProblem.problemSelect.map((option, index) => (
               <li
