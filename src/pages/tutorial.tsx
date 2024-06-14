@@ -555,7 +555,7 @@ const HoverLabel = ({
       <div
         className="absolute h-3 w-3 rotate-45 border-b-2 border-r-2 border-gray-200 bg-white"
         style={{ left: "calc(50% - 8px)", bottom: "-8px" }}
-      ></div>
+      />
     </div>
   );
 };
