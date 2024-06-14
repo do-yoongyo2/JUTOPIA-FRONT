@@ -11,7 +11,6 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <meta name="description" content="Jutopia web app written with React" />
         <link rel="icon" href="/jutopia-favicon.svg" />
         <meta name="theme-color" content="#0046ff" />
-        <link rel="manifest" href="/app.webmanifest" />
       </Head>
       <Component {...pageProps} />
     </>
