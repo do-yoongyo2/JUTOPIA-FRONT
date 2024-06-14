@@ -11,7 +11,7 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      <ProblemUnit2_4 />
+      {/* <ProblemUnit2_4 /> */}
 
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
