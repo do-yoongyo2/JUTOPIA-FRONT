@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import TestExample from "~/components/TestExample";
+import ProblemUnit2_4 from "~/components/ProblemUnit2_4";
 
 const Lesson: NextPage = () => {
   return (
@@ -11,7 +11,7 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      <TestExample />
+      <ProblemUnit2_4 />
 
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
