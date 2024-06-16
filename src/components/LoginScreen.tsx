@@ -3,6 +3,8 @@ import { CloseSvg } from "./Svgs";
 import React, { useEffect, useRef, useState } from "react";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useRouter } from "next/router";
+import { signup, login } from "~/apis/user";
+import Error from "next/error";
 
 export type LoginScreenState = "HIDDEN" | "LOGIN" | "SIGNUP";
 
@@ -30,10 +32,12 @@ export const LoginScreen = ({
   const router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);
   const logIn = useBoundStore((x) => x.logIn);
-  const setUsername = useBoundStore((x) => x.setUsername);
+  const setEmail = useBoundStore((x) => x.setEmail);
   const setName = useBoundStore((x) => x.setName);
 
   const nameInputRef = useRef<null | HTMLInputElement>(null);
+  const emailInputRef = useRef<null | HTMLInputElement>(null);
+  const passwordInputRef = useRef<null | HTMLInputElement>(null);
 
   useEffect(() => {
     if (loginScreenState !== "HIDDEN" && loggedIn) {
@@ -41,14 +45,68 @@ export const LoginScreen = ({
     }
   }, [loginScreenState, loggedIn, setLoginScreenState]);
 
-  const logInAndSetUserProperties = () => {
+  const handleSignUp = async () => {
+    // console.log("Sign Up"); test
     const name =
       nameInputRef.current?.value.trim() || Math.random().toString().slice(2);
     const username = name.replace(/ +/g, "-");
-    setUsername(username);
-    setName(name);
-    logIn();
-    void router.push("/home");
+
+    try {
+      const response = await signup(
+        username,
+        emailInputRef.current?.value.trim() || "",
+        passwordInputRef.current?.value.trim() || "",
+      );
+
+      if (response.status === 201) {
+        const data = await response.data;
+        const username = data.username; // 서버에서 반환된 데이터에서 이름 가져오기
+        const email = data.email;
+        setEmail(email);
+        setName(username); // 이름 설정
+
+        logIn(); // Assuming logIn updates the logged-in state
+        router.push("/home");
+      } else {
+        const data = await response;
+        console.error("Failed to sign up:", data);
+        // Handle error: Display message to user, etc.
+      }
+    } catch (error: any) {
+      console.error("Failed to sign up:", error.message);
+      // Handle error: Display message to user, etc.
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await login(
+        emailInputRef.current?.value.trim() || "",
+        passwordInputRef.current?.value.trim() || "",
+      );
+      if (response.status === 200) {
+        const data = await response.data;
+        const token = data.token;
+
+        localStorage.setItem("token", token);
+
+        const username = data.username;
+        const email = data.email;
+
+        setName(username);
+        setEmail(email);
+
+        logIn(); // Assuming logIn updates the logged-in state
+        router.push("/home");
+      } else {
+        console.log(response);
+        const data = await response.data();
+        console.error("Failed to log in:", data.message);
+        // Handle error: Display message to user, etc.
+      }
+    } catch (error: any) {
+      console.error("Failed to login:", error.message);
+    }
   };
 
   return (
@@ -98,12 +156,14 @@ export const LoginScreen = ({
                   ? "Email or username (optional)"
                   : "Email (optional)"
               }
+              ref={emailInputRef}
             />
             <div className="relative flex grow">
               <input
                 className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
                 placeholder="Password (optional)"
                 type="password"
+                ref={passwordInputRef}
               />
               {loginScreenState === "LOGIN" && (
                 <div className="absolute bottom-0 right-0 top-0 flex items-center justify-center pr-5">
@@ -119,7 +179,8 @@ export const LoginScreen = ({
           </div>
           <button
             className="rounded-2xl border-b-4 border-[#235390] bg-[#0046ff] py-3 font-bold uppercase text-white transition hover:bg-[#003bdf]"
-            onClick={logInAndSetUserProperties}
+            // onClick={logInAndSetUserProperties}
+            onClick={loginScreenState === "LOGIN" ? handleLogin : handleSignUp}
           >
             {loginScreenState === "LOGIN" ? "Log in" : "Create account"}
           </button>
