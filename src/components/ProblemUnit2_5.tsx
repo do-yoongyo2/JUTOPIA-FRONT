@@ -1,11 +1,10 @@
 import { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
-import CharacterExplainVer2 from "./CharacterExplainVer2";
+import CharacterExplainVer2_5 from "./CharacterExplainVer2_5";
 import Link from "next/link";
 
-const ProblemUnit2_3 = () => {
-  // const totalCorrectAnswersNeeded = 12; // Example value
+const ProblemUnit2_5 = () => {
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
@@ -53,7 +52,7 @@ const ProblemUnit2_3 = () => {
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
           />
-          <CharacterExplainVer2
+          <CharacterExplainVer2_5
             onNext={onNext}
             onFinish={onFinish}
             onDataLength={handleDataLength}
@@ -66,7 +65,7 @@ const ProblemUnit2_3 = () => {
   );
 };
 
-export default ProblemUnit2_3;
+export default ProblemUnit2_5;
 
 const LessonComplete = () => {
   return (

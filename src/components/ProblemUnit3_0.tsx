@@ -39,16 +39,40 @@ const ProblemUnit3_0 = () => {
     ? (typedData[problemKeys[currentProblemIndex]] as Problem)
     : null;
 
+  //   const onCheckAnswer = () => {
+  //     if (!currentProblem) return;
+
+  //     setCorrectAnswerShown(true);
+  //     setAttemptedProblemsCount((x) => x + 1);
+  //     if ((selectedAnswer + 1)?.toString() === currentProblem.answer) {
+  //       setIsAnswerCorrect(true);
+  //       setCorrectAnswerCount((x) => x + 1);
+  //     } else {
+  //       setIsAnswerCorrect(false);
+  //     }
+  //   };
+
   const onCheckAnswer = () => {
     if (!currentProblem) return;
 
     setCorrectAnswerShown(true);
     setAttemptedProblemsCount((x) => x + 1);
-    if (selectedAnswer?.toString() === currentProblem.answer) {
+
+    // selectedAnswer 인덱스를 1 기반으로 조정하여 currentProblem.answer와 비교
+    if (
+      selectedAnswer !== null &&
+      (selectedAnswer + 1).toString() === currentProblem.answer
+    ) {
       setIsAnswerCorrect(true);
       setCorrectAnswerCount((x) => x + 1);
+      console.log(
+        `Correct! selectedAnswer: ${selectedAnswer + 1} / currentProblem.answer: ${currentProblem.answer}`,
+      );
     } else {
       setIsAnswerCorrect(false);
+      console.log(
+        `Incorrect! selectedAnswer: ${selectedAnswer + 1} / currentProblem.answer: ${currentProblem.answer}`,
+      );
     }
   };
 
@@ -88,17 +112,18 @@ const ProblemUnit3_0 = () => {
         </div>
         <div className="max-w-2xl">
           <h1 className="mb-4 text-2xl font-bold">{currentProblem.problem}</h1>
-          {currentProblem.problemDetail && (
-            <div className="mb-4">
-              {Array.isArray(currentProblem.problemDetail) ? (
-                currentProblem.problemDetail.map((detail, index) => (
-                  <p key={index}>{detail}</p>
-                ))
-              ) : (
-                <p>{currentProblem.problemDetail}</p>
-              )}
-            </div>
-          )}
+          {currentProblem.problemDetail &&
+            currentProblem.problemDetail !== "null" && (
+              <div className="mb-4">
+                {Array.isArray(currentProblem.problemDetail) ? (
+                  currentProblem.problemDetail.map((detail, index) => (
+                    <p key={index}>{detail}</p>
+                  ))
+                ) : (
+                  <p>{currentProblem.problemDetail}</p>
+                )}
+              </div>
+            )}
           <ul>
             {currentProblem.problemSelect.map((option, index) => (
               <li
