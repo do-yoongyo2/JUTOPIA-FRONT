@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import TextTypingAni from "./TextTypingAni";
 
@@ -20,9 +20,11 @@ interface DataItem {
 const CharacterExplainVer2 = ({
   onNext,
   onFinish,
+  onDataLength,
 }: {
   onNext: () => void;
   onFinish: () => void;
+  onDataLength: (length: number) => void;
 }) => {
   const dataArr: DataItem[] = [
     {
@@ -72,6 +74,9 @@ const CharacterExplainVer2 = ({
         "축하드려요! 기업분석을 통해 기업을 판단할 수 있을 것 같아요.\n이제 무지성 침팬지 투자는 안하시겠죠?",
     },
   ];
+  useEffect(() => {
+    onDataLength(dataArr.length);
+  }, [dataArr.length, onDataLength]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTypingComplete, setIsTypingComplete] = useState(false);

@@ -5,10 +5,11 @@ import CharacterExplainVer2 from "./CharacterExplainVer2";
 import Link from "next/link";
 
 const ProblemUnit2_3 = () => {
-  const totalCorrectAnswersNeeded = 12; // Example value
+  // const totalCorrectAnswersNeeded = 12; // Example value
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
+  const [totalCorrectAnswersNeeded, setTotalCorrectAnswersNeeded] = useState(0);
 
   const onNext = () => {
     if (currentStep < totalCorrectAnswersNeeded - 1) {
@@ -21,6 +22,10 @@ const ProblemUnit2_3 = () => {
   const onFinish = () => {
     // Logic to move to the next problem or end the lesson
     setLessonComplete(true); // Example: Mark lesson as complete
+  };
+
+  const handleDataLength = (length: number) => {
+    setTotalCorrectAnswersNeeded(length);
   };
 
   return (
@@ -48,7 +53,11 @@ const ProblemUnit2_3 = () => {
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
           />
-          <CharacterExplainVer2 onNext={onNext} onFinish={onFinish} />
+          <CharacterExplainVer2
+            onNext={onNext}
+            onFinish={onFinish}
+            onDataLength={handleDataLength}
+          />
         </>
       ) : (
         <LessonComplete />
