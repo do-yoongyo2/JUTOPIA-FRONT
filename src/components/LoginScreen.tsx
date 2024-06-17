@@ -34,6 +34,7 @@ export const LoginScreen = ({
   const logIn = useBoundStore((x) => x.logIn);
   const setEmail = useBoundStore((x) => x.setEmail);
   const setName = useBoundStore((x) => x.setName);
+  const testName = useBoundStore((x) => x.name);
 
   const nameInputRef = useRef<null | HTMLInputElement>(null);
   const emailInputRef = useRef<null | HTMLInputElement>(null);
@@ -59,13 +60,13 @@ export const LoginScreen = ({
       );
 
       if (response.status === 201) {
-        const data = await response.data;
+        const data = response.data;
         const username = data.username; // 서버에서 반환된 데이터에서 이름 가져오기
         const email = data.email;
         setEmail(email);
         setName(username); // 이름 설정
+        logIn(false); // Assuming logIn updates the logged-in state
 
-        logIn(); // Assuming logIn updates the logged-in state
         router.push("/home");
       } else {
         const data = await response;
@@ -85,19 +86,28 @@ export const LoginScreen = ({
         passwordInputRef.current?.value.trim() || "",
       );
       if (response.status === 200) {
-        const data = await response.data;
+        const data = response.data;
         const token = data.token;
 
         localStorage.setItem("token", token);
 
-        const username = data.username;
-        const email = data.email;
+        async function addUser(data: any) {
+          const username = data.username;
+          const email = data.email;
 
-        setName(username);
-        setEmail(email);
+          setEmail(email);
+          setName(username);
+          return true;
+        }
 
-        logIn(); // Assuming logIn updates the logged-in state
-        router.push("/home");
+        addUser(data)
+          .then((flag: boolean) => {
+            logIn(flag); // Assuming logIn updates the logged-in state
+          })
+          .then(() => {
+            console.log(loggedIn);
+            router.push("/home");
+          });
       } else {
         console.log(response);
         const data = await response.data();

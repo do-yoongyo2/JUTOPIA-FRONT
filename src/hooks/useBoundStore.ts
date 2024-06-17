@@ -21,23 +21,27 @@ export type BoundStateCreator<SliceState> = StateCreator<
   SliceState
 >;
 
-export const useBoundStore = create<BoundState>((...args) => ({
-  ...createLessonSlice(...args),
-  ...createLingotSlice(...args),
-  ...createStreakSlice(...args),
-  ...createUserSlice(...args),
-  ...createXpSlice(...args),
-}));
+// export const useBoundStore = create<BoundState>((...args) => ({
+//   ...createLessonSlice(...args),
+//   ...createLingotSlice(...args),
+//   ...createStreakSlice(...args),
+//   ...createUserSlice(...args),
+//   ...createXpSlice(...args),
+// }));
 
-// export const useBoundStore = create(
-//   persist<BoundState>(
-//     (...args) => ({
-//       ...createLessonSlice(...args),
-//       ...createLingotSlice(...args),
-//       ...createStreakSlice(...args),
-//       ...createUserSlice(...args),
-//       ...createXpSlice(...args),
-//     }),
-//     { name: "bound-store" },
-//   ),
-// );
+export const useBoundStore = create(
+  persist<BoundState>(
+    (...args) => ({
+      ...createLessonSlice(...args),
+      ...createLingotSlice(...args),
+      ...createStreakSlice(...args),
+      ...createUserSlice(...args),
+      ...createXpSlice(...args),
+    }),
+    {
+      name: "bound-store",
+      getStorage: () =>
+        typeof window !== "undefined" ? localStorage : undefined, // 기본값은 localStorage
+    },
+  ),
+);

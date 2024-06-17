@@ -451,9 +451,11 @@ const getTopBarColors = (
 
 const Tutorial: NextPage = () => {
   const { loginScreenState, setLoginScreenState } = useLoginScreen();
+  const [isHydrated, setIsHydrated] = useState(false);
 
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
+    setIsHydrated(true);
     const updateScrollY = () => setScrollY(globalThis.scrollY ?? scrollY);
     updateScrollY();
     document.addEventListener("scroll", updateScrollY);
@@ -462,6 +464,10 @@ const Tutorial: NextPage = () => {
 
   const topBarColors = getTopBarColors(scrollY);
 
+  if (!isHydrated) {
+    // 초기 로딩 상태 표시 또는 빈 상태로 렌더링
+    return null;
+  }
   return (
     <>
       <TutorialTopBar

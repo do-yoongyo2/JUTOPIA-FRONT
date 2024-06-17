@@ -27,21 +27,28 @@ const MyPage: NextPage = () => {
   const email = useBoundStore((x) => x.email);
   const setEmail = useBoundStore((x) => x.setEmail);
   const [localEmail, setLocalEmail] = useState(email);
-
+  const [isHydrated, setIsHydrated] = useState(false);
   const loggedIn = useBoundStore((x) => x.loggedIn);
 
   useEffect(() => {
+    console.log("User logged in", loggedIn);
+    setIsHydrated(true);
+
     if (!loggedIn) {
-      //router.push("/"); // 로그인 상태가 아니면 홈페이지로 이동
+      // router.push("/"); // 로그인 상태가 아니면 홈페이지로 이동
       console.log(name + " " + loggedIn);
       console.log("로그인안됨");
     } else {
       // 로그인 상태인 경우 서버에서 데이터 가져와서 설정
       setLocalName(name); // 초기 localName 설정
-      setEmail(email); // 초기 localEmail 설정
+      // setEmail(email); // 초기 localEmail 설정
     }
-  }, [loggedIn, name, email]);
+  }, [loggedIn]);
 
+  if (!isHydrated) {
+    // 초기 로딩 상태 표시 또는 빈 상태로 렌더링
+    return null;
+  }
   const updateProfile = () => {
     setUpdateState("view");
     setName(localName);
@@ -104,7 +111,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
   const [menu, setMenu] = useState<MenuState>("HIDDEN");
 
   const logOut = useBoundStore((x) => x.logOut);
-  const router = useRouter();
+  var router = useRouter();
 
   const handleLogOut = () => {
     void logOut();
@@ -179,7 +186,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
 };
 
 const MypageTopSection = (props: MypageTopSectionProps) => {
-  const router = useRouter();
+  var router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);
 
   // const joinedAt = useBoundStore((x) => x.joinedAt).format("MMMM YYYY");
@@ -188,6 +195,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
   const joinedAt = dayjs(dd).format("MMMM YYYY");
 
   useEffect(() => {
+    console.log("login ", loggedIn);
     if (!loggedIn) {
       void router.push("/");
     }

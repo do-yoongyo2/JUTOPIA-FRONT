@@ -10,7 +10,7 @@ export type UserSlice = {
   loggedIn: boolean;
   setName: (name: string) => void;
   setEmail: (email: string) => void;
-  logIn: () => void;
+  logIn: (flag: boolean) => void;
   logOut: () => void;
 };
 
@@ -21,6 +21,6 @@ export const createUserSlice: BoundStateCreator<UserSlice> = (set) => ({
   loggedIn: false,
   setName: (name: string) => set(() => ({ name })),
   setEmail: (email: string) => set(() => ({ email })),
-  logIn: () => set(() => ({ loggedIn: true })),
+  logIn: (flag: boolean) => set(() => ({ loggedIn: flag })),
   logOut: () => set(() => ({ name: "", username: "", loggedIn: false })),
 });
