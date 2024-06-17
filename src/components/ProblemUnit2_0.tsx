@@ -2,8 +2,9 @@ import { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CheckAnswer from "~/components/LessonCheckAnswer";
+import CharacterExplain from "./CharacterExplain";
 
-const TestExample = () => {
+const ProblemUnit2_0 = () => {
   // 아래를 참고해서 자신의 문제에 맞게 커스텀하라.
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0); // 맞춘 문제수
   const totalCorrectAnswersNeeded = 5; // 예시 값
@@ -13,16 +14,11 @@ const TestExample = () => {
   const [selectedAnswer, setSelectedAnswer] = useState("answer");
   const [correctAnswer, setCorrectAnswer] = useState(""); // 정답도 여러분이 처리해야겠죠?
 
-  const onCheckAnswer = () => {
+  const onNext = () => {
     setCorrectAnswerShown(true);
     if (isAnswerCorrect) {
       setCorrectAnswerCount((x) => x + 1);
     }
-  };
-
-  const onSkip = () => {
-    setSelectedAnswer("null");
-    setCorrectAnswerShown(true);
   };
 
   const onFinish = () => {
@@ -42,13 +38,21 @@ const TestExample = () => {
           />
         </div>
         {/* 여기에 너의 문제를 만들어 */}
-        <div>문제</div>
+        <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
+          수입, 비용, 자산에 대해 알아볼까요?
+        </h1>
+        <img
+          alt="설명 이미지"
+          src="dummyImage.jpeg"
+          style={{ height: "300px" }}
+        />
       </div>
       <QuitMessage
         quitMessageShown={quitMessageShown}
         setQuitMessageShown={setQuitMessageShown}
       />
-      <CheckAnswer
+      <CharacterExplain onNext={onNext} onFinish={onFinish} />
+      {/* <CheckAnswer
         isAnswerSelected={selectedAnswer !== null}
         isAnswerCorrect={isAnswerCorrect}
         correctAnswerShown={correctAnswerShown}
@@ -56,9 +60,9 @@ const TestExample = () => {
         onCheckAnswer={onCheckAnswer}
         onFinish={onFinish}
         onSkip={onSkip}
-      />
+      /> */}
     </div>
   );
 };
 
-export default TestExample;
+export default ProblemUnit2_0;

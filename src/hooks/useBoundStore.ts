@@ -10,9 +10,10 @@ import type { UserSlice } from "~/stores/createUserStore";
 import { createUserSlice } from "~/stores/createUserStore";
 import type { XpSlice } from "~/stores/createXpStore";
 import { createXpSlice } from "~/stores/createXpStore";
+import { persist } from "zustand/middleware";
 
 type BoundState = LessonSlice & LingotSlice & StreakSlice & UserSlice & XpSlice;
-
+//& UserSlice
 export type BoundStateCreator<SliceState> = StateCreator<
   BoundState,
   [],
@@ -27,3 +28,16 @@ export const useBoundStore = create<BoundState>((...args) => ({
   ...createUserSlice(...args),
   ...createXpSlice(...args),
 }));
+
+// export const useBoundStore = create(
+//   persist<BoundState>(
+//     (...args) => ({
+//       ...createLessonSlice(...args),
+//       ...createLingotSlice(...args),
+//       ...createStreakSlice(...args),
+//       ...createUserSlice(...args),
+//       ...createXpSlice(...args),
+//     }),
+//     { name: "bound-store" },
+//   ),
+// );

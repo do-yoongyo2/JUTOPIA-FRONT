@@ -16,6 +16,7 @@ import {
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import dayjs from "dayjs";
 
 const MyPage: NextPage = () => {
   const [updateState, setUpdateState] = useState<"update" | "view">("view");
@@ -23,14 +24,28 @@ const MyPage: NextPage = () => {
   const setName = useBoundStore((x) => x.setName);
   const [localName, setLocalName] = useState(name);
 
-  const username = useBoundStore((x) => x.username);
-  const setUsername = useBoundStore((x) => x.setUsername);
-  const [localUsername, setLocalUsername] = useState(username);
+  const email = useBoundStore((x) => x.email);
+  const setEmail = useBoundStore((x) => x.setEmail);
+  const [localEmail, setLocalEmail] = useState(email);
+
+  const loggedIn = useBoundStore((x) => x.loggedIn);
+
+  useEffect(() => {
+    if (!loggedIn) {
+      //router.push("/"); // 로그인 상태가 아니면 홈페이지로 이동
+      console.log(name + " " + loggedIn);
+      console.log("로그인안됨");
+    } else {
+      // 로그인 상태인 경우 서버에서 데이터 가져와서 설정
+      setLocalName(name); // 초기 localName 설정
+      setEmail(email); // 초기 localEmail 설정
+    }
+  }, [loggedIn, name, email]);
 
   const updateProfile = () => {
     setUpdateState("view");
     setName(localName);
-    setUsername(localUsername);
+    setEmail(localEmail);
   };
 
   return (
@@ -49,9 +64,9 @@ const MyPage: NextPage = () => {
             name={name}
             localName={localName}
             setLocalName={setLocalName}
-            username={username}
-            localUsername={localUsername}
-            setLocalUsername={setLocalUsername}
+            email={email}
+            localEmail={localEmail}
+            setLocalEmail={setLocalEmail}
             updateProfile={updateProfile}
           />
           <MypageStatsSection />
@@ -77,9 +92,9 @@ type MypageTopSectionProps = {
   name: string;
   localName: string;
   setLocalName: (state: string) => void;
-  username: string;
-  localUsername: string;
-  setLocalUsername: (state: string) => void;
+  email: string;
+  localEmail: string;
+  setLocalEmail: (state: string) => void;
   setUpdateState: (state: "update" | "view") => void;
   updateProfile: () => void;
 };
@@ -166,7 +181,11 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
 const MypageTopSection = (props: MypageTopSectionProps) => {
   const router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);
-  const joinedAt = useBoundStore((x) => x.joinedAt).format("MMMM YYYY");
+
+  // const joinedAt = useBoundStore((x) => x.joinedAt).format("MMMM YYYY");
+  // const joinedAt = useBoundStore((x) => x.joinedAt);
+  const dd = useBoundStore((state) => state.joinedAt);
+  const joinedAt = dayjs(dd).format("MMMM YYYY");
 
   useEffect(() => {
     if (!loggedIn) {
@@ -180,7 +199,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
         className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl"
         style={{ minWidth: "80px" }}
       >
-        {props.username.charAt(0).toUpperCase()}
+        {props.email.charAt(0).toUpperCase()}
       </div>
       <div className="flex grow flex-col justify-between gap-3">
         <div className="flex flex-col gap-2">
@@ -188,7 +207,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
             {props.updateState === "view" ? (
               <div>
                 <h1 className="text-2xl font-bold">{props.name}</h1>
-                <div className="text-sm text-gray-400">{props.username}</div>
+                <div className="text-sm text-gray-400">{props.email}</div>
               </div>
             ) : (
               <div>
@@ -207,9 +226,9 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
                 <input
                   type="text"
                   className="text-sm text-gray-400"
-                  value={props.localUsername}
+                  value={props.localEmail}
                   style={{ borderBottom: "1px solid gray", outline: "none" }}
-                  onChange={(e) => props.setLocalUsername(e.target.value)}
+                  onChange={(e) => props.setLocalEmail(e.target.value)}
                 />
               </div>
             )}

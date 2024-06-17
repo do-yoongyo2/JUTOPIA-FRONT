@@ -9,3 +9,23 @@
   font-weight: 700;
   font-style: normal;
 }
+
+@keyframes custom-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px); /* 애니메이션 세기 조절 */
+  }
+  60% {
+    transform: translateY(-5px); /* 애니메이션 세기 조절 */
+  }
+}
+
+.animate-bounce {
+  animation: custom-bounce 2s infinite; /* 애니메이션 속도와 반복 설정 */
+}
