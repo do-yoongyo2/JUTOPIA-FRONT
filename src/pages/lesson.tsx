@@ -1,8 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
+// import ProblemUnit2_0 from "~/components/ProblemUnit2_0";
+import ProblemUnit2_3 from "~/components/ProblemUnit2_3";
 // import ProblemUnit2_4 from "~/components/ProblemUnit2_4";
-// import ProblemUnit3_0 from "~/components/ProblemUnit3_0";
-// import ProblemUnit2_3 from "~/components/ProblemUnit2_3";
+//import ProblemUnit3_0 from "~/components/ProblemUnit3_0";
 
 const Lesson: NextPage = () => {
   return (
@@ -13,7 +14,10 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
+      {/* <ProblemUnit2_0 /> */}
+
       {/* <ProblemUnit2_3 /> */}
+
       {/* <ProblemUnit2_4 /> */}
 
       {/* <TestExample /> */}
