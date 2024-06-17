@@ -20,7 +20,7 @@ const TextTypingAni = ({ text, onTypingComplete }: AnimationProps) => {
         clearInterval(interval);
         onTypingComplete();
       }
-    }, 100);
+    }, 60);
 
     return () => clearInterval(interval);
   }, [text, onTypingComplete]);

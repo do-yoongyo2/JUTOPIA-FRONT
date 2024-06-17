@@ -5,14 +5,31 @@ import CharacterExplainVer2 from "./CharacterExplainVer2";
 import Link from "next/link";
 
 const ProblemUnit2_3 = () => {
+  const images = [
+    "UNIT2_3/기업분석.jpg",
+    "UNIT2_3/기업실적분석왜.jpg",
+    "UNIT2_3/네이버증권기업분석.png",
+    "UNIT2_3/기업실적분석.png",
+
+    "UNIT2_3/네이버기업실적분석.png",
+    "UNIT2_3/삼전매출액.png",
+    "UNIT2_3/삼전영업이익액.png",
+    "UNIT2_3/삼전순이익.png",
+    "UNIT2_3/삼전부채비율.png",
+
+    "UNIT2_3/종목판단지표.png",
+    "UNIT2_3/그외.png",
+    "UNIT2_3/축하원숭이.png",
+    // Add more images as needed
+  ];
   // const totalCorrectAnswersNeeded = 12; // Example value
   const [quitMessageShown, setQuitMessageShown] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
   const [lessonComplete, setLessonComplete] = useState(false);
   const [totalCorrectAnswersNeeded, setTotalCorrectAnswersNeeded] = useState(0);
 
   const onNext = () => {
-    if (currentStep < totalCorrectAnswersNeeded - 1) {
+    if (currentStep < totalCorrectAnswersNeeded) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
       setLessonComplete(true); // Mark lesson as complete
@@ -44,9 +61,9 @@ const ProblemUnit2_3 = () => {
               근거있는 투자, 기업분석이란 무엇일까요?
             </h1>
             <img
-              alt="설명 이미지"
-              src="dummyImage.jpeg"
-              style={{ height: "300px" }}
+              alt={`설명 이미지 ${currentStep}`}
+              src={images[currentStep - 1]} // Use currentStep to select the image
+              style={{ height: "350px" }}
             />
           </div>
           <QuitMessage
@@ -80,7 +97,7 @@ const LessonComplete = () => {
         <div className="mx-auto flex max-w-5xl sm:justify-between">
           <Link
             className={
-              "flex w-full items-center justify-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
+              "flex w-full items-center justify-center rounded-2xl border-b-4 border-blue-600 bg-blue-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
             }
             href="/tutorial"
           >
