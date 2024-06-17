@@ -36,21 +36,8 @@ const ProblemUnit3_0 = () => {
 
   const problemKeys: string[] = Object.keys(typedData);
   const currentProblem: Problem | null = problemKeys[currentProblemIndex]
-    ? (typedData[problemKeys[currentProblemIndex]] as Problem)
+    ? typedData[problemKeys[currentProblemIndex]]
     : null;
-
-  //   const onCheckAnswer = () => {
-  //     if (!currentProblem) return;
-
-  //     setCorrectAnswerShown(true);
-  //     setAttemptedProblemsCount((x) => x + 1);
-  //     if ((selectedAnswer + 1)?.toString() === currentProblem.answer) {
-  //       setIsAnswerCorrect(true);
-  //       setCorrectAnswerCount((x) => x + 1);
-  //     } else {
-  //       setIsAnswerCorrect(false);
-  //     }
-  //   };
 
   const onCheckAnswer = () => {
     if (!currentProblem) return;
@@ -58,7 +45,6 @@ const ProblemUnit3_0 = () => {
     setCorrectAnswerShown(true);
     setAttemptedProblemsCount((x) => x + 1);
 
-    // selectedAnswer 인덱스를 1 기반으로 조정하여 currentProblem.answer와 비교
     if (
       selectedAnswer !== null &&
       (selectedAnswer + 1).toString() === currentProblem.answer
@@ -137,14 +123,14 @@ const ProblemUnit3_0 = () => {
               </li>
             ))}
           </ul>
-          {correctAnswerShown && (
+          {/* {correctAnswerShown && (
             <div className="mt-4 text-red-500">
               {isAnswerCorrect
                 ? "정답입니다!"
                 : `오답입니다. 정답은 ${currentProblem.problemSelect[parseInt(currentProblem.answer) - 1]}입니다.`}
               <div>{currentProblem.solutionDetail}</div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       <QuitMessage
@@ -158,6 +144,8 @@ const ProblemUnit3_0 = () => {
         correctAnswer={
           currentProblem.problemSelect[parseInt(currentProblem.answer) - 1]
         }
+        isAnswerDetail={currentProblem.solutionDetail !== undefined}
+        answerDetail={currentProblem.solutionDetail || ""}
         onCheckAnswer={onCheckAnswer}
         onFinish={onFinish}
         onSkip={onSkip}
