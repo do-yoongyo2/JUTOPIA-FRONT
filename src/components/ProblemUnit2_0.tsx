@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
-import CharacterExplain2_0 from "./CharacterExplain2_0";
+import CharacterExplain from "./CharacterExplain";
+import { descriptionArr2_0 } from "./../data/description";
 import Link from "next/link";
+
+const nextIndexes = [2, 6, 9, 11];
 
 const ProblemUnit2_0 = () => {
   const totalCorrectAnswersNeeded = 4;
@@ -12,7 +15,7 @@ const ProblemUnit2_0 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [titleIndex, setTitleIndex] = useState(0);
 
-  const onNext = (index: number) => {
+  const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
@@ -80,12 +83,15 @@ const ProblemUnit2_0 = () => {
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
           />
-          <CharacterExplain2_0
+          <CharacterExplain
             onNext={onNext}
             onFinish={onFinish}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             setTitleIndex={setTitleIndex}
+            descriptionArr={descriptionArr2_0}
+            nextIndexes={nextIndexes}
+            backgroundColor="#0046ff"
           />
         </>
       ) : (
