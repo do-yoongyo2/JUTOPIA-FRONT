@@ -12,6 +12,7 @@ const ProblemUnitDescription = ({
   backgroundColor,
   images,
   imageIndexes,
+  progressbarColor,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -19,6 +20,7 @@ const ProblemUnitDescription = ({
   backgroundColor: string;
   images: string[];
   imageIndexes: number[];
+  progressbarColor: string;
 }) => {
   const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
@@ -78,6 +80,7 @@ const ProblemUnitDescription = ({
                 correctAnswerCount={currentStep}
                 totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
                 setQuitMessageShown={setQuitMessageShown}
+                color={progressbarColor}
               />
             </div>
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">

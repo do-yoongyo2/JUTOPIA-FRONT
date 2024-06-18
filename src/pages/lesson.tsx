@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
 import ProblemUnitDescription from "~/components/ProblemUnitDescription";
+import ProblemUnitQuiz from "~/components/ProblemUnitQuiz";
 import * as descriptionData from "~/data/description";
-// import ProblemUnit2_4 from "~/components/ProblemUnit2_4";
-//import ProblemUnit3_0 from "~/components/ProblemUnit3_0";
+import * as problemData from "~/data/problem";
 
 const Lesson: NextPage = () => {
   return (
@@ -21,6 +21,7 @@ const Lesson: NextPage = () => {
         images={descriptionData.images2_0}
         imageIndexes={descriptionData.imageIndexes2_0}
         backgroundColor="#0046ff"
+        progressbarColor="blue"
       /> */}
 
       {/* <ProblemUnitDescription
@@ -30,6 +31,7 @@ const Lesson: NextPage = () => {
         images={descriptionData.images2_1}
         imageIndexes={descriptionData.imageIndexes2_1}
         backgroundColor="#0046ff"
+        progressbarColor="blue"
       /> */}
 
       {/* <ProblemUnitDescription
@@ -39,11 +41,21 @@ const Lesson: NextPage = () => {
         images={descriptionData.images2_3}
         imageIndexes={descriptionData.imageIndexes2_3}
         backgroundColor="#0046ff"
+        progressbarColor="blue"
       /> */}
 
-      {/* <ProblemUnit2_4 /> */}
-      {/* <TestExample /> */}
-      {/* <ProblemUnit3_0 /> */}
+      {/* <ProblemUnitQuiz
+        problem={problemData.problem2_4}
+        backgroundColor="blue"
+        progressbarColor="blue"
+      /> */}
+
+      {/* <ProblemUnitQuiz
+        problem={problemData.problem3_0}
+        backgroundColor="blue"
+        progressbarColor="blue"
+      /> */}
+
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
             ex)
