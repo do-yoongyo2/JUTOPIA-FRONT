@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { IoArrowRedoOutline } from "react-icons/io5";
 import { MdOutlineSwipeLeft } from "react-icons/md";
@@ -30,6 +30,12 @@ const CharacterExplain = ({
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // 클라이언트 환경에서만 isClient를 true로 설정합니다.
+    setIsClient(typeof window !== "undefined");
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < descriptionArr.length - 1) {
@@ -103,7 +109,26 @@ const CharacterExplain = ({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <MdOutlineSwipeLeft
+        {isClient && (
+          <MdOutlineSwipeLeft
+            className={
+              window.innerWidth <= 768 &&
+              isTypingComplete &&
+              currentIndex < descriptionArr.length - 1
+                ? "blink"
+                : "hide"
+            }
+            style={{
+              position: "absolute",
+              left: "50%",
+              transform: "translate(-50%, 50%)",
+              opacity: "70%",
+            }}
+            size="150px"
+          />
+        )}
+
+        {/* <MdOutlineSwipeLeft
           className={
             window.innerWidth <= 768 &&
             isTypingComplete &&
@@ -118,7 +143,7 @@ const CharacterExplain = ({
             opacity: "70%",
           }}
           size="150px"
-        />
+        /> */}
         <div
           className="container mx-auto block items-center justify-between sm:flex"
           style={{ maxWidth: "70vw" }}
