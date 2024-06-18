@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         ttlaundrygothicb: ["TTLaundryGothicB", "sans-serif"],
+      },
       colors: {
         "shinhan-blue": "#0446ff", //신한 색
         "shinhan-back": "#EBF1FF", //버튼 백그라운드 회색
