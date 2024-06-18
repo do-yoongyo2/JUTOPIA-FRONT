@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <>
+    <div className="font-ttlaundrygothicb">
       <TopBar menuName="Home" />
       <LeftBar selectedTab="홈" />
 
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
       </div>
 
       <BottomBar selectedTab="홈" />
-    </>
+    </div>
   );
 };
 
