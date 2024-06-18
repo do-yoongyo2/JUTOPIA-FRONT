@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import React from "react";
 import ProblemUnitDescription from "~/components/ProblemUnitDescription";
 import * as descriptionData from "~/data/description";
-import ProblemUnit2_3 from "~/components/ProblemUnit2_3";
 // import ProblemUnit2_4 from "~/components/ProblemUnit2_4";
 //import ProblemUnit3_0 from "~/components/ProblemUnit3_0";
 
@@ -19,16 +18,29 @@ const Lesson: NextPage = () => {
         descriptionArr={descriptionData.descriptionArr2_0}
         titles={descriptionData.titles2_0}
         nextIndexes={descriptionData.nextIndexes2_0}
+        images={descriptionData.images2_0}
+        imageIndexes={descriptionData.imageIndexes2_0}
         backgroundColor="#0046ff"
       /> */}
+
       {/* <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_1}
         titles={descriptionData.titles2_1}
         nextIndexes={descriptionData.nextIndexes2_1}
+        images={descriptionData.images2_1}
+        imageIndexes={descriptionData.imageIndexes2_1}
         backgroundColor="#0046ff"
       /> */}
 
-      {/* <ProblemUnit2_3 /> */}
+      {/* <ProblemUnitDescription
+        descriptionArr={descriptionData.descriptionArr2_3}
+        titles={descriptionData.titles2_3}
+        nextIndexes={descriptionData.nextIndexes2_3}
+        images={descriptionData.images2_3}
+        imageIndexes={descriptionData.imageIndexes2_3}
+        backgroundColor="#0046ff"
+      /> */}
+
       {/* <ProblemUnit2_4 /> */}
       {/* <TestExample /> */}
       {/* <ProblemUnit3_0 /> */}

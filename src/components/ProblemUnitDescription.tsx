@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CharacterExplain from "./CharacterExplain";
@@ -10,11 +10,15 @@ const ProblemUnitDescription = ({
   titles,
   nextIndexes,
   backgroundColor,
+  images,
+  imageIndexes,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
   nextIndexes: number[];
   backgroundColor: string;
+  images: string[];
+  imageIndexes: number[];
 }) => {
   const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
@@ -22,6 +26,7 @@ const ProblemUnitDescription = ({
   const [lessonComplete, setLessonComplete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [titleIndex, setTitleIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
@@ -34,6 +39,10 @@ const ProblemUnitDescription = ({
   const onFinish = () => {
     setLessonComplete(true);
   };
+
+  useEffect(() => {
+    if (imageIndexes.includes(currentIndex)) setImageIndex((prev) => prev + 1);
+  }, [currentIndex]);
 
   const LessonComplete = () => {
     return (
@@ -76,7 +85,7 @@ const ProblemUnitDescription = ({
             </h1>
             <img
               alt="설명 이미지"
-              src="dummyImage.jpeg"
+              src={images[imageIndex]}
               style={{ height: "300px" }}
             />
           </div>
