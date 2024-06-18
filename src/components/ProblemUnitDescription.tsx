@@ -9,15 +9,14 @@ const ProblemUnitDescription = ({
   descriptionArr,
   titles,
   nextIndexes,
-  totalCorrectAnswersNeeded,
   backgroundColor,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
   nextIndexes: number[];
-  totalCorrectAnswersNeeded: number;
   backgroundColor: string;
 }) => {
+  const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);

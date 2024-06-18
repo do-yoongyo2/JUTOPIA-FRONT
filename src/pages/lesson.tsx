@@ -1,11 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import ProblemUnitDescription from "~/components/ProblemUnitDescription";
-import {
-  descriptionArr2_0,
-  titles2_0,
-  nextIndexes2_0,
-} from "~/data/description";
+import * as descriptionData from "~/data/description";
 import ProblemUnit2_3 from "~/components/ProblemUnit2_3";
 // import ProblemUnit2_4 from "~/components/ProblemUnit2_4";
 //import ProblemUnit3_0 from "~/components/ProblemUnit3_0";
@@ -19,13 +15,18 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      <ProblemUnitDescription
-        descriptionArr={descriptionArr2_0}
-        titles={titles2_0}
-        nextIndexes={nextIndexes2_0}
-        totalCorrectAnswersNeeded={4}
+      {/* <ProblemUnitDescription
+        descriptionArr={descriptionData.descriptionArr2_0}
+        titles={descriptionData.titles2_0}
+        nextIndexes={descriptionData.nextIndexes2_0}
         backgroundColor="#0046ff"
-      />
+      /> */}
+      {/* <ProblemUnitDescription
+        descriptionArr={descriptionData.descriptionArr2_1}
+        titles={descriptionData.titles2_1}
+        nextIndexes={descriptionData.nextIndexes2_1}
+        backgroundColor="#0046ff"
+      /> */}
 
       {/* <ProblemUnit2_3 /> */}
       {/* <ProblemUnit2_4 /> */}
