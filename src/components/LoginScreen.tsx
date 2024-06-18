@@ -61,11 +61,25 @@ export const LoginScreen = ({
 
       if (response.status === 201) {
         const data = response.data;
-        const username = data.username; // 서버에서 반환된 데이터에서 이름 가져오기
-        const email = data.email;
-        setEmail(email);
-        setName(username); // 이름 설정
-        logIn(false); // Assuming logIn updates the logged-in state
+
+        async function createUser(data: any) {
+          const username = data.username; // 서버에서 반환된 데이터에서 이름 가져오기
+          const email = data.email;
+
+          setEmail(email);
+          setName(username); // 이름 설정
+
+          return true;
+        }
+
+        createUser(data)
+          .then((flag: boolean) => {
+            logIn(flag);
+          })
+          .then(() => {
+            console.log(loggedIn);
+            router.push("/home");
+          });
 
         router.push("/home");
       } else {
