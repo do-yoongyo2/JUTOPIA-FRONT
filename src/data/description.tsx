@@ -1,3 +1,10 @@
+export const nextIndexes2_0 = [2, 6, 9, 11];
+export const titles2_0 = [
+  "수입, 비용, 자산에 대해 알아볼까요?",
+  "계좌와 신용에 대해 알아볼까요?",
+  "이자율과 적금, 예금에 대해 알아볼까요?",
+  "금융 상품과 비금융 상품에 대해 알아볼까요?",
+];
 export interface DescriptionItem {
   [key: string]: string;
 }
