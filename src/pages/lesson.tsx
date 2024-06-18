@@ -1,6 +1,11 @@
 import { NextPage } from "next";
 import React from "react";
-// import ProblemUnit2_0 from "~/components/ProblemUnit2_0";
+import ProblemUnitDescription from "~/components/ProblemUnitDescription";
+import {
+  descriptionArr2_0,
+  titles2_0,
+  nextIndexes2_0,
+} from "~/data/description";
 import ProblemUnit2_3 from "~/components/ProblemUnit2_3";
 // import ProblemUnit2_4 from "~/components/ProblemUnit2_4";
 //import ProblemUnit3_0 from "~/components/ProblemUnit3_0";
@@ -14,15 +19,18 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      {/* <ProblemUnit2_0 /> */}
+      <ProblemUnitDescription
+        descriptionArr={descriptionArr2_0}
+        titles={titles2_0}
+        nextIndexes={nextIndexes2_0}
+        totalCorrectAnswersNeeded={4}
+        backgroundColor="#0046ff"
+      />
 
       {/* <ProblemUnit2_3 /> */}
-
       {/* <ProblemUnit2_4 /> */}
-
       {/* <TestExample /> */}
       {/* <ProblemUnit3_0 /> */}
-
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
             ex)

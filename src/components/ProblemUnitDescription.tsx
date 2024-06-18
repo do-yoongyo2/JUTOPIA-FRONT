@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
-import CharacterExplain2_0 from "./CharacterExplain2_0";
+import CharacterExplain from "./CharacterExplain";
+import { DescriptionItem } from "~/data/description";
 import Link from "next/link";
 
-const ProblemUnit2_0 = () => {
-  const totalCorrectAnswersNeeded = 4;
+const ProblemUnitDescription = ({
+  descriptionArr,
+  titles,
+  nextIndexes,
+  totalCorrectAnswersNeeded,
+  backgroundColor,
+}: {
+  descriptionArr: DescriptionItem[];
+  titles: string[];
+  nextIndexes: number[];
+  totalCorrectAnswersNeeded: number;
+  backgroundColor: string;
+}) => {
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [titleIndex, setTitleIndex] = useState(0);
 
-  const onNext = (index: number) => {
+  const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
@@ -48,13 +60,6 @@ const ProblemUnit2_0 = () => {
     );
   };
 
-  const titles = [
-    "수입, 비용, 자산에 대해 알아볼까요?",
-    "계좌와 신용에 대해 알아볼까요?",
-    "이자율과 적금, 예금에 대해 알아볼까요?",
-    "금융 상품과 비금융 상품에 대해 알아볼까요?",
-  ];
-
   return (
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
       {!lessonComplete ? (
@@ -80,12 +85,15 @@ const ProblemUnit2_0 = () => {
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
           />
-          <CharacterExplain2_0
+          <CharacterExplain
             onNext={onNext}
             onFinish={onFinish}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             setTitleIndex={setTitleIndex}
+            descriptionArr={descriptionArr}
+            nextIndexes={nextIndexes}
+            backgroundColor={backgroundColor}
           />
         </>
       ) : (
@@ -95,4 +103,4 @@ const ProblemUnit2_0 = () => {
   );
 };
 
-export default ProblemUnit2_0;
+export default ProblemUnitDescription;
