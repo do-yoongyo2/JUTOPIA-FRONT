@@ -23,7 +23,7 @@ const CharacterExplain = ({
   setTitleIndex: React.Dispatch<React.SetStateAction<number>>;
   descriptionArr: DescriptionItem[];
   nextIndexes: number[];
-  backgroundColor?: string;
+  backgroundColor: string;
 }) => {
   const titleChangeIndexes = nextIndexes.map((elem) => elem + 1);
   const [dragStartX, setDragStartX] = useState<number | null>(null);
