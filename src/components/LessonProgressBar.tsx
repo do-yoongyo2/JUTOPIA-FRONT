@@ -5,10 +5,12 @@ const ProgressBar = ({
   correctAnswerCount, // 맞춘 문제개수
   totalCorrectAnswersNeeded, //전체문제개수
   setQuitMessageShown,
+  color,
 }: {
   correctAnswerCount: number;
   totalCorrectAnswersNeeded: number;
   setQuitMessageShown: (isShown: boolean) => void;
+  color: string;
 }) => {
   return (
     <header className="flex items-center gap-4">
@@ -36,14 +38,14 @@ const ProgressBar = ({
       >
         <div
           className={
-            "h-full rounded-full bg-green-500 transition-all duration-700 " +
+            `h-full rounded-full bg-${color}-500 transition-all duration-700 ` +
             (correctAnswerCount > 0 ? "px-2 pt-1 " : "")
           }
           style={{
             width: `${(correctAnswerCount / totalCorrectAnswersNeeded) * 100}%`,
           }}
         >
-          <div className="h-[5px] w-full rounded-full bg-green-400"></div>
+          <div className={`h-[5px] w-full rounded-full bg-${color}-400`}></div>
         </div>
       </div>
     </header>
