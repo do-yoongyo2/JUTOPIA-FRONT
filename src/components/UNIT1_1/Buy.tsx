@@ -240,7 +240,7 @@ const Buy = () => {
                 1주
               </div>
             </div>
-            <div className="mt-5 flex h-[25px] items-center justify-between rounded-md text-custom font-semibold">
+            <div className="mt-3 flex h-[25px] items-center justify-between rounded-md text-custom font-semibold">
               <div className="flex items-center text-shinhan-gray">
                 매수가능금액
                 <MdOutlineArrowForwardIos />
@@ -254,6 +254,23 @@ const Buy = () => {
             <button className="mt-1 h-[35px] w-full rounded-lg bg-red-500 text-xs font-medium text-white">
               현금매수
             </button>
+          </div>
+        </div>
+      </div>
+      <div className="mt-0">
+        <hr />
+      </div>
+      <div className="ml-3 flex items-center justify-between p-1">
+        <div className="flex items-center">
+          <div className="text-xs font-semibold text-black">홈</div>
+          <div className="ml-5 text-xs font-semibold text-black">관심</div>
+          <div className="ml-5 text-xs font-semibold text-black">현재가</div>
+          <div className="ml-5 text-xs font-semibold text-black">주문</div>
+          <div className="ml-5 text-xs font-semibold text-black">잔고</div>
+        </div>
+        <div className="flex items-center">
+          <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
+            메뉴
           </div>
         </div>
       </div>
