@@ -469,7 +469,7 @@ const Tutorial: NextPage = () => {
     return null;
   }
   return (
-    <>
+    <div className="font-ttlaundrygothicb">
       <TutorialTopBar
         backgroundColor={topBarColors.backgroundColor}
         borderColor={topBarColors.borderColor}
@@ -502,7 +502,7 @@ const Tutorial: NextPage = () => {
         loginScreenState={loginScreenState}
         setLoginScreenState={setLoginScreenState}
       />
-    </>
+    </div>
   );
 };
 

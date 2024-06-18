@@ -56,7 +56,7 @@ const MyPage: NextPage = () => {
   };
 
   return (
-    <div>
+    <div className="font-ttlaundrygothicb">
       <MyPageTopBar
         updateState={updateState}
         setUpdateState={setUpdateState}
