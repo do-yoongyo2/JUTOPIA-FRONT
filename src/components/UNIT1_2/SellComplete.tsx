@@ -4,7 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChartSquare } from "react-icons/bi";
 import { RiMore2Fill } from "react-icons/ri";
-import { GoTriangleDown } from "react-icons/go";
+import { GoTriangleUp } from "react-icons/go";
 import { FaLock } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
@@ -31,29 +31,29 @@ const SellComplete = () => {
           </span>
         </div>
       </div>
-
       <div className="mt-2 flex items-center justify-between pl-4 pr-4">
         <div className="flex w-[175px] items-center justify-between">
-          <div className="text-lg font-bold text-shinhan-blue">75,800</div>
-          <div className="flex items-center text-xs font-semibold text-shinhan-blue">
-            <GoTriangleDown />
-            1,500
+          <div className="text-lg font-bold text-red-500">79,800</div>
+          <div className="flex items-center text-xs font-semibold text-red-500">
+            <GoTriangleUp />
+            1,200
           </div>
         </div>
-        <div className="text-base font-bold text-shinhan-blue">1.94%</div>
+        <div className="text-base font-bold text-red-500">1.40%</div>
       </div>
       <div className="mt-1 pl-4 pr-4 text-xs">
         <div className="text-xxs flex items-center justify-between font-medium text-gray-600">
           <div className="flex">
-            <span>시 76,100</span>
-            <span className="ml-1">고 76,600</span>
-            <span className="ml-1">저 75,700</span>
+            <span>시 79,700</span>
+            <span className="ml-1">고 80,500</span>
+            <span className="ml-1">저 79,000</span>
           </div>
           <div>
-            <span>5,691,161주</span>
+            <span>13,804,346주</span>
           </div>
         </div>
       </div>
+
       <div className="mt-1 pl-4 pr-4 text-xs">
         <div className="flex items-center">
           <span className="text-xxs font-medium text-gray-400">현금30</span>
@@ -150,10 +150,10 @@ const SellComplete = () => {
                 현금매수
               </td> */}
               <td className="border border-shnhan-whitegray-back px-2 py-1">
-                75,800
+                79,900
               </td>
               <td className="border border-shnhan-whitegray-back px-2 py-1">
-                75,800
+                79,900
               </td>
             </tr>
           </tbody>
