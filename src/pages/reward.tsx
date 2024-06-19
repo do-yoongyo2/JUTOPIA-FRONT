@@ -1,9 +1,20 @@
 import type { NextPage } from "next";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
+import { useState, useEffect } from "react";
 import ChallengeGrid from "~/components/ChallengeGrid";
 
 const Reward: NextPage = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) {
+    // 초기 로딩 상태 표시 또는 빈 상태로 렌더링
+    return null;
+  }
   return (
     <div className="font-ttlaundrygothicb">
       <LeftBar selectedTab="리워드" />
