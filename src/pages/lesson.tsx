@@ -14,7 +14,7 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      {/* <ProblemUnitDescription
+      <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_0}
         titles={descriptionData.titles2_0}
         nextIndexes={descriptionData.nextIndexes2_0}
@@ -22,7 +22,7 @@ const Lesson: NextPage = () => {
         imageIndexes={descriptionData.imageIndexes2_0}
         backgroundColor="#0046ff"
         progressbarColor="blue"
-      /> */}
+      />
 
       {/* <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_1}
@@ -50,11 +50,11 @@ const Lesson: NextPage = () => {
         progressbarColor="blue"
       /> */}
 
-      <ProblemUnitQuiz
+      {/* <ProblemUnitQuiz
         problem={problemData.problem3_0}
         backgroundColor="blue"
         progressbarColor="blue"
-      />
+      /> */}
 
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
