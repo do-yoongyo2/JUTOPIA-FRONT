@@ -4,26 +4,29 @@ import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
-
-const MakeAccount2 = ({ onNext, onPrev }) => {
+interface MakeAccountProps {
+  onNext: () => void;
+  onPrev: () => void;
+}
+const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#prepareMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
       content: "다음과 같은 것들이 필요해요!", // 표시할 텍스트
-      placement: "bottom", // 코치마크의 위치
+      placement: "bottom" as const, // 코치마크의 위치
       disableBeacon: true, //표시 없애기
     },
     {
       target: "#readMessage",
       content: "주의사항을 읽어주세요!",
-      placement: "bottom",
+      placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#clickButton2",
       content: "시작하기 버튼을 클릭해봅시다.",
-      placement: "center",
+      placement: "center" as const,
       disableBeacon: true,
     },
   ];
@@ -51,7 +54,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
             </h2>
             <ul id="prepareMessage" className="mt-5 space-y-4">
               <li className="flex items-center">
-                <span className="bg-shinhan-back mr-3 rounded-lg p-2 text-white">
+                <span className="mr-3 rounded-lg bg-shinhan-back p-2 text-white">
                   📘
                 </span>
                 <div className="text-xs font-semibold text-gray-600">
@@ -59,7 +62,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
                 </div>
               </li>
               <li className="flex items-center">
-                <span className="bg-shinhan-back mr-3 rounded-lg p-2 text-white">
+                <span className="mr-3 rounded-lg bg-shinhan-back p-2 text-white">
                   🔓
                 </span>
                 <div className="text-xs font-semibold text-gray-600">
@@ -67,7 +70,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
                 </div>
               </li>
               <li className="flex items-center">
-                <span className="bg-shinhan-back mr-3 rounded-lg p-2 text-white">
+                <span className="mr-3 rounded-lg bg-shinhan-back p-2 text-white">
                   💼
                 </span>
                 <div className="text-xs font-semibold text-gray-600">
@@ -75,7 +78,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
                 </div>
               </li>
             </ul>
-            <button className="bg-shinhan-back text-shinhan-blue mt-5 h-[30px] w-full rounded-lg text-xs font-semibold ">
+            <button className="mt-5 h-[30px] w-full rounded-lg bg-shinhan-back text-xs font-semibold text-shinhan-blue ">
               자녀 계좌 만들기
             </button>
             <div id="readMessage" className="mt-5 text-xs">
@@ -83,7 +86,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
               <div className="mt-1">
                 • 이용 가능시간: 24시간 365일 <br />
               </div>
-              <div className="text-shinhan-gray text-xxs mt-1">
+              <div className="text-xxs mt-1 text-shinhan-gray">
                 <div className="mt-1">
                   &nbsp;&nbsp;* 영상통화: 영업일 9시~16시 <br />
                 </div>
@@ -97,7 +100,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
             <button
               id="clickButton2"
               onClick={onNext}
-              className="bg-shinhan-button mt-5 h-[35px] w-full rounded-lg text-xs font-semibold text-white"
+              className="mt-5 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-semibold text-white"
             >
               시작하기
             </button>
@@ -116,7 +119,7 @@ const MakeAccount2 = ({ onNext, onPrev }) => {
             <div className="ml-5 text-xs font-semibold text-black">잔고</div>
           </div>
           <div className="flex items-center">
-            <div className="bg-shinhan-blue rounded-lg p-3 text-xs font-semibold text-white">
+            <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
               메뉴
             </div>
           </div>

@@ -6,19 +6,24 @@ import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
-const MakeAccount = ({ onNext }) => {
+
+interface MakeAccountProps {
+  onNext: () => void;
+}
+
+const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
   const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
       content: "계좌 개설하기 튜토리얼에 오신걸 환영해요!", // 표시할 텍스트
-      placement: "bottom", // 코치마크의 위치
+      placement: "bottom" as const, // 코치마크의 위치
       disableBeacon: true, //표시 없애기
     },
     {
       target: "#clickButton1",
       content: "계좌 만들기 버튼을 클릭해봅시다.",
-      placement: "center",
+      placement: "center" as const,
       disableBeacon: true,
     },
   ];
@@ -44,13 +49,13 @@ const MakeAccount = ({ onNext }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="text-base font-bold text-black">자산</div>
-              <div className="text-shinhan-gray ml-3 text-base font-bold">
+              <div className="ml-3 text-base font-bold text-shinhan-gray">
                 주식
               </div>
-              <div className="text-shinhan-gray ml-3 text-base font-bold">
+              <div className="ml-3 text-base font-bold text-shinhan-gray">
                 ETF
               </div>
-              <div className="text-shinhan-gray ml-3 text-base font-bold">
+              <div className="ml-3 text-base font-bold text-shinhan-gray">
                 상품
               </div>
             </div>
@@ -67,13 +72,13 @@ const MakeAccount = ({ onNext }) => {
               <img src="/UNIT1_0/iconShinhan.png" alt="img" />
             </div>
           </div>
-          <button className="bg-shinhan-blue h-[30px] w-full rounded-lg text-xs font-semibold text-white">
+          <button className="h-[30px] w-full rounded-lg bg-shinhan-blue text-xs font-semibold text-white">
             로그인하기
           </button>
           <button
             onClick={onNext}
             id="clickButton1"
-            className="text-shinhan-blue h-[30px] w-full rounded-lg bg-white text-xs font-semibold"
+            className="h-[30px] w-full rounded-lg bg-white text-xs font-semibold text-shinhan-blue"
           >
             계좌 만들기
           </button>
@@ -122,7 +127,7 @@ const MakeAccount = ({ onNext }) => {
           </div>
           <div className="my-first-step">
             <div className="mt-6">
-              <div className="bg-shinhan-blue flex h-[70px] w-full flex-col rounded-lg p-3 text-white">
+              <div className="flex h-[70px] w-full flex-col rounded-lg bg-shinhan-blue p-3 text-white">
                 <div className="text-xs">신용융자 7일몰 ZERO</div>
                 <div className="text-sm font-semibold">
                   신용 1~7일물 신용거래 이벤트
@@ -144,7 +149,7 @@ const MakeAccount = ({ onNext }) => {
             <div className="ml-5 text-xs font-semibold text-black">잔고</div>
           </div>
           <div className="flex items-center">
-            <div className="bg-shinhan-blue rounded-lg p-3 text-xs font-semibold text-white">
+            <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
               메뉴
             </div>
           </div>

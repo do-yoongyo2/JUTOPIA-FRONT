@@ -4,20 +4,23 @@ import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
-
-const MakeAccount5 = ({ onNext, onPrev }) => {
+interface MakeAccountProps {
+  onNext: () => void;
+  onPrev: () => void;
+}
+const MakeAccount5: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#checkMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
       content: "주민등록증, 운전면허증으로 본인 확인할 수 있어요!", // 표시할 텍스트
-      placement: "bottom", // 코치마크의 위치
+      placement: "bottom" as const, // 코치마크의 위치
       disableBeacon: true, //표시 없애기
     },
     {
       target: "#clickButton5",
       content: "신분증 촬영 버튼을 클릭해봅시다.",
-      placement: "center",
+      placement: "center" as const,
       disableBeacon: true,
     },
   ];
@@ -49,7 +52,7 @@ const MakeAccount5 = ({ onNext, onPrev }) => {
               신분증으로 본인을 확인할게요
             </h2>
             <div className="text-xs">
-              <div className="text-shinhan-gray text-xxs mt-2 font-semibold">
+              <div className="text-xxs mt-2 font-semibold text-shinhan-gray">
                 주민등록증, 운전면허증으로 가능해요.
               </div>
             </div>
@@ -58,7 +61,7 @@ const MakeAccount5 = ({ onNext, onPrev }) => {
             <hr />
           </div>
           <div className="mt-5 text-xs">
-            <div className="text-shinhan-gray text-xxs mt-1">
+            <div className="text-xxs mt-1 text-shinhan-gray">
               <div className="mt-1">
                 &nbsp;&nbsp;* 인식이 안된다면, 어두운 배경에 신분증을
                 <br />
@@ -70,7 +73,7 @@ const MakeAccount5 = ({ onNext, onPrev }) => {
           <button
             onClick={onNext}
             id="clickButton5"
-            className="bg-shinhan-button mt-10 h-[35px] w-full rounded-lg text-xs font-medium text-white"
+            className="mt-10 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-medium text-white"
           >
             신분증 촬영
           </button>

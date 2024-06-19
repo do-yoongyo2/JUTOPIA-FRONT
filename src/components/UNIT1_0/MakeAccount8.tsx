@@ -1,6 +1,9 @@
 import React from "react";
-
-const MakeAccount8 = ({ onFinish, onPrev }) => {
+interface MakeAccountProps {
+  onFinish: () => void;
+  onPrev: () => void;
+}
+const MakeAccount8: React.FC<MakeAccountProps> = ({ onFinish, onPrev }) => {
   return (
     <div>
       <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white p-4">
@@ -12,7 +15,7 @@ const MakeAccount8 = ({ onFinish, onPrev }) => {
           </h2>
 
           <div className="mt-4 text-xs">
-            <div className="text-shinhan-gray text-xxs mt-3 font-semibold">
+            <div className="text-xxs mt-3 font-semibold text-shinhan-gray">
               계좌 비밀번호 재입력
             </div>
             <div className="mt-7">
@@ -20,7 +23,7 @@ const MakeAccount8 = ({ onFinish, onPrev }) => {
             </div>
           </div>
           <div className="text-xs">
-            <div className="text-shinhan-gray text-xxs mt-4 font-semibold">
+            <div className="text-xxs mt-4 font-semibold text-shinhan-gray">
               계좌 비밀번호
             </div>
             <div className="mt-7">
@@ -32,16 +35,16 @@ const MakeAccount8 = ({ onFinish, onPrev }) => {
             미수(외상)을 사용할까요?
           </div>
           <div className="mt-4 flex justify-between">
-            <button className="bg-shnhan-whitegray-back text-shinhan-blue h-[30px] w-full rounded-lg text-xs font-semibold ">
+            <button className="h-[30px] w-full rounded-lg bg-shnhan-whitegray-back text-xs font-semibold text-shinhan-blue ">
               사용
             </button>
-            <button className="bg-shinhan-blue h-[30px] w-full rounded-md text-xs font-semibold text-white">
+            <button className="h-[30px] w-full rounded-md bg-shinhan-blue text-xs font-semibold text-white">
               사용 안 함
             </button>
           </div>
           <button
             onClick={onFinish}
-            className="bg-shinhan-button mt-40 h-[35px] w-full rounded-lg text-xs font-medium text-white"
+            className="mt-40 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-medium text-white"
           >
             다음
           </button>

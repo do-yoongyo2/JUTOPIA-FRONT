@@ -4,26 +4,29 @@ import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
-
-const MakeAccount7 = ({ onNext, onPrev }) => {
+interface MakeAccountProps {
+  onNext: () => void;
+  onPrev: () => void;
+}
+const MakeAccount7: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#explainMessage",
       content: "해당 정보들을 기재해주세요.",
-      placement: "bottom",
+      placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#explainMessage2",
       content: "미수란? ~~~블라블라~~~",
-      placement: "bottom",
+      placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#clickButton7",
       content: "다음 버튼을 클릭해봅시다.",
-      placement: "center",
+      placement: "center" as const,
       disableBeacon: true,
     },
   ];
@@ -52,7 +55,7 @@ const MakeAccount7 = ({ onNext, onPrev }) => {
           </h2>
           <div id="explainMessage">
             <div className="mt-4 text-xs">
-              <div className="text-shinhan-gray text-xxs mt-3 font-semibold">
+              <div className="text-xxs mt-3 font-semibold text-shinhan-gray">
                 계좌 비밀번호 재입력
               </div>
               <div className="mt-7">
@@ -60,7 +63,7 @@ const MakeAccount7 = ({ onNext, onPrev }) => {
               </div>
             </div>
             <div className="text-xs">
-              <div className="text-shinhan-gray text-xxs mt-4 font-semibold">
+              <div className="text-xxs mt-4 font-semibold text-shinhan-gray">
                 계좌 비밀번호
               </div>
               <div className="mt-7">
@@ -76,17 +79,17 @@ const MakeAccount7 = ({ onNext, onPrev }) => {
             미수(외상)을 사용할까요?
           </div>
           <div className="mt-4 flex justify-between">
-            <button className="bg-shnhan-whitegray-back text-shinhan-blue h-[30px] w-full rounded-lg text-xs font-semibold ">
+            <button className="h-[30px] w-full rounded-lg bg-shnhan-whitegray-back text-xs font-semibold text-shinhan-blue ">
               사용
             </button>
-            <button className="bg-shinhan-blue h-[30px] w-full rounded-md text-xs font-semibold text-white">
+            <button className="h-[30px] w-full rounded-md bg-shinhan-blue text-xs font-semibold text-white">
               사용 안 함
             </button>
           </div>
           <button
             onClick={onNext}
             id="clickButton7"
-            className="bg-shinhan-button mt-40 h-[35px] w-full rounded-lg text-xs font-medium text-white"
+            className="mt-40 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-medium text-white"
           >
             다음
           </button>
