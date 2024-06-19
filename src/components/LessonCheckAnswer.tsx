@@ -75,10 +75,11 @@ const CheckAnswer = ({
   correctAnswer,
   isAnswerDetail,
   answerDetail,
+  color,
   onCheckAnswer,
   onFinish,
   onSkip,
-  color,
+  setIsChecked,
 }: {
   isAnswerSelected: boolean;
   isAnswerCorrect: boolean;
@@ -86,10 +87,11 @@ const CheckAnswer = ({
   correctAnswer: string;
   isAnswerDetail?: boolean;
   answerDetail?: string;
+  color: string;
   onCheckAnswer: () => void;
   onFinish: () => void;
   onSkip: () => void;
-  color: string;
+  setIsChecked: (check: boolean) => void;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -136,7 +138,7 @@ const CheckAnswer = ({
         className={`${
           correctAnswerShown
             ? isAnswerCorrect
-              ? `fixed bottom-0 left-0 right-0 bg-green-100 font-bold text-green-600 transition-all`
+              ? "fixed bottom-0 left-0 right-0 bg-green-100 font-bold text-green-600 transition-all"
               : "fixed bottom-0 left-0 right-0 bg-red-100 font-bold text-red-500 transition-all"
             : "fixed -bottom-52 left-0 right-0"
         } ${!correctAnswerShown && "hidden sm:block"}`}

@@ -29,3 +29,20 @@
 .animate-bounce {
   animation: custom-bounce 2s infinite; /* 애니메이션 속도와 반복 설정 */
 }
+
+@keyframes custom-blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media (max-width: 768px) {
+  .blink-on-small {
+    animation: custom-blink 1s infinite;
+  }
+}
