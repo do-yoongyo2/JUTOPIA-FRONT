@@ -4,20 +4,23 @@ import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
-
-const MakeAccount6 = ({ onNext, onPrev }) => {
+interface MakeAccountProps {
+  onNext: () => void;
+  onPrev: () => void;
+}
+const MakeAccount6: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#explainMessage",
       content: "해당 정보들을 기재해주세요.",
-      placement: "bottom",
+      placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#clickButton6",
       content: "동의하고 인증번호 받기 버튼을 클릭해봅시다.",
-      placement: "center",
+      placement: "center" as const,
       disableBeacon: true,
     },
   ];
@@ -46,7 +49,7 @@ const MakeAccount6 = ({ onNext, onPrev }) => {
 
           <div id="explainMessage">
             <div className="text-xs">
-              <div className="text-shinhan-gray text-xxs mt-4 flex font-semibold">
+              <div className="text-xxs mt-4 flex font-semibold text-shinhan-gray">
                 <span className="pr-11">통신사</span>
                 <span className="pl-3">휴대폰번호</span>
               </div>
@@ -56,7 +59,7 @@ const MakeAccount6 = ({ onNext, onPrev }) => {
               </div>
             </div>
             <div className="text-xs">
-              <div className="text-shinhan-gray text-xxs mt-4 font-semibold">
+              <div className="text-xxs mt-4 font-semibold text-shinhan-gray">
                 이름
               </div>
               <div className="mt-7">
@@ -68,7 +71,7 @@ const MakeAccount6 = ({ onNext, onPrev }) => {
           <button
             onClick={onNext}
             id="clickButton6"
-            className="bg-shinhan-button mt-40 h-[35px] w-full rounded-lg text-xs font-medium text-white"
+            className="mt-40 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-medium text-white"
           >
             동의하고 인증번호 받기
           </button>

@@ -12,6 +12,7 @@ const ProblemUnitDescription = ({
   backgroundColor,
   images,
   imageIndexes,
+  progressbarColor,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -19,6 +20,7 @@ const ProblemUnitDescription = ({
   backgroundColor: string;
   images: string[];
   imageIndexes: number[];
+  progressbarColor: string;
 }) => {
   const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
@@ -46,7 +48,7 @@ const ProblemUnitDescription = ({
 
   const LessonComplete = () => {
     return (
-      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
         <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
           <h1 className="text-center text-3xl text-yellow-400">
             Lesson Complete!
@@ -69,7 +71,7 @@ const ProblemUnitDescription = ({
   };
 
   return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       {!lessonComplete ? (
         <>
           <div className="flex grow flex-col items-center gap-5">
@@ -78,6 +80,7 @@ const ProblemUnitDescription = ({
                 correctAnswerCount={currentStep}
                 totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
                 setQuitMessageShown={setQuitMessageShown}
+                color={progressbarColor}
               />
             </div>
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">

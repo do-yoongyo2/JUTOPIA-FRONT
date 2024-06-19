@@ -7,6 +7,7 @@ import { RiMore2Fill } from "react-icons/ri";
 import { GoTriangleDown } from "react-icons/go";
 import { FaLock } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
+
 interface BuyProps {
   onFinish: () => void;
   onPrev: () => void;

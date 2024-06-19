@@ -7,17 +7,25 @@ import Accounts5 from "./MakeAccount5";
 import Accounts6 from "./MakeAccount6";
 import Accounts7 from "./MakeAccount7";
 import Accounts8 from "./MakeAccount8";
-
-const RenderComponent = ({ onNext, onPrev, onFinish }) => {
+interface RenderComponentProps {
+  onNext: () => void;
+  onFinish: () => void;
+  onPrev: () => void;
+}
+const RenderComponent: React.FC<RenderComponentProps> = ({
+  onNext,
+  onPrev,
+  onFinish,
+}) => {
   const [activeComponent, setActiveComponent] = useState("Accounts");
   useEffect(() => {
     console.log("Accounts2 props updated");
   }, [onNext, onPrev, setActiveComponent, activeComponent]);
-  const handleNext = (nextComponent) => {
+  const handleNext = (nextComponent: React.SetStateAction<string>) => {
     setActiveComponent(nextComponent); // 다음 컴포넌트로 상태 업데이트
     onNext(); // 부모 컴포넌트에서 currentStep 업데이트
   };
-  const handlePrev = (prevComponent) => {
+  const handlePrev = (prevComponent: React.SetStateAction<string>) => {
     setActiveComponent(prevComponent);
     onPrev();
   };

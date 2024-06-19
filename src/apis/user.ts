@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function login(email: string, password: string) {
   try {
-    const resp = await axios.post(`http://localhost:3000/api/users/login`, {
+    const resp = await axios.post(`http://52.78.236.23:3000/api/users/login`, {
       email: email,
       password: password,
     });
@@ -14,7 +14,7 @@ export async function login(email: string, password: string) {
 
 export async function signup(name: string, email: string, password: string) {
   try {
-    const resp = await axios.post("http://localhost:3000/api/users/signup", {
+    const resp = await axios.post("http://52.78.236.23:3000/api/users/signup", {
       username: name, // 서버에서 username 필드로 사용하므로 이름을 username으로 전달합니다.
       email: email,
       password: password,
