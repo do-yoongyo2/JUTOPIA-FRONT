@@ -48,7 +48,7 @@ const ProblemUnitDescription = ({
 
   const LessonComplete = () => {
     return (
-      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
         <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
           <h1 className="text-center text-3xl text-yellow-400">
             Lesson Complete!
@@ -71,7 +71,7 @@ const ProblemUnitDescription = ({
   };
 
   return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       {!lessonComplete ? (
         <>
           <div className="flex grow flex-col items-center gap-5">
