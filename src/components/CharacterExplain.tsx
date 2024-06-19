@@ -74,27 +74,6 @@ const CharacterExplain = ({
 
   return (
     <>
-      <style>
-        {`
-          @keyframes blink {
-            0% { opacity: 0.7; }
-            50% { opacity: 0; }
-            100% { opacity: 0.7; }
-          }
-          .blink {
-            animation: blink 1s infinite;
-          }
-          .hide {
-            display:none;
-          }
-          @media (max-width: 768px) {
-            .hide-on-small {
-              display: none;
-            }
-          }
-          
-        `}
-      </style>
       <DescriptionFrame
         backgroundColor={backgroundColor}
         draggable="true"
@@ -104,64 +83,26 @@ const CharacterExplain = ({
         onTouchEnd={handleTouchEnd}
       >
         <MdOutlineSwipeLeft
-          className={
-            window.innerWidth <= 768 &&
-            isTypingComplete &&
-            currentIndex < descriptionArr.length - 1
-              ? "blink"
-              : "hide"
-          }
-          style={{
-            position: "absolute",
-            left: "50%",
-            transform: "translate(-50%, 50%)",
-            opacity: "70%",
-          }}
-          size="150px"
+          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} absolute left-2/4 size-[150px] translate-x-[-50%] translate-y-[50%] opacity-0`}
         />
-        <div
-          className="container mx-auto block items-center justify-between sm:flex"
-          style={{ maxWidth: "70vw" }}
-        >
+        <div className="container mx-auto block max-w-[70vw] items-center justify-between sm:flex">
           <div className="block sm:flex">
             <img
+              className="m-[15px] h-[7rem] w-[7rem] rounded-[100%] border-4 border-solid border-white object-cover"
               src="character_finger.webp"
               alt="Character pointing"
-              width="100rem"
-              style={{
-                objectFit: "cover",
-                margin: "30px",
-                border: "white 5px solid",
-                borderRadius: "100%",
-              }}
             />
             {currentItem && (
               <div className="p-4">
-                <h2
-                  style={{
-                    fontFamily: "TTLaundryGothicB",
-                    padding: "10px 0",
-                    fontSize: "1.5rem",
-                    marginBottom: "10px",
-                    cursor: "default",
-                    whiteSpace: "pre-line",
-                  }}
-                >
+                <h2 className="mb-10 cursor-default whitespace-pre-line font-['TTLaundryGothicB'] text-[1.5rem]">
                   {Object.keys(currentItem)[0]}
                 </h2>
                 <div
-                  className="flex items-center"
+                  className="flex cursor-default items-center"
                   onClick={handleTypingComplete}
-                  style={{ cursor: "default" }}
                 >
                   {isTypingComplete ? (
-                    <div
-                      style={{
-                        fontFamily: "TTLaundryGothicB",
-                        whiteSpace: "pre-line",
-                        cursor: "default",
-                      }}
-                    >
+                    <div className="cursor-default whitespace-pre-line font-['TTLaundryGothicB']">
                       {
                         currentItem[
                           Object.keys(currentItem)[0] as keyof DescriptionItem
@@ -183,37 +124,28 @@ const CharacterExplain = ({
             )}
           </div>
           <div
-            className={`transition-transform ${isTypingComplete ? "animate-bounce" : ""}`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginLeft: "10px",
-            }}
+            className={`ml-10 flex items-center transition-transform ${isTypingComplete ? "animate-bounce" : ""}`}
           >
             {nextIndexes.includes(currentIndex)
               ? currentIndex === descriptionArr.length - 1
                 ? isTypingComplete && (
                     <button
-                      className="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                      className="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 font-['TTLaundryGothicB'] text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                       onClick={handleNext}
-                      style={{ fontFamily: "TTLaundryGothicB" }}
                     >
                       COMPLETE!
                     </button>
                   )
                 : isTypingComplete && (
                     <MdKeyboardDoubleArrowRight
-                      className="hide-on-small"
+                      className="cursor-pointer text-[40px] text-white max-[768px]:hidden"
                       onClick={handleNext}
-                      style={{ cursor: "pointer", fontSize: "40px" }}
-                      color="white"
                     />
                   )
               : isTypingComplete && (
                   <IoArrowRedoOutline
-                    className="hide-on-small"
+                    className="cursor-pointer text-[30px] max-[768px]:hidden"
                     onClick={handleNext}
-                    style={{ cursor: "pointer", fontSize: "30px" }}
                   />
                 )}
           </div>

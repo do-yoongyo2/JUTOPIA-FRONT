@@ -12,6 +12,7 @@ interface SellProps {
   onPrev: () => void;
 }
 const SellComplete: React.FC<SellProps> = ({ onFinish, onPrev }) => {
+
   return (
     <div className="h-screen max-h-[500px] w-screen max-w-[300px] border-2 bg-white ">
       <div className="flex items-center justify-between pl-4 pr-4 pt-4">
@@ -118,7 +119,9 @@ const SellComplete: React.FC<SellProps> = ({ onFinish, onPrev }) => {
         </div>
       </div>
 
+
       <div className="mt-1 h-[180px] text-center text-sm ">
+
         <table className="w-full border-collapse">
           <thead className="bg-shnhan-whitegray-back text-gray-500">
             <tr>
@@ -179,6 +182,7 @@ const SellComplete: React.FC<SellProps> = ({ onFinish, onPrev }) => {
           </div>
         </div>
       </div>
+
       <div className=" flex justify-center">
         <button
           onClick={onPrev}

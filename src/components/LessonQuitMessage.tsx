@@ -29,7 +29,7 @@ const QuitMessage = ({
         }
         aria-hidden={!quitMessageShown}
       >
-        <div className="flex grow flex-col gap-4">
+        <div className="flex grow flex-col gap-4 font-['TTLaundryGothicB']">
           <h2 className="text-lg font-bold sm:text-2xl">
             Are you sure you want to quit?
           </h2>
@@ -37,7 +37,7 @@ const QuitMessage = ({
             All progress for this lesson will be lost.
           </p>
         </div>
-        <div className="flex grow flex-col items-center justify-center gap-4 sm:flex-row-reverse">
+        <div className="flex grow flex-col items-center justify-center gap-4 font-['TTLaundryGothicB'] sm:flex-row-reverse">
           <Link
             className="flex w-full items-center justify-center rounded-2xl border-b-4 border-blue-500 bg-blue-400 py-3 font-bold uppercase text-white transition hover:brightness-105 sm:w-48"
             href="/tutorial"

@@ -1,30 +1,32 @@
 import { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
-import CharacterExplainVer2_5 from "./CharacterExplainVer2_5";
 import Link from "next/link";
+import RenderBuy from "./UNIT1_1/RenderBuy";
 
-const ProblemUnit2_5 = () => {
+// const pages = [Accounts, Accounts2, Accounts3];
+const ProblemUnit1_1 = ({ progressbarColor }: { progressbarColor: string }) => {
+  const totalCorrectAnswersNeeded = 2;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
-  const [totalCorrectAnswersNeeded, setTotalCorrectAnswersNeeded] = useState(0);
 
   const onNext = () => {
     if (currentStep < totalCorrectAnswersNeeded - 1) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
-      setLessonComplete(true); // Mark lesson as complete
+      setLessonComplete(true);
+    }
+  };
+
+  const onPrev = () => {
+    if (currentStep > 0) {
+      setCurrentStep((prevStep) => prevStep - 1);
     }
   };
 
   const onFinish = () => {
-    // Logic to move to the next problem or end the lesson
-    setLessonComplete(true); // Example: Mark lesson as complete
-  };
-
-  const handleDataLength = (length: number) => {
-    setTotalCorrectAnswersNeeded(length);
+    setLessonComplete(true);
   };
 
   return (
@@ -34,28 +36,22 @@ const ProblemUnit2_5 = () => {
           <div className="flex grow flex-col items-center gap-5">
             <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
               <ProgressBar
-                correctAnswerCount={currentStep}
+                correctAnswerCount={currentStep + 1}
                 totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
                 setQuitMessageShown={setQuitMessageShown}
+                color={progressbarColor}
               />
             </div>
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
-              근거있는 투자, 기업분석이란 무엇일까요?
+              삼성전자 매수하기
             </h1>
-            <img
-              alt="설명 이미지"
-              src="dummyImage.jpeg"
-              style={{ height: "300px" }}
-            />
+
+            <RenderBuy onNext={onNext} onFinish={onFinish} onPrev={onPrev} />
           </div>
+
           <QuitMessage
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
-          />
-          <CharacterExplainVer2_5
-            onNext={onNext}
-            onFinish={onFinish}
-            onDataLength={handleDataLength}
           />
         </>
       ) : (
@@ -65,16 +61,34 @@ const ProblemUnit2_5 = () => {
   );
 };
 
-export default ProblemUnit2_5;
+export default ProblemUnit1_1;
 
 const LessonComplete = () => {
   return (
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
-      <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
-        <h1 className="text-center text-3xl text-yellow-400">
+      <div className="flex grow flex-col items-center justify-center gap-2 font-bold">
+        {/* <h1 className="text-center text-3xl text-yellow-400">
           Lesson Complete!
-        </h1>
+        </h1> */}
+        <img
+          className="mt-4"
+          alt="설명 이미지"
+          src="/UNIT1_0/shinhanEvent.png"
+          style={{ height: "400px", width: "350px" }}
+        />
+        <div className="flex items-center">
+          <img
+            className="mt-4"
+            alt="설명 이미지"
+            src="/UNIT1_0/신한투자증권qr코드.jpg"
+            style={{ height: "100px", width: "100px" }}
+          />
+          <h1 className="text-center text-xl text-shinhan-blue">
+            신한투자증권 바로가기
+          </h1>
+        </div>
       </div>
+
       <section className="border-gray-200 sm:border-t-2 sm:p-10">
         <div className="mx-auto flex max-w-5xl sm:justify-between">
           <Link
