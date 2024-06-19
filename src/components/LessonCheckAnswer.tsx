@@ -142,28 +142,26 @@ const CheckAnswer = ({
         } ${!correctAnswerShown && "hidden sm:block"}`}
       >
         <div className="flex max-w-5xl flex-col gap-4 p-5 sm:mx-auto sm:flex-row sm:items-center sm:justify-between sm:p-10 sm:py-14">
-          <>
-            {isAnswerCorrect ? (
-              <div className="mb-2 flex flex-col gap-5 sm:flex-row sm:items-center">
-                <div
-                  className={`hidden rounded-full bg-white p-5 text-green-500 sm:block`}
-                >
-                  <DoneSvg />
-                </div>
-                <div className="text-2xl">Good job!</div>
+          {isAnswerCorrect ? (
+            <div className="mb-2 flex flex-col gap-5 sm:flex-row sm:items-center">
+              <div
+                className={`hidden rounded-full bg-white p-5 text-green-500 sm:block`}
+              >
+                <DoneSvg />
               </div>
-            ) : (
-              <div className="mb-2 flex flex-col gap-5 sm:flex-row sm:items-center">
-                <div className="hidden rounded-full bg-white p-5 text-red-500 sm:block">
-                  <BigCloseSvg />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <div className="text-2xl">Correct solution</div>
-                  <div className="text-sm font-normal">{correctAnswer}</div>
-                </div>
+              <div className="text-2xl">Good job!</div>
+            </div>
+          ) : (
+            <div className="mb-2 flex flex-col gap-5 sm:flex-row sm:items-center">
+              <div className="hidden rounded-full bg-white p-5 text-red-500 sm:block">
+                <BigCloseSvg />
               </div>
-            )}
-          </>
+              <div className="flex flex-col gap-2">
+                <div className="text-2xl">Correct solution</div>
+                <div className="text-sm font-normal">{correctAnswer}</div>
+              </div>
+            </div>
+          )}
           <div className="flex max-w-5xl gap-5">
             <button
               onClick={onFinish}

@@ -6,6 +6,28 @@ import { Problem } from "~/data/problem";
 import Link from "next/link";
 import Image from "next/image";
 
+const LessonComplete = ({ backgroundColor }: { backgroundColor: string }) => {
+  return (
+    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+      <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
+        <h1 className="text-center text-3xl text-yellow-400">
+          Lesson Complete!
+        </h1>
+      </div>
+      <section className="border-gray-200 sm:border-t-2 sm:p-10">
+        <div className="mx-auto flex max-w-5xl sm:justify-between">
+          <Link
+            className={`bg-${backgroundColor}-500 flex w-full items-center justify-center rounded-2xl border-b-4 border-${backgroundColor}-600 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit`}
+            href="/tutorial"
+          >
+            돌아가기
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 const ProblemUnitQuiz = ({
   problem,
   backgroundColor,
@@ -24,6 +46,7 @@ const ProblemUnitQuiz = ({
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0); // 현재 문제 인덱스
   const [incorrectAnswers, setIncorrectAnswers] = useState<number[]>([]); // 틀린 문제 인덱스
   const [retryMode, setRetryMode] = useState(false); // 재도전 모드 여부
+  const [isComplete, setIsComplete] = useState(false);
 
   const problemKeys: string[] = Object.keys(problem);
   const currentProblem: Problem | null = problemKeys[currentProblemIndex]
@@ -49,15 +72,22 @@ const ProblemUnitQuiz = ({
     setCorrectAnswerShown(true);
   };
 
-  if (correctAnswerCount >= totalCorrectAnswersNeeded && !retryMode) {
-    if (incorrectAnswers.length > 0) {
-      setRetryMode(true);
-      setCurrentProblemIndex(incorrectAnswers[0]!);
-      setIncorrectAnswers(incorrectAnswers.slice(1));
-    } else {
-      return <LessonComplete backgroundColor={backgroundColor} />;
-    }
-  }
+  // 필요없지만 학습에 굉장히 중요했던 코드. 아주 큰 이슈를 가져왔음
+  // 이거 주석 풀면 마지막 프로그레스 바 안차고 바로 LessonComplete으로 넘어감.
+  // 그런데 주석 풀고 return까지 지우면 프로그레스 바만 차고 LessonComplete는 호출 안됨.
+  // 추가로 <LessonComplete backgroundColor={backgroundColor} /> 이 부분을 setIsComplete(true)로 대체하면 too many rerenders 에러가 남.
+  // 아마 이 if문을 전역으로 관리해서 그런 것 같음. 전역 제발 금지...
+  // 2024.06.19 return 대란 by 준우 & 진아
+
+  // if (correctAnswerCount === totalCorrectAnswersNeeded && !retryMode) {
+  //   if (incorrectAnswers.length > 0) {
+  //     setRetryMode(true);
+  //     setCurrentProblemIndex(incorrectAnswers[0]!);
+  //     setIncorrectAnswers(incorrectAnswers.slice(1));
+  //   } else {
+  //     return <LessonComplete backgroundColor={backgroundColor} />;
+  //   }
+  // }
 
   // 다음 문제로 넘어갈 때 호출되는 함수
   const onFinish = () => {
@@ -70,7 +100,7 @@ const ProblemUnitQuiz = ({
         setIncorrectAnswers(incorrectAnswers.slice(1));
       } else {
         setRetryMode(false);
-        return <LessonComplete backgroundColor={backgroundColor} />;
+        setIsComplete(true);
       }
     } else {
       if (currentProblemIndex < totalCorrectAnswersNeeded - 1) {
@@ -81,13 +111,15 @@ const ProblemUnitQuiz = ({
           setCurrentProblemIndex(incorrectAnswers[0]!);
           setIncorrectAnswers(incorrectAnswers.slice(1));
         } else {
-          return <LessonComplete backgroundColor={backgroundColor} />;
+          setIsComplete(true);
         }
       }
     }
   };
 
-  return (
+  return isComplete ? (
+    <LessonComplete backgroundColor={backgroundColor} />
+  ) : (
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
       <div className="flex grow flex-col items-center gap-5">
         <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
@@ -185,25 +217,3 @@ const ProblemUnitQuiz = ({
 };
 
 export default ProblemUnitQuiz;
-
-const LessonComplete = ({ backgroundColor }: { backgroundColor: string }) => {
-  return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
-      <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
-        <h1 className="text-center text-3xl text-yellow-400">
-          Lesson Complete!
-        </h1>
-      </div>
-      <section className="border-gray-200 sm:border-t-2 sm:p-10">
-        <div className="mx-auto flex max-w-5xl sm:justify-between">
-          <Link
-            className={`bg-${backgroundColor}-500 flex w-full items-center justify-center rounded-2xl border-b-4 border-${backgroundColor}-600 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit`}
-            href="/tutorial"
-          >
-            돌아가기
-          </Link>
-        </div>
-      </section>
-    </div>
-  );
-};
