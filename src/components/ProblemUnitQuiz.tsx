@@ -47,6 +47,7 @@ const ProblemUnitQuiz = ({
   const [incorrectAnswers, setIncorrectAnswers] = useState<number[]>([]); // 틀린 문제 인덱스
   const [retryMode, setRetryMode] = useState(false); // 재도전 모드 여부
   const [isComplete, setIsComplete] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const problemKeys: string[] = Object.keys(problem);
   const currentProblem: Problem | null = problemKeys[currentProblemIndex]
@@ -56,6 +57,7 @@ const ProblemUnitQuiz = ({
 
   // 정답을 확인할 때 호출되는 함수
   const onCheckAnswer = () => {
+    setIsChecked(true);
     setCorrectAnswerShown(true);
     if (selectedAnswer === correctAnswer) {
       setIsAnswerCorrect(true);
@@ -68,6 +70,7 @@ const ProblemUnitQuiz = ({
 
   // 문제를 건너뛰기 할 때 호출되는 함수
   const onSkip = () => {
+    setIsChecked(true);
     setSelectedAnswer(null);
     setCorrectAnswerShown(true);
   };
@@ -94,6 +97,7 @@ const ProblemUnitQuiz = ({
     setSelectedAnswer(null);
     setCorrectAnswerShown(false);
     setIsAnswerCorrect(false);
+    setIsChecked(false);
     if (retryMode) {
       if (incorrectAnswers.length > 0) {
         setCurrentProblemIndex(incorrectAnswers[0]!);
@@ -165,10 +169,10 @@ const ProblemUnitQuiz = ({
                   key={index}
                   className={
                     index === selectedAnswer
-                      ? "cursor-pointer rounded-xl border-2 border-b-4 border-blue-300 bg-blue-100 p-4 text-center text-blue-600"
-                      : "cursor-pointer rounded-xl border-2 border-b-4 border-gray-200 p-4 text-center hover:bg-gray-100"
+                      ? `${!isChecked ? "cursor-pointer" : `cursor-default`} rounded-xl border-2 border-b-4 border-blue-300 bg-blue-100 p-4 text-center text-blue-600`
+                      : `${!isChecked ? "cursor-pointer hover:bg-gray-100" : `cursor-default`} cursor-pointer rounded-xl border-2 border-b-4 border-gray-200 p-4 text-center`
                   }
-                  onClick={() => setSelectedAnswer(index)}
+                  onClick={() => (!isChecked ? setSelectedAnswer(index) : null)}
                 >
                   {option}
                 </li>
@@ -187,7 +191,7 @@ const ProblemUnitQuiz = ({
                   role="radio"
                   aria-checked={index === selectedAnswer}
                   tabIndex={0}
-                  onClick={() => setSelectedAnswer(index)}
+                  onClick={() => !isChecked && setSelectedAnswer(index)}
                 >
                   <h2 className="font-bold">{option}</h2>
                 </div>
@@ -210,6 +214,7 @@ const ProblemUnitQuiz = ({
         answerDetail={currentProblem.solutionDetail || ""}
         onFinish={onFinish}
         onSkip={onSkip}
+        setIsChecked={setIsChecked}
         color={backgroundColor}
       />
     </div>
