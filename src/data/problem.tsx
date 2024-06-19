@@ -77,3 +77,58 @@ export const problem2_4: ProblemItem = {
     answer: "2",
   },
 };
+export const problem2_2: ProblemItem = {
+  lessonProblem1: {
+    problem: "개인이 일정 기간 동안 벌어들인 돈을 무엇이라고 하나요?",
+    problemSelect: ["자산", "수입", "비용"],
+    answer: "1",
+  },
+  lessonProblem2: {
+    problem: "은행에서 돈을 빌리고 갚아야 할 때 사용하는 계좌는 무엇인가요?",
+    problemSelect: ["대출 계좌", "예금 계좌", "적금 계좌"],
+    answer: "0",
+  },
+  lessonProblem3: {
+    problem:
+      "일정 기간 동안 정기적으로 일정 금액을 저축하고 만기 시 이자와 함께 돌려받는 금융 상품은 무엇인가요?",
+    problemSelect: ["예금", "적금", "주식"],
+    answer: "1",
+  },
+  lessonProblem4: {
+    problem: "다음 중 금융 상품에 해당하는 것은 무엇인가요?",
+    problemSelect: ["주식", "부동산", "예술품"],
+    answer: "0",
+  },
+  lessonProblem5: {
+    problem: "주식, 채권 등 증권이 거래되는 시장을 무엇이라고 하나요?",
+    problemSelect: ["은행", "증시", "상점"],
+    answer: "1",
+  },
+  lessonProblem6: {
+    problem: "회사가 사업을 위해 주주들로부터 투자받은 돈을 무엇이라고 하나요?",
+    problemSelect: ["배당금", "시세 차익", "자본금"],
+    answer: "2",
+  },
+  lessonProblem7: {
+    problem:
+      "주식을 낮은 가격에 사서 높은 가격에 팔아 차익을 얻는 방법은 무엇인가요?",
+    problemSelect: ["배당금", "시세 차익", "이자"],
+    answer: "1",
+  },
+  lessonProblem8: {
+    problem: "주식이 거래되는 시장을 무엇이라고 하나요?",
+    problemSelect: ["주식 시장", "채권 시장", "외환 시장"],
+    answer: "0",
+  },
+  lessonProblem9: {
+    problem: "주식처럼 거래소에 상장되어 거래되는 펀드를 무엇이라고 하나요?",
+    problemSelect: ["채권", "예금", "ETF"],
+    answer: "2",
+  },
+  lessonProblem10: {
+    problem:
+      "정부나 기업이 자금을 조달하기 위해 발행하는 일종의 차용 증서는 무엇인가요?",
+    problemSelect: ["주식", "채권", "ETF"],
+    answer: "1",
+  },
+};
