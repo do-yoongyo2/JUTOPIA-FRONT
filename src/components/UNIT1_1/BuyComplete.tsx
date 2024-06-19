@@ -8,9 +8,13 @@ import { GoTriangleDown } from "react-icons/go";
 import { FaLock } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-const BuyComplete = () => {
+interface BuyProps {
+  onFinish: () => void;
+  onPrev: () => void;
+}
+const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
   return (
-    <div className="h-screen max-h-[500px] w-screen max-w-[300px] border-2 bg-white ">
+    <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
       <div className="flex items-center justify-between pl-4 pr-4 pt-4">
         <div className="flex items-center">
           <IoIosArrowBack />
@@ -115,7 +119,7 @@ const BuyComplete = () => {
         </div>
       </div>
 
-      <div className="mt-1 h-[184px] text-center text-sm ">
+      <div className="mt-1 h-[180px] text-center text-sm ">
         <table className="w-full border-collapse">
           <thead className="bg-shnhan-whitegray-back text-gray-500">
             <tr>
@@ -175,6 +179,20 @@ const BuyComplete = () => {
             메뉴
           </div>
         </div>
+      </div>
+      <div className=" flex justify-center">
+        <button
+          onClick={onPrev}
+          className="mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+        >
+          이전
+        </button>
+        <button
+          onClick={onFinish}
+          className="ml-2 mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+        >
+          매수완료!
+        </button>
       </div>
     </div>
   );
