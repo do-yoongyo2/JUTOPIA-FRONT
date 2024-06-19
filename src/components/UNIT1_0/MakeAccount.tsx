@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { HiOutlineBell } from "react-icons/hi2";
 import { FiSearch } from "react-icons/fi";
 import Tooltip from "../Tooltip";
@@ -12,7 +11,7 @@ interface MakeAccountProps {
 }
 
 const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
-  const [run, setRun] = useState(true);
+  // const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
@@ -33,7 +32,7 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
       <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
         <Joyride
           steps={steps}
-          run={run}
+          run={true}
           continuous={true}
           spotlightClicks={true}
           // scrollToFirstStep={true}
