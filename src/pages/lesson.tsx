@@ -44,11 +44,11 @@ const Lesson: NextPage = () => {
         progressbarColor="blue"
       /> */}
 
-      <ProblemUnitQuiz
+      {/* <ProblemUnitQuiz
         problem={problemData.problem2_4}
         backgroundColor="blue"
         progressbarColor="blue"
-      />
+      /> */}
 
       {/* <ProblemUnitQuiz
         problem={problemData.problem3_0}
