@@ -1,6 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import type { TooltipRenderProps } from "react-joyride/src/types/components";
-
+import type { TooltipRenderProps } from "react-joyride";
 export default function Tooltip({
   step,
   index,

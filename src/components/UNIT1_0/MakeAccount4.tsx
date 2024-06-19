@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
@@ -9,7 +8,7 @@ interface MakeAccountProps {
   onPrev: () => void;
 }
 const MakeAccount4: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
-  const [run, setRun] = useState(true);
+  // const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#checkMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
@@ -35,7 +34,7 @@ const MakeAccount4: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
       <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white p-4">
         <Joyride
           steps={steps}
-          run={run}
+          run={true}
           continuous={true}
           spotlightClicks={true}
           // scrollToFirstStep={true}
