@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const LessonComplete = ({ backgroundColor }: { backgroundColor: string }) => {
   return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
         <h1 className="text-center text-3xl text-yellow-400">
           Lesson Complete!
@@ -124,7 +124,7 @@ const ProblemUnitQuiz = ({
   return isComplete ? (
     <LessonComplete backgroundColor={backgroundColor} />
   ) : (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       <div className="flex grow flex-col items-center gap-5">
         <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
           <ProgressBar
@@ -135,14 +135,11 @@ const ProblemUnitQuiz = ({
           />
         </div>
         <section className="flex max-w-2xl grow flex-col gap-5 self-center rounded-lg sm:items-center sm:justify-center sm:gap-5 sm:px-5">
-          <h1
-            className="self-start text-center text-2xl font-bold sm:text-3xl"
-            style={{ whiteSpace: "pre-line" }}
-          >
+          <h1 className="self-start whitespace-pre-line text-center text-2xl font-bold sm:text-3xl ">
             {currentProblem.problem}
           </h1>
           {currentProblem.problemDetail != null && (
-            <div className="mb-4">
+            <div className="mb-4 text-center text-gray-600">
               {Array.isArray(currentProblem.problemDetail) ? (
                 currentProblem.problemDetail.map((detail, index) => (
                   <p key={index}>{detail}</p>
@@ -169,8 +166,8 @@ const ProblemUnitQuiz = ({
                   key={index}
                   className={
                     index === selectedAnswer
-                      ? `${!isChecked ? "cursor-pointer" : `cursor-default`} rounded-xl border-2 border-b-4 border-blue-300 bg-blue-100 p-4 text-center text-blue-600`
-                      : `${!isChecked ? "cursor-pointer hover:bg-gray-100" : `cursor-default`} cursor-pointer rounded-xl border-2 border-b-4 border-gray-200 p-4 text-center`
+                      ? `${!isChecked ? "cursor-pointer" : `cursor-default`} mb-[10px] rounded-xl border-2 border-b-4 border-blue-300 bg-blue-100 p-4 text-center text-blue-600`
+                      : `${!isChecked ? "cursor-pointer hover:bg-gray-100" : `cursor-default`} mb-[10px] cursor-pointer rounded-xl border-2 border-b-4 border-gray-200 p-4 text-center`
                   }
                   onClick={() => (!isChecked ? setSelectedAnswer(index) : null)}
                 >
@@ -185,8 +182,8 @@ const ProblemUnitQuiz = ({
                   key={index}
                   className={
                     index === selectedAnswer
-                      ? "cursor-pointer rounded-xl border-2 border-b-4 border-blue-300 bg-blue-100 p-4 text-center text-blue-600"
-                      : "cursor-pointer rounded-xl border-2 border-b-4 border-gray-200 p-4 text-center hover:bg-gray-100"
+                      ? `${!isChecked ? "cursor-pointer" : `cursor-default`} rounded-xl border-2 border-b-4 border-blue-300 bg-blue-100 p-4 text-center text-blue-600`
+                      : `${!isChecked ? "cursor-pointer hover:bg-gray-100" : `cursor-default`} rounded-xl border-2 border-b-4 border-gray-200 p-4 text-center`
                   }
                   role="radio"
                   aria-checked={index === selectedAnswer}

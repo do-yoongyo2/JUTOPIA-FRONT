@@ -1,11 +1,23 @@
 import { type NextPage } from "next";
 import Image from "next/image";
-import React from "react";
+import { useRouter, NextRouter } from "next/router";
+import React, { useEffect } from "react";
 import { LandingPageHeader } from "~/components/LandingPageHeader";
 import { useLoginScreen, LoginScreen } from "~/components/LoginScreen";
+import { useBoundStore } from "~/hooks/useBoundStore";
 
 const Home: NextPage = () => {
   const { loginScreenState, setLoginScreenState } = useLoginScreen();
+  const loggedIn: boolean = useBoundStore((x) => x.loggedIn);
+  const router: NextRouter = useRouter();
+
+  useEffect(() => {
+    if (loggedIn) {
+      router.push("/home").catch((err) => {
+        console.log("failed at index page:", err);
+      });
+    }
+  }, [loggedIn]);
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-black">
       <LandingPageHeader />

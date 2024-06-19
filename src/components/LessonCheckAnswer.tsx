@@ -58,7 +58,7 @@ const Modal = ({
             </button>
           </div>
           <div className="space-y-4 p-4 md:p-5">
-            <p className="text-base leading-relaxed text-gray-700 dark:text-gray-400">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
               {answerDetail}
             </p>
           </div>
@@ -108,7 +108,7 @@ const CheckAnswer = ({
           )}
         </>
       )}
-      <section className="border-gray-200 sm:border-t-2 sm:p-10">
+      <section className="border-gray-200 font-['TTLaundryGothicB'] sm:border-t-2 sm:p-10">
         <div className="mx-auto flex max-w-5xl sm:justify-between">
           <button
             className="hidden rounded-2xl border-2 border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:block sm:min-w-[150px] sm:max-w-fit"
