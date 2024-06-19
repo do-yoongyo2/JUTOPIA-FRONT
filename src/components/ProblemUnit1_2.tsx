@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import Link from "next/link";
+import Image from "next/image";
 import RenderSell from "./UNIT1_2/RenderSell";
 
 // const pages = [Accounts, Accounts2, Accounts3];
@@ -70,18 +71,20 @@ const LessonComplete = () => {
         {/* <h1 className="text-center text-3xl text-yellow-400">
           Lesson Complete!
         </h1> */}
-        <img
+        <Image
           className="mt-4"
           alt="설명 이미지"
           src="/UNIT1_0/shinhanEvent.png"
-          style={{ height: "400px", width: "350px" }}
+          width={350}
+          height={400}
         />
         <div className="flex items-center">
-          <img
+          <Image
             className="mt-4"
             alt="설명 이미지"
             src="/UNIT1_0/신한투자증권qr코드.jpg"
-            style={{ height: "100px", width: "100px" }}
+            width={100}
+            height={100}
           />
           <h1 className="text-center text-xl text-shinhan-blue">
             신한투자증권 바로가기
