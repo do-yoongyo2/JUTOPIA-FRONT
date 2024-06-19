@@ -44,17 +44,17 @@ const Lesson: NextPage = () => {
         progressbarColor="blue"
       /> */}
 
-      <ProblemUnitQuiz
+      {/* <ProblemUnitQuiz
         problem={problemData.problem2_4}
         backgroundColor="blue"
         progressbarColor="blue"
-      />
+      /> */}
 
-      {/* <ProblemUnitQuiz
+      <ProblemUnitQuiz
         problem={problemData.problem3_0}
         backgroundColor="blue"
         progressbarColor="blue"
-      /> */}
+      />
 
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
