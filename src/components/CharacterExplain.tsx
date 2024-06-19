@@ -93,8 +93,8 @@ const CharacterExplain = ({
               alt="Character pointing"
             />
             {currentItem && (
-              <div className="p-4">
-                <h2 className="mb-10 cursor-default whitespace-pre-line font-['TTLaundryGothicB'] text-[1.5rem]">
+              <div className="p-4 ">
+                <h2 className="mb-5 cursor-default whitespace-pre-line font-['TTLaundryGothicB'] text-[1.5rem]">
                   {Object.keys(currentItem)[0]}
                 </h2>
                 <div

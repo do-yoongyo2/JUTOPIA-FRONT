@@ -51,11 +51,24 @@ export const descriptionArr2_0: DescriptionItem[] = [
       "금융기관에서 제공하지 않는 일반적인 상품 및 서비스입니다.\n예를 들어, 부동산, 골동품, 예술품 등이 이에 해당합니다.",
   },
 ];
-export const images2_0 = ["dummyImage.jpeg"];
+export const images2_0 = [
+  "UNIT2_0/001.png",
+  "UNIT2_0/002.png",
+  "UNIT2_0/003.png",
+  "UNIT2_0/004.png",
+  "UNIT2_0/005.png",
+  "UNIT2_0/006.png",
+  "UNIT2_0/007.png",
+  "UNIT2_0/008.png",
+  "UNIT2_0/009.png",
+  "UNIT2_0/010.png",
+  "UNIT2_0/011.png",
+  "UNIT2_0/012.png",
+];
 export const nextIndexes2_0 = [2, 6, 9, 11];
 export const imageIndexes2_0 = Array.from(
-  { length: descriptionArr2_0.length },
-  () => -1,
+  { length: descriptionArr2_0.length - 1 },
+  (_, i) => i + 1,
 );
 export const titles2_0 = [
   "수입, 비용, 자산에 대해 알아볼까요?",
@@ -94,11 +107,19 @@ export const descriptionArr2_1: DescriptionItem[] = [
       "정부나 기업이 자금을 조달하기 위해 발행하는 일종의 차용 증서입니다.\n채권을 소유한 투자자는 정해진 이자(쿠폰)를 일정 기간 동안 받고, 만기 시 원금을 돌려받습니다.\n채권은 비교적 안정적인 투자 수단으로 간주됩니다.",
   },
 ];
-export const images2_1 = ["dummyImage.jpeg"];
+export const images2_1 = [
+  "UNIT2_1/014.png",
+  "UNIT2_1/015.png",
+  "UNIT2_1/016.png",
+  "UNIT2_1/017.png",
+  "UNIT2_1/018.png",
+  "UNIT2_1/019.png",
+  "UNIT2_1/020.png",
+];
 export const nextIndexes2_1 = [1, 2, 4, 5, 6];
 export const imageIndexes2_1 = Array.from(
-  { length: descriptionArr2_1.length },
-  () => -1,
+  { length: descriptionArr2_1.length - 1 },
+  (_, i) => i + 1,
 );
 export const titles2_1 = [
   "증시와 증권에 대해 알아볼까요?",
