@@ -2,11 +2,11 @@ import { useState } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import Link from "next/link";
-import RenderComponent from "./UNIT1_0/RenderComponent";
+import RenderSell from "./UNIT1_2/RenderSell";
 
 // const pages = [Accounts, Accounts2, Accounts3];
-const ProblemUnit1_0 = () => {
-  const totalCorrectAnswersNeeded = 8;
+const ProblemUnit1_2 = ({ progressbarColor }: { progressbarColor: string }) => {
+  const totalCorrectAnswersNeeded = 2;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
@@ -39,25 +39,14 @@ const ProblemUnit1_0 = () => {
                 correctAnswerCount={currentStep + 1}
                 totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
                 setQuitMessageShown={setQuitMessageShown}
+                color={progressbarColor}
               />
             </div>
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
-              계좌 개설하기
+              삼성전자 매도하기
             </h1>
 
-            <RenderComponent
-              onNext={onNext}
-              onFinish={onFinish}
-              onPrev={onPrev}
-            />
-            {/* {currentStep > 0 && (
-              <button
-                onClick={onPrev}
-                className="mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-              >
-                이전
-              </button>
-            )} */}
+            <RenderSell onNext={onNext} onFinish={onFinish} onPrev={onPrev} />
           </div>
 
           <QuitMessage
@@ -72,7 +61,7 @@ const ProblemUnit1_0 = () => {
   );
 };
 
-export default ProblemUnit1_0;
+export default ProblemUnit1_2;
 
 const LessonComplete = () => {
   return (
@@ -94,7 +83,7 @@ const LessonComplete = () => {
             src="/UNIT1_0/신한투자증권qr코드.jpg"
             style={{ height: "100px", width: "100px" }}
           />
-          <h1 className="text-shinhan-blue text-center text-xl">
+          <h1 className="text-center text-xl text-shinhan-blue">
             신한투자증권 바로가기
           </h1>
         </div>
