@@ -52,7 +52,6 @@ const MyPage: NextPage = () => {
   const updateProfile = () => {
     setUpdateState("view");
     setName(localName);
-    setEmail(localEmail);
   };
 
   return (
@@ -231,13 +230,15 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
                   onChange={(e) => props.setLocalName(e.target.value)}
                 />
                 <br />
-                <input
+                <p className="text-sm text-gray-400">{props.localEmail}</p>
+
+                {/* <input
                   type="text"
-                  className="text-sm text-gray-400"
+                  
                   value={props.localEmail}
                   style={{ borderBottom: "1px solid gray", outline: "none" }}
                   onChange={(e) => props.setLocalEmail(e.target.value)}
-                />
+                /> */}
               </div>
             )}
           </div>
