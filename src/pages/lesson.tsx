@@ -24,12 +24,6 @@ const Lesson: NextPage = () => {
         progressbarColor="blue"
       /> */}
 
-      {/* <ProblemUnitQuiz
-        problem={problemData.problem2_2}
-        backgroundColor="blue"
-        progressbarColor="blue"
-      /> */}
-
       {/* <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_1}
         titles={descriptionData.titles2_1}
@@ -37,6 +31,12 @@ const Lesson: NextPage = () => {
         images={descriptionData.images2_1}
         imageIndexes={descriptionData.imageIndexes2_1}
         backgroundColor="#0046ff"
+        progressbarColor="blue"
+      /> */}
+
+      {/* <ProblemUnitQuiz
+        problem={problemData.problem2_2}
+        backgroundColor="blue"
         progressbarColor="blue"
       /> */}
 
@@ -56,11 +56,11 @@ const Lesson: NextPage = () => {
         progressbarColor="blue"
       /> */}
 
-      <ProblemUnitQuiz
+      {/* <ProblemUnitQuiz
         problem={problemData.problem3_0}
         backgroundColor="blue"
         progressbarColor="blue"
-      />
+      /> */}
 
       {/* 
             구현한 문제 컴포넌트에서 알아서 사용해라. div css구조는 아래와 같이 사용할것.
