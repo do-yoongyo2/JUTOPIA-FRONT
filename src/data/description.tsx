@@ -1,3 +1,11 @@
+// nextIndexes와 imageIndexes는 로직이 다름
+// 만약 descriptionArr[3]에서 새로운 제목을 보여주고 싶다면 nextIndexes에는 2를 넣어야 함.
+// 그런데 만약 descriptionArr[3]에서 새로운 이미지를 보여주고 싶다면 imageIndexes에는 3을 넣어야 함.
+// why?
+// 제목 인덱스는 바뀌고 난 다음번에 적용됨.
+// 하지만 이미지 인덱스는 useEffect로 인해 바뀌는 값이 실시간으로 반영됨.
+// 굳이 이렇게 한 이유? 프로그레스 바 이슈 때문...
+
 export interface DescriptionItem {
   [key: string]: string;
 }
@@ -277,7 +285,7 @@ export const descriptionArr2_5: DescriptionItem[] = [
   },
 ];
 
-export const nextIndexes2_5 = [6, 7, 8, 9, 10, 11, 12, 13, 14];
+export const nextIndexes2_5 = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 export const titles2_5 = [
   "재무제표의 구성",
   "회계항등식: 빚도 자산이라는 것을 아시나요?",
@@ -291,7 +299,7 @@ export const titles2_5 = [
   "손익 계산 4단계 : 당기순이익",
 ];
 
-export const imageIndexes2_5 = [6, 7, 8, 9, 10, 11, 12, 13, 14];
+export const imageIndexes2_5 = nextIndexes2_5.map((elem) => elem + 1);
 export const images2_5 = [
   "UNIT2_5/2-5-0_재무제표구성.png",
   "UNIT2_5/2-5-1_회계항등식.png",
