@@ -57,12 +57,13 @@ const MarketIssues: React.FC = () => {
         <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
-              Title
+              제목
             </th>
             <th scope="col" className="px-6 py-3">
-              Date
+              발행일
             </th>
             <th scope="col" className="px-6 py-3">
+              PDF 파일
               <span className="sr-only">Download</span>
             </th>
           </tr>
@@ -77,7 +78,21 @@ const MarketIssues: React.FC = () => {
                 scope="row"
                 className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
               >
-                {item.title}
+                {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
+                <div className="flex items-center justify-between">
+                  {item.title}
+                  <a
+                    href={`/details/${item.messageId}`}
+                    className="ml-4 inline-flex"
+                  >
+                    <button
+                      type="button"
+                      className="mb-2 me-2 rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    >
+                      자세히
+                    </button>
+                  </a>
+                </div>
               </th>
               <td className="px-6 py-4">{item.regDate}</td>
               <td className="px-6 py-4 text-right">
