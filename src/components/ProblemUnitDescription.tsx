@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CharacterExplain from "./CharacterExplain";
 import { DescriptionItem } from "~/data/description";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 import Link from "next/link";
 
 const ProblemUnitDescription = ({
@@ -29,6 +31,7 @@ const ProblemUnitDescription = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [titleIndex, setTitleIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  const transformWrapperRef = useRef(null);
 
   const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
@@ -45,6 +48,12 @@ const ProblemUnitDescription = ({
   useEffect(() => {
     if (imageIndexes.includes(currentIndex)) setImageIndex((prev) => prev + 1);
   }, [currentIndex]);
+
+  useEffect(() => {
+    if (transformWrapperRef.current) {
+      transformWrapperRef.current.resetTransform();
+    }
+  }, [imageIndex]);
 
   const LessonComplete = () => {
     return (
@@ -86,11 +95,26 @@ const ProblemUnitDescription = ({
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
               {titles[titleIndex]}
             </h1>
-            <img
-              alt="설명 이미지"
-              src={images[imageIndex]}
-              style={{ height: "300px" }}
-            />
+            <div>
+              <TransformWrapper
+                initialScale={1}
+                minScale={1}
+                maxScale={5}
+                ref={transformWrapperRef}
+              >
+                <TransformComponent>
+                  <img
+                    className="h-[300px] w-[100vw] cursor-pointer object-contain"
+                    alt="설명 이미지"
+                    src={images[imageIndex]}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+              <p className="max-[768px] mt-0.5 cursor-default text-center text-[11px] text-gray-600">
+                <IoIosInformationCircleOutline className="inline pr-0.5 text-[13px]" />
+                마우스 스크롤시 이미지 확대/축소가 가능합니다.
+              </p>
+            </div>
           </div>
           <QuitMessage
             quitMessageShown={quitMessageShown}

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CheckAnswer from "~/components/LessonCheckAnswer";
@@ -48,6 +50,7 @@ const ProblemUnitQuiz = ({
   const [retryMode, setRetryMode] = useState(false); // 재도전 모드 여부
   const [isComplete, setIsComplete] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const transformWrapperRef = useRef(null);
 
   const problemKeys: string[] = Object.keys(problem);
   const currentProblem: Problem | null = problemKeys[currentProblemIndex]
@@ -121,6 +124,12 @@ const ProblemUnitQuiz = ({
     }
   };
 
+  useEffect(() => {
+    if (transformWrapperRef.current) {
+      transformWrapperRef.current.resetTransform();
+    }
+  }, [currentProblemIndex]);
+
   return isComplete ? (
     <LessonComplete backgroundColor={backgroundColor} />
   ) : (
@@ -134,8 +143,8 @@ const ProblemUnitQuiz = ({
             color={progressbarColor}
           />
         </div>
-        <section className="flex max-w-2xl grow flex-col gap-5 self-center rounded-lg sm:items-center sm:justify-center sm:gap-5 sm:px-5">
-          <h1 className="self-start whitespace-pre-line text-center text-2xl font-bold sm:text-3xl ">
+        <section className="flex grow flex-col gap-5 self-center rounded-lg text-center sm:items-center sm:justify-center sm:gap-5 sm:px-5">
+          <h1 className="max-w-4xl whitespace-pre-line text-center text-2xl font-bold sm:text-3xl ">
             {currentProblem.problem}
           </h1>
           {currentProblem.problemDetail != null && (
@@ -150,13 +159,25 @@ const ProblemUnitQuiz = ({
             </div>
           )}
           {currentProblem.problemImage != null && (
-            <div className="relative h-64 w-full">
-              <Image
-                src={currentProblem.problemImage}
-                alt="Problem Image"
-                layout="fill"
-                objectFit="contain"
-              />
+            <div>
+              <TransformWrapper
+                initialScale={1}
+                minScale={1}
+                maxScale={5}
+                ref={transformWrapperRef}
+              >
+                <TransformComponent>
+                  <img
+                    className="h-[300px] w-[100vw] cursor-pointer object-contain"
+                    src={currentProblem.problemImage}
+                    alt="Problem Image"
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+              <p className="max-[768px] mt-0.5 cursor-default text-center text-[11px] text-gray-600">
+                <IoIosInformationCircleOutline className="inline pr-0.5 text-[13px]" />
+                마우스 스크롤시 이미지 확대/축소가 가능합니다.
+              </p>
             </div>
           )}
           {currentProblem.problemSelect.length >= 4 ? (
@@ -176,7 +197,7 @@ const ProblemUnitQuiz = ({
               ))}
             </ul>
           ) : (
-            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="mt-4 grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-3">
               {currentProblem.problemSelect.map((option, index) => (
                 <div
                   key={index}
