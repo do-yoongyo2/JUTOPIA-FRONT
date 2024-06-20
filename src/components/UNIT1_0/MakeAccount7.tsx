@@ -12,20 +12,26 @@ const MakeAccount7: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   const steps = [
     {
       target: "#explainMessage",
-      content: "해당 정보들을 기재해주세요.",
+      content: "해당 정보들을 기재해주세요!",
       placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#explainMessage2",
-      content: "미수란? ~~~블라블라~~~",
+      content: (
+        <div>
+          &apos;미수&apos;는 일정 비율의 증거금만 내고
+          <br />
+          외상으로 주식을 사는 것!
+        </div>
+      ),
       placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#clickButton7",
-      content: "다음 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      content: "다음 버튼을 클릭해봅시다!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];
