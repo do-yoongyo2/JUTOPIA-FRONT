@@ -83,7 +83,7 @@ export const problem2_4: ProblemItem = {
 export const problem2_2: ProblemItem = {
   lessonProblem1: {
     problem: "개인이 일정 기간 동안 벌어들인 돈을 무엇이라고 하나요?",
-    problemSelect: ["자산", "수입", "비용"],
+    problemSelect: ["자산", "수익", "비용"],
     answer: "1",
   },
   lessonProblem2: {
@@ -93,7 +93,7 @@ export const problem2_2: ProblemItem = {
   },
   lessonProblem3: {
     problem:
-      "일정 기간 동안 정기적으로 일정 금액을 저축하고 만기 시 이자와 함께 돌려받는 금융 상품은 무엇인가요?",
+      "일정 기간 동안 정기적으로 일정 금액을 저축하고, 만기 시 이자와 함께 돌려받는 금융 상품은 무엇인가요?",
     problemSelect: ["예금", "적금", "주식"],
     answer: "1",
   },

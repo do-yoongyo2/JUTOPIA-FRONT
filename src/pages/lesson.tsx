@@ -56,6 +56,16 @@ const Lesson: NextPage = () => {
         progressbarColor="blue"
       /> */}
 
+      {/* <ProblemUnitDescription
+        descriptionArr={descriptionData.descriptionArr2_5}
+        titles={descriptionData.titles2_5}
+        nextIndexes={descriptionData.nextIndexes2_5}
+        images={descriptionData.images2_5}
+        imageIndexes={descriptionData.imageIndexes2_5}
+        backgroundColor="#0046ff"
+        progressbarColor="blue"
+      /> */}
+
       {/* <ProblemUnitQuiz
         problem={problemData.problem3_0}
         backgroundColor="blue"
