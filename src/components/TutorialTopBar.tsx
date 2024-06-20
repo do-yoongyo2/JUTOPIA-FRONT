@@ -58,7 +58,7 @@ export const TutorialTopBar = ({
   return (
     <header className="fixed z-20 h-[58px] w-full">
       <div
-        className={`relative flex h-full w-full items-center justify-between border-b-2 px-[10px] transition duration-500 sm:hidden ${borderColor} ${backgroundColor}`}
+        className={`fixed relative left-0 right-0 top-0 z-50 flex flex h-16 items-center justify-between border-b-2 border-gray-200 px-5 transition duration-500 sm:hidden ${borderColor} ${backgroundColor}`}
       >
         {/* <div className="flex items-center gap-2 font-bold text-white">
           {streak > 0 ? <FireSvg /> : <EmptyFireTopBarSvg />}{" "}
@@ -81,6 +81,10 @@ export const TutorialTopBar = ({
           aria-label="Toggle more menu"
           fillColor="white"
         />
+        <div className="text-gray-200">튜토리얼🤓</div>
+        <div className="invisible">
+          <MoreOptionsSvg />
+        </div>
 
         <div
           className={[
