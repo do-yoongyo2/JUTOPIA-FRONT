@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Profile from "~/components/HomeProfile";
 import WeeklyCalendar from "~/components/WeeklyCalender";
 import Card from "~/components/HomeCard";
+import MarketIssues from "~/components/HomeMarketIssues";
 
 const Home: NextPage = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -33,7 +34,8 @@ const Home: NextPage = () => {
           <div className="pt-[40px]"></div>
           <div className="flex flex-row justify-evenly">
             <Card title="시장 지표" content="시장 지표 api 연결" />
-            <Card title="최신 금융 칼럼" content="금융 칼럼 api 연결" />
+            {/* <Card title="최신 금융 칼럼" content="금융 칼럼 api 연결" /> */}
+            <MarketIssues />
           </div>
         </div>
       </div>
