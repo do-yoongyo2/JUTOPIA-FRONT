@@ -13,6 +13,10 @@ import Button from "@mui/material/Button";
 import { Modal, Box } from "@mui/material";
 import { useState } from "react";
 import { Drawer } from "@mui/material";
+import Tooltip from "../Tooltip";
+import dynamic from "next/dynamic";
+const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
+
 interface SellProps {
   onNext: () => void;
 }
@@ -20,7 +24,68 @@ interface SellProps {
 const Sell: React.FC<SellProps> = ({ onNext }) => {
   const [open, setOpen] = useState(false);
   const [modalopen, setModalOpen] = useState(false);
-
+  const steps = [
+    {
+      target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
+      content: "삼성전자 매도하기 튜토리얼에 오신걸 환영해요!", // 표시할 텍스트
+      placement: "bottom" as const, // 코치마크의 위치
+      disableBeacon: true, //표시 없애기
+    },
+    {
+      target: "#explainMessage1",
+      content: "'매도'는 주식을 파는 것!",
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage2",
+      content: "'호가'는 주식을 사고 팔 때 제시하는 가격!",
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage3",
+      content: (
+        <div>
+          &apos;지정가&apos;는 특정 가격에 주식을
+          <br />
+          팔겠다고 지정하는 주문 방식!
+        </div>
+      ),
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage4",
+      content: (
+        <div>
+          &apos;시장가&apos;는 현재 시장에서 거래되는 가격에
+          <br />
+          주식을 팔겠다는 주문 방식!
+        </div>
+      ),
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage5",
+      content: (
+        <div>
+          현재 삼성전자 1주만 가지고 있으니
+          <br />
+          &apos;매도가능 1주&apos;라고 나와요!
+        </div>
+      ),
+      placement: "top" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#clickButton1",
+      content: "현금매도 버튼을 클릭해 매도를 해봅시다!",
+      placement: "top" as const,
+      disableBeacon: true,
+    },
+  ];
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -48,11 +113,26 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
       className="relative h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white !pr-0"
     >
       <div className="relative">
+        <Joyride
+          steps={steps}
+          disableScrolling={true}
+          run={true}
+          continuous={true}
+          spotlightClicks={true}
+          tooltipComponent={Tooltip}
+          styles={{
+            options: {
+              zIndex: 10000,
+            },
+          }}
+        />
         <div className="flex items-center justify-between pl-4 pr-4 pt-4">
           <div className="flex items-center">
             <IoIosArrowBack />
             <div className="ml-2 flex h-[30px] w-[150px] items-center justify-between rounded-lg bg-shnhan-whitegray-back p-2 text-sm font-semibold text-black ">
-              <span className="">삼성전자</span>
+              <span id="welcomeMessage" className="">
+                삼성전자
+              </span>
               <span className="text-gray-500">
                 <CiSearch />
               </span>
@@ -114,7 +194,12 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
         </div>
         <div className="mt-2 grid grid-cols-4 pl-4 pr-4 text-center text-sm font-semibold">
           <span className="text-sm font-semibold text-shinhan-gray">매수</span>
-          <span className="text-sm font-medium text-shinhan-blue">매도</span>
+          <span
+            id="explainMessage1"
+            className="text-sm font-medium text-shinhan-blue"
+          >
+            매도
+          </span>
           <span className="text-sm font-medium text-shinhan-gray">
             정정/취소
           </span>
@@ -122,7 +207,10 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
         </div>
         <div className="mt-2 flex text-center">
           <div className="w-2/5 w-full">
-            <div className="h-[20px] items-center bg-shnhan-whitegray-back text-xs font-semibold">
+            <div
+              id="explainMessage2"
+              className="h-[20px] items-center bg-shnhan-whitegray-back text-xs font-semibold"
+            >
               호가
             </div>
             <div className="flex h-[15px] items-center justify-between bg-white pt-2 text-xs">
@@ -242,14 +330,20 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
             </div>
             <div className="p-2">
               <div className="flex justify-between">
-                <div className="flex h-[20px] w-[70px] items-center justify-between rounded-md border-2 border-black bg-white p-2 text-xs font-semibold">
+                <div
+                  id="explainMessage3"
+                  className="flex h-[20px] w-[70px] items-center justify-between rounded-md border-2 border-black bg-white p-2 text-xs font-semibold"
+                >
                   지정가
                   <span>
                     <MdKeyboardArrowDown />
                   </span>
                 </div>
 
-                <div className="flex h-[20px] w-[55px] items-center justify-between rounded-md bg-shnhan-whitegray-back p-1 text-xs font-semibold">
+                <div
+                  id="explainMessage4"
+                  className="flex h-[20px] w-[55px] items-center justify-between rounded-md bg-shnhan-whitegray-back p-1 text-xs font-semibold"
+                >
                   시장가
                 </div>
               </div>
@@ -266,7 +360,9 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
 
               <div className="mt-2 flex justify-between">
                 <div className="flex h-[20px] w-[80px] items-center justify-between rounded-md bg-shnhan-whitegray-back text-custom font-semibold">
-                  <span className="ml-3">매도가능 1주</span>
+                  <span id="explainMessage5" className="ml-3">
+                    매도가능 1주
+                  </span>
                 </div>
 
                 <div className="flex h-[20px] w-[50px] rounded-md bg-gray-500 text-custom font-semibold text-white">
@@ -280,6 +376,7 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
               </div>
               <button
                 onClick={handleOpen}
+                id="clickButton1"
                 className="mt-1 h-[35px] w-full rounded-md bg-blue-500 text-xs font-medium text-white"
               >
                 현금매도
