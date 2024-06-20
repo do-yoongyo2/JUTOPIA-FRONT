@@ -25,7 +25,6 @@ const CharacterExplain = ({
   nextIndexes: number[];
   backgroundColor: string;
 }) => {
-  const titleChangeIndexes = nextIndexes.map((elem) => elem + 1);
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
@@ -33,12 +32,11 @@ const CharacterExplain = ({
 
   const handleNext = () => {
     if (currentIndex < descriptionArr.length - 1) {
+      if (nextIndexes.includes(currentIndex)) setTitleIndex((prev) => prev + 1);
       const nextIdx = currentIndex + 1;
       setCurrentIndex(nextIdx);
       setIsTypingComplete(false);
       if (nextIndexes.includes(nextIdx)) onNext(nextIdx);
-      if (titleChangeIndexes.includes(nextIdx))
-        setTitleIndex((prev) => prev + 1);
     } else {
       onFinish();
     }
