@@ -24,12 +24,7 @@ const TopBar = (props: TopBarProps) => {
   return (
     <div className="md:hidden">
       {" "}
-      {/* This class ensures the TopBar is only visible on mobile */}
       <div className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300">
-        <div className="invisible">
-          <MoreOptionsSvg />
-        </div>
-        <span className="text-gray-700">{props.menuName}</span>
         <MoreOptionsSvg
           onClick={() => setMenu((x) => (x === "MORE" ? "HIDDEN" : "MORE"))}
           role="button"
@@ -37,6 +32,10 @@ const TopBar = (props: TopBarProps) => {
           aria-label="Toggle more menu"
           fillColor="darkgray"
         />
+        <span className="text-gray-700">{props.menuName}</span>
+        <div className="invisible">
+          <MoreOptionsSvg />
+        </div>
         {menu === "MORE" && (
           <div
             className="absolute left-0 right-0 top-full z-40 bg-white opacity-100 transition duration-300"
