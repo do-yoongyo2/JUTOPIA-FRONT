@@ -29,7 +29,7 @@ const RewardCard: React.FC<RewardCardProps> = ({
       <img
         src={imageUrl}
         alt={title}
-        className={`object-fit mb-4 h-40 w-full transform cursor-pointer rounded-lg transition-transform duration-300 hover:scale-105 ${!completed ? "grayscale" : ""}`}
+        className={`mb-4 h-40 w-full transform cursor-pointer rounded-lg object-contain transition-transform duration-300 hover:scale-105 ${!completed ? "grayscale" : ""}`}
         onClick={openModal}
       />
       <p className="text-center">{description}</p>
