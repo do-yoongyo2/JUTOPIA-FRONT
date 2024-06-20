@@ -174,7 +174,7 @@ const ProblemUnitQuiz = ({
                   />
                 </TransformComponent>
               </TransformWrapper>
-              <p className="max-[768px] mt-0.5 cursor-default text-center text-[11px] text-gray-600">
+              <p className="max-[768px] mt-[2.5vh] cursor-default text-center text-[11px] text-gray-600">
                 <IoIosInformationCircleOutline className="inline pr-0.5 text-[13px]" />
                 마우스 스크롤시 이미지 확대/축소가 가능합니다.
               </p>
@@ -232,7 +232,6 @@ const ProblemUnitQuiz = ({
         answerDetail={currentProblem.solutionDetail || ""}
         onFinish={onFinish}
         onSkip={onSkip}
-        setIsChecked={setIsChecked}
         color={backgroundColor}
       />
     </div>
