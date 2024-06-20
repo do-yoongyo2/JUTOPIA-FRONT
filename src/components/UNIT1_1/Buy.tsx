@@ -14,9 +14,9 @@ import Button from "@mui/material/Button";
 import { Modal, Box } from "@mui/material";
 import { useState } from "react";
 import { Drawer } from "@mui/material";
-// import Tooltip from "../Tooltip";
-// import dynamic from "next/dynamic";
-// const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
+import Tooltip from "../Tooltip";
+import dynamic from "next/dynamic";
+const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 
 interface BuyProps {
   onNext: () => void;
@@ -24,27 +24,62 @@ interface BuyProps {
 const Buy: React.FC<BuyProps> = ({ onNext }) => {
   const [open, setOpen] = useState(false);
   const [modalopen, setModalOpen] = useState(false);
-  // const [run, setRun] = useState(true);
-  // const steps = [
-  //   {
-  //     target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
-  //     content: "삼성전자 매수하기 튜토리얼에 오신걸 환영해요!", // 표시할 텍스트
-  //     placement: "bottom" as const, // 코치마크의 위치
-  //     disableBeacon: true, //표시 없애기
-  //   },
-  //   {
-  //     target: "#clickButton1",
-  //     content: "현금매수 버튼을 클릭해봅시다.",
-  //     placement: "center" as const,
-  //     disableBeacon: true,
-  //   },
-  //   {
-  //     target: "#clickButton2",
-  //     content: "매수주문 버튼을 클릭해봅시다.",
-  //     placement: "center" as const,
-  //     disableBeacon: true,
-  //   },
-  // ];
+  const steps = [
+    {
+      target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
+      content: "삼성전자 매수하기 튜토리얼에 오신걸 환영해요!", // 표시할 텍스트
+      placement: "bottom" as const, // 코치마크의 위치
+      disableBeacon: true, //표시 없애기
+    },
+    {
+      target: "#explainMessage1",
+      content: "'매수'는 주식을 사는 것!",
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage2",
+      content: "'호가'는 주식을 사고 팔 때 제시하는 가격!",
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage3",
+      content: (
+        <div>
+          &apos;지정가&apos;는 특정 가격에 주식을
+          <br />
+          사겠다고 지정하는 주문 방식!
+        </div>
+      ),
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage4",
+      content: (
+        <div>
+          &apos;시장가&apos;는 현재 시장에서 거래되는 가격에
+          <br />
+          주식을 사겠다는 주문 방식!
+        </div>
+      ),
+      placement: "bottom" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#explainMessage5",
+      content: "금액을 정해서 입력합니다!",
+      placement: "top" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#clickButton1",
+      content: "현금매수 버튼을 클릭해 매수를 해봅시다!",
+      placement: "top" as const,
+      disableBeacon: true,
+    },
+  ];
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,20 +108,19 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
       className="relative h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white !pr-0"
     >
       <div className="relative">
-        {/* <Joyride
+        <Joyride
           steps={steps}
-          run={run}
+          disableScrolling={true}
+          run={true}
           continuous={true}
           spotlightClicks={true}
-          // scrollToFirstStep={true}
-          // showSkipButton={true}
           tooltipComponent={Tooltip}
           styles={{
             options: {
               zIndex: 10000,
             },
           }}
-        /> */}
+        />
         <div className="flex items-center justify-between pl-4 pr-4 pt-4">
           <div className="flex items-center">
             <IoIosArrowBack />
@@ -154,7 +188,12 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
           </span>
         </div>
         <div className="mt-2 grid grid-cols-4 pl-4 pr-4 text-center text-sm font-semibold">
-          <span className="text-sm font-semibold text-red-500">매수</span>
+          <span
+            id="explainMessage1"
+            className="text-sm font-semibold text-red-500"
+          >
+            매수
+          </span>
           <span className="text-sm font-medium text-shinhan-gray">매도</span>
           <span className="text-sm font-medium text-shinhan-gray">
             정정/취소
@@ -163,7 +202,10 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
         </div>
         <div className="mt-2 flex text-center">
           <div className="w-2/5 w-full">
-            <div className="h-[20px] items-center bg-shnhan-whitegray-back text-xs font-semibold">
+            <div
+              id="explainMessage2"
+              className="h-[20px] items-center bg-shnhan-whitegray-back text-xs font-semibold"
+            >
               호가
             </div>
             <div className="flex h-[15px] items-center justify-between bg-white pt-2 text-xs">
@@ -284,20 +326,28 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
             </div>
             <div className="p-2">
               <div className="flex justify-between">
-                <div className="flex h-[20px] w-[70px] items-center justify-between rounded-md border-2 border-black bg-white p-2 text-xs font-semibold">
+                <div
+                  id="explainMessage3"
+                  className="flex h-[20px] w-[70px] items-center justify-between rounded-md border-2 border-black bg-white p-2 text-xs font-semibold"
+                >
                   지정가
                   <span>
                     <MdKeyboardArrowDown />
                   </span>
                 </div>
 
-                <div className="flex h-[20px] w-[55px] items-center justify-between rounded-md bg-shnhan-whitegray-back p-1 text-xs font-semibold">
+                <div
+                  id="explainMessage4"
+                  className="flex h-[20px] w-[55px] items-center justify-between rounded-md bg-shnhan-whitegray-back p-1 text-xs font-semibold"
+                >
                   시장가
                 </div>
               </div>
               <div className="mt-1 flex h-[25px] items-center justify-between rounded-md border-2  border-black bg-white text-xs font-semibold">
                 <div className="pl-2">-</div>
-                <div className="">75,800원</div>
+                <div id="explainMessage5" className="">
+                  75,800원
+                </div>
                 <div className="pr-2">+</div>
               </div>
               <div className="mt-1 flex h-[25px] items-center justify-between rounded-md border-2 border-shnhan-whitegray-back bg-white text-xs font-semibold">
@@ -411,7 +461,6 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
                   </span>
                   <Button
                     onClick={handleModalOpen}
-                    id="clickButton2"
                     sx={{
                       backgroundColor: "red",
                       color: "white",

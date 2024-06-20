@@ -7,14 +7,44 @@ import { RiMore2Fill } from "react-icons/ri";
 import { GoTriangleDown } from "react-icons/go";
 import { FaLock } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Tooltip from "../Tooltip";
+import dynamic from "next/dynamic";
+const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 
 interface BuyProps {
   onFinish: () => void;
   onPrev: () => void;
 }
 const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
+  const steps = [
+    {
+      target: "#explainMessage1",
+      content: "삼성전자 1주 매수완료!",
+      placement: "top" as const,
+      disableBeacon: true,
+    },
+    {
+      target: "#clickButton1",
+      content: "매수 튜토리얼 완료했어요! 버튼을 클릭하세요.",
+      placement: "top" as const,
+      disableBeacon: true,
+    },
+  ];
+
   return (
     <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
+      <Joyride
+        steps={steps}
+        run={true}
+        continuous={true}
+        spotlightClicks={true}
+        tooltipComponent={Tooltip}
+        styles={{
+          options: {
+            zIndex: 10000,
+          },
+        }}
+      />
       <div className="flex items-center justify-between pl-4 pr-4 pt-4">
         <div className="flex items-center">
           <IoIosArrowBack />
@@ -133,7 +163,7 @@ const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
               <th className="border border-white px-2 py-1">체결단가</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="explainMessage1">
             <tr>
               <td
                 rowSpan={2}
@@ -188,6 +218,7 @@ const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
           이전
         </button>
         <button
+          id="clickButton1"
           onClick={onFinish}
           className="ml-2 mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         >
