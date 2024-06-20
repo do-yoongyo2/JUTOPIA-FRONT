@@ -28,9 +28,11 @@ export const ModalBackdrop = styled.div<ModalDisplayProps>`
 
 export const Modal = ({
   toggleModal,
+  title,
   detail,
 }: {
   toggleModal: () => void;
+  title: string;
   detail: string;
 }) => {
   return (
@@ -44,7 +46,7 @@ export const Modal = ({
         <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
           <div className="flex items-center justify-between rounded-t border-b p-4 md:p-5 dark:border-gray-600">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              해설
+              {title}
             </h3>
             <button
               type="button"

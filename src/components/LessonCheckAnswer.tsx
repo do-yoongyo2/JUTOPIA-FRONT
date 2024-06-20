@@ -13,7 +13,6 @@ const CheckAnswer = ({
   onCheckAnswer,
   onFinish,
   onSkip,
-  setIsChecked,
 }: {
   isAnswerSelected: boolean;
   isAnswerCorrect: boolean;
@@ -25,9 +24,9 @@ const CheckAnswer = ({
   onCheckAnswer: () => void;
   onFinish: () => void;
   onSkip: () => void;
-  setIsChecked: (check: boolean) => void;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalTitle = "해설";
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -38,7 +37,11 @@ const CheckAnswer = ({
       {isAnswerDetail && (
         <>
           {isModalOpen && (
-            <Modal toggleModal={toggleModal} detail={answerDetail} />
+            <Modal
+              toggleModal={toggleModal}
+              title={modalTitle}
+              detail={answerDetail}
+            />
           )}
         </>
       )}
