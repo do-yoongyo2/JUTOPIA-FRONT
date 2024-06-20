@@ -49,8 +49,8 @@ const Lesson: NextPage = () => {
         backgroundColor="#0046ff"
         progressbarColor="blue"
       /> */}
-
-      {/* <ProblemUnitQuiz
+      {/* 
+      <ProblemUnitQuiz
         problem={problemData.problem2_4}
         backgroundColor="blue"
         progressbarColor="blue"

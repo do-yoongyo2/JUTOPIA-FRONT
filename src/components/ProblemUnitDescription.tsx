@@ -83,7 +83,7 @@ const ProblemUnitDescription = ({
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       {!lessonComplete ? (
         <>
-          <div className="flex grow flex-col items-center gap-5">
+          <div className="flex grow flex-col items-center gap-8">
             <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
               <ProgressBar
                 correctAnswerCount={currentStep}
@@ -104,14 +104,14 @@ const ProblemUnitDescription = ({
               >
                 <TransformComponent>
                   <img
-                    className="h-[300px] w-[100vw] cursor-pointer object-contain"
+                    className="h-[45vh] w-[100vw] cursor-pointer object-contain"
                     alt="설명 이미지"
                     src={images[imageIndex]}
                   />
                 </TransformComponent>
               </TransformWrapper>
-              <p className="max-[768px] mt-0.5 cursor-default text-center text-[11px] text-gray-600">
-                <IoIosInformationCircleOutline className="inline pr-0.5 text-[13px]" />
+              <p className="max-[768px] mt-[2.5vh] cursor-default text-center text-[11px] text-gray-600">
+                <IoIosInformationCircleOutline className="inline pr-0.5 text-[14px]" />
                 마우스 스크롤시 이미지 확대/축소가 가능합니다.
               </p>
             </div>
