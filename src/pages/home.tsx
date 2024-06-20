@@ -34,8 +34,14 @@ const Home: NextPage = () => {
           <div className="pt-[40px]"></div>
           <div className="flex flex-row justify-evenly">
             <Card title="시장 지표" content="시장 지표 api 연결" />
-            {/* <Card title="최신 금융 칼럼" content="금융 칼럼 api 연결" /> */}
-            <MarketIssues />
+            <Card
+              title="최신 금융 칼럼(with 신한투자증권)"
+              content={
+                <>
+                  <MarketIssues />
+                </>
+              }
+            />
           </div>
         </div>
       </div>
