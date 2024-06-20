@@ -25,8 +25,8 @@ const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
     },
     {
       target: "#clickButton2",
-      content: "시작하기 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      content: "시작하기 버튼을 클릭해봐요!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];

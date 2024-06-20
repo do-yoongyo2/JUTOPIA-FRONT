@@ -13,14 +13,35 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   const steps = [
     {
       target: "#explainMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
-      content: "중개형 ISA란? ~~~블라블라~~~", // 표시할 텍스트
+      content: (
+        <div>
+          &apos;중개형 ISA&apos;는 개인종합자산관리계좌로
+          <br />
+          주식, 채권, 펀드 등 다양한 금융 상품을
+          <br />한 계좌에서 거래할 수 있는 만능 통장이에요!
+        </div>
+      ),
       placement: "bottom" as const, // 코치마크의 위치
       disableBeacon: true, //표시 없애기
     },
     {
-      target: "#clickButton3",
-      content: "필수 계좌만 한 번에 만들기 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      target: "#explainMessage2", // 코치마크를 표시할 대상 요소의 CSS 선택자
+      content: (
+        <div>
+          계좌에서 발생한 이익에서
+          <br />
+          손실을 공제한 순수익에 대해서만 과세해요.
+          <br />
+          순수익 200만원까지는 비과세!
+        </div>
+      ),
+      placement: "bottom" as const, // 코치마크의 위치
+      disableBeacon: true, //표시 없애기
+    },
+    {
+      target: "#clickButton1",
+      content: "필수 계좌만 한 번에 만들기 버튼을 클릭해보세요!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];
@@ -63,7 +84,7 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             </div>
             <button
               onClick={onNext}
-              id="clickButton3"
+              id="clickButton1"
               className="mt-5 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-medium text-white"
             >
               필수 계좌만 한 번에 만들기
@@ -73,7 +94,10 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             스마트한 자산관리를 시작 하세요!
           </h2>
           <div className="flex justify-between pl-4 pr-4">
-            <div className="rounded-xl bg-shnhan-whitegray-back p-3 pr-8">
+            <div
+              id="explainMessage2"
+              className="rounded-xl bg-shnhan-whitegray-back p-3 pr-8"
+            >
               <span className="text-xs font-semibold">중개형ISA</span>
               <div className="text-xs font-medium">
                 세금을 낮추는

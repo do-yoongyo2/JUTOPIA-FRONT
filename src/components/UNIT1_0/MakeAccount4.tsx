@@ -19,14 +19,14 @@ const MakeAccount4: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
     },
     {
       target: "#explainMessage",
-      content: "해당 정보들을 기재해주세요.",
+      content: "해당 정보들을 기재해주세요!",
       placement: "top" as const,
       disableBeacon: true,
     },
     {
       target: "#clickButton4",
-      content: "다음 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      content: "다음 버튼을 클릭해봅시다!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];

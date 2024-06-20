@@ -19,8 +19,8 @@ const MakeAccount5: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
     },
     {
       target: "#clickButton5",
-      content: "신분증 촬영 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      content: "신분증 촬영 버튼을 클릭해봅시다!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];
