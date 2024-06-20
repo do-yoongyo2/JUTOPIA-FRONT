@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import ChallengeGrid from "~/components/ChallengeGrid";
 import TopBar from "~/components/TopBar";
+import { updateName } from "~/apis/user";
 
 const MyPage: NextPage = () => {
   const [updateState, setUpdateState] = useState<"update" | "view">("view");
@@ -46,7 +47,23 @@ const MyPage: NextPage = () => {
   }
   const updateProfile = () => {
     setUpdateState("view");
-    setName(localName);
+    //update api
+    async function update() {
+      try {
+        const newName = localName;
+        const response = await updateName(email, newName);
+        console.log("여기임");
+        console.log(response);
+        console.log(newName);
+
+        setName(response.newName);
+      } catch (error) {
+        console.error("Error fetching update:", error);
+      }
+    }
+    update().catch((error) => {
+      console.error("Unhandled error:", error);
+    });
   };
 
   return (

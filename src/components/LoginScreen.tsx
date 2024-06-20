@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useRouter } from "next/router";
 import { signup, login } from "~/apis/user";
-import Error from "next/error";
 
 export type LoginScreenState = "HIDDEN" | "LOGIN" | "SIGNUP";
 
@@ -34,7 +33,6 @@ export const LoginScreen = ({
   const logIn = useBoundStore((x) => x.logIn);
   const setEmail = useBoundStore((x) => x.setEmail);
   const setName = useBoundStore((x) => x.setName);
-  const testName = useBoundStore((x) => x.name);
 
   const nameInputRef = useRef<null | HTMLInputElement>(null);
   const emailInputRef = useRef<null | HTMLInputElement>(null);
@@ -47,49 +45,25 @@ export const LoginScreen = ({
   }, [loginScreenState, loggedIn, setLoginScreenState]);
 
   const handleSignUp = async () => {
-    // console.log("Sign Up"); test
-    const name =
-      nameInputRef.current?.value.trim() || Math.random().toString().slice(2);
-    const username = name.replace(/ +/g, "-");
-
     try {
       const response = await signup(
-        username,
+        nameInputRef.current?.value.trim() || "",
         emailInputRef.current?.value.trim() || "",
         passwordInputRef.current?.value.trim() || "",
       );
 
-      if (response.status === 201) {
-        const data = response.data;
+      const username = response.username; // 서버에서 반환된 데이터에서 이름 가져오기
+      const email = response.email;
 
-        async function createUser(data: any) {
-          const username = data.username; // 서버에서 반환된 데이터에서 이름 가져오기
-          const email = data.email;
+      setEmail(email);
+      setName(username);
+      logIn(true);
 
-          setEmail(email);
-          setName(username); // 이름 설정
-
-          return true;
-        }
-
-        createUser(data)
-          .then((flag: boolean) => {
-            logIn(flag);
-          })
-          .then(() => {
-            console.log(loggedIn);
-            router.push("/home");
-          });
-
-        router.push("/home");
-      } else {
-        const data = await response;
-        console.error("Failed to sign up:", data);
-        // Handle error: Display message to user, etc.
-      }
-    } catch (error: any) {
-      console.error("Failed to sign up:", error.message);
-      // Handle error: Display message to user, etc.
+      router.push("/home").catch((error) => {
+        console.error("Unhandled error signup:", error);
+      });
+    } catch (error) {
+      console.error("Failed to sign up:", error);
     }
   };
 
@@ -99,40 +73,42 @@ export const LoginScreen = ({
         emailInputRef.current?.value.trim() || "",
         passwordInputRef.current?.value.trim() || "",
       );
-      if (response.status === 200) {
-        const data = response.data;
-        const token = data.token;
+      const token = response.token;
+      localStorage.setItem("token", token);
 
-        localStorage.setItem("token", token);
+      const username = response.username;
+      const email = response.email;
 
-        async function addUser(data: any) {
-          const username = data.username;
-          const email = data.email;
+      setEmail(email);
+      setName(username);
+      logIn(true);
 
-          setEmail(email);
-          setName(username);
-          return true;
-        }
-
-        addUser(data)
-          .then((flag: boolean) => {
-            logIn(flag); // Assuming logIn updates the logged-in state
-          })
-          .then(() => {
-            console.log(loggedIn);
-            router.push("/home");
-          });
-      } else {
-        console.log(response);
-        const data = await response.data();
-        console.error("Failed to log in:", data.message);
-        // Handle error: Display message to user, etc.
-      }
-    } catch (error: any) {
-      console.error("Failed to login:", error.message);
+      router.push("/home").catch((error) => {
+        console.error("Unhandled error login:", error);
+      });
+    } catch (error) {
+      console.error("Failed to login:", error);
     }
   };
-
+  const handleButtonClick = () => {
+    (async () => {
+      if (loginScreenState === "LOGIN") {
+        try {
+          await handleLogin();
+        } catch (error) {
+          console.error("Unhandled error in handleLogin:", error);
+        }
+      } else {
+        try {
+          await handleSignUp();
+        } catch (error) {
+          console.error("Unhandled error in handleSignUp:", error);
+        }
+      }
+    })().catch((error) => {
+      console.error("Unhandled error in handleButtonClick:", error);
+    });
+  };
   return (
     <article
       className={[
@@ -204,7 +180,8 @@ export const LoginScreen = ({
           <button
             className="rounded-2xl border-b-4 border-[#235390] bg-[#0046ff] py-3 font-bold uppercase text-white transition hover:bg-[#003bdf]"
             // onClick={logInAndSetUserProperties}
-            onClick={loginScreenState === "LOGIN" ? handleLogin : handleSignUp}
+            // onClick={loginScreenState === "LOGIN" ? handleLogin : handleSignUp}
+            onClick={handleButtonClick}
           >
             {loginScreenState === "LOGIN" ? "Log in" : "Create account"}
           </button>
