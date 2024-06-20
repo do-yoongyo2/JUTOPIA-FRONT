@@ -1,12 +1,19 @@
 import type { NextPage } from "next";
 import { BottomBar } from "~/components/BottomBar";
 import { LeftBar } from "~/components/LeftBar";
-import { EditPencilSvg, ProfileTimeJoinedSvg } from "~/components/Svgs";
+import {
+  EditPencilSvg,
+  ProfileTimeJoinedSvg,
+  MoreOptionsSvg,
+  CheckSvg,
+  LogoutIconSvg,
+} from "~/components/Svgs";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import ChallengeGrid from "~/components/ChallengeGrid";
+import TopBar from "~/components/TopBar";
 
 const MyPage: NextPage = () => {
   const [updateState, setUpdateState] = useState<"update" | "view">("view");
@@ -44,6 +51,11 @@ const MyPage: NextPage = () => {
 
   return (
     <div className="font-ttlaundrygothicb">
+      <MyPageTopBar
+        updateState={updateState}
+        setUpdateState={setUpdateState}
+        updateProfile={updateProfile}
+      />
       <LeftBar selectedTab="마이페이지" />
       <div className="flex justify-center gap-3 pt-14 md:ml-[8rem] lg:ml-64 lg:gap-12">
         <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
@@ -69,6 +81,12 @@ const MyPage: NextPage = () => {
 
 export default MyPage;
 
+type MyPageTopBarProps = {
+  updateState: "update" | "view";
+  setUpdateState: (state: "update" | "view") => void;
+  updateProfile: () => void;
+};
+
 type MypageTopSectionProps = {
   updateState: "update" | "view";
   name: string;
@@ -81,6 +99,84 @@ type MypageTopSectionProps = {
   updateProfile: () => void;
 };
 
+const MyPageTopBar = (props: MyPageTopBarProps) => {
+  type MenuState = "HIDDEN" | "MORE";
+  const [menu, setMenu] = useState<MenuState>("HIDDEN");
+
+  const logOut = useBoundStore((x) => x.logOut);
+  var router = useRouter();
+
+  const handleLogOut = () => {
+    void logOut();
+    void router.push("/");
+  };
+
+  return (
+    <div className="fixed left-0 right-0 top-0 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300 md:hidden">
+      <MoreOptionsSvg
+        onClick={() => setMenu((x) => (x === "MORE" ? "HIDDEN" : "MORE"))}
+        role="button"
+        tabIndex={0}
+        aria-label="Toggle more menu"
+        fillColor="darkgray"
+      />
+      <div
+        className={[
+          "absolute left-0 right-0 top-full bg-white transition duration-300",
+          menu === "HIDDEN" ? "opacity-0" : "opacity-100",
+        ].join(" ")}
+        aria-hidden={menu === "HIDDEN"}
+      >
+        {((): null | JSX.Element => {
+          switch (menu) {
+            case "MORE":
+              return (
+                <div className="flex grow flex-col">
+                  <div
+                    className="flex items-center gap-2 p-2 font-bold text-gray-700"
+                    style={{
+                      fontFamily: "TTLaundryGothicB",
+                      cursor: "pointer",
+                      borderTop: "1px solid gray",
+                      borderBottom: "1px solid gray",
+                    }}
+                    onClick={handleLogOut}
+                  >
+                    <LogoutIconSvg className="h-10 w-10" />
+                    <span style={{ fontSize: "16px" }}>로그아웃</span>
+                  </div>
+                </div>
+              );
+            case "HIDDEN":
+              return null;
+          }
+        })()}
+        <div
+          className={[
+            "absolute left-0 top-full h-screen w-screen bg-black opacity-30",
+            menu === "HIDDEN" ? "pointer-events-none" : "",
+          ].join(" ")}
+          onClick={() => setMenu("HIDDEN")}
+          aria-label="Hide menu"
+          role="button"
+        />
+      </div>
+      <span className="text-gray-400">😎마이 페이지😎</span>
+      {props.updateState === "view" ? (
+        <div
+          onClick={() => props.setUpdateState("update")}
+          style={{ cursor: "pointer" }}
+        >
+          <EditPencilSvg iconColor="darkgray" />
+        </div>
+      ) : (
+        <div onClick={props.updateProfile} style={{ cursor: "pointer" }}>
+          <CheckSvg />
+        </div>
+      )}
+    </div>
+  );
+};
 const MypageTopSection = (props: MypageTopSectionProps) => {
   const router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);

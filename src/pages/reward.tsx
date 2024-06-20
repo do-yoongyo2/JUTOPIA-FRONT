@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import TopBar from "~/components/TopBar";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import { useState, useEffect } from "react";
@@ -17,10 +18,11 @@ const Reward: NextPage = () => {
   }
   return (
     <div className="font-ttlaundrygothicb">
+      <TopBar menuName="도전과제" />
       <LeftBar selectedTab="리워드" />
 
-      <div className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
-        <div className="flex max-w-[65rem] grow flex-col">
+      <div className="flex justify-center gap-3 pt-14 md:ml-[8rem] lg:ml-64 lg:gap-12">
+        <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
           <h1 className="border-b-2 pb-4 text-center text-4xl font-bold">
             {" "}
             🔥도전과제🔥 <div className="pt-[40px]"></div>
@@ -29,7 +31,7 @@ const Reward: NextPage = () => {
           <ChallengeGrid />
         </div>
       </div>
-
+      <div className="pt-[90px]"></div>
       <BottomBar selectedTab="리워드" />
     </div>
   );
