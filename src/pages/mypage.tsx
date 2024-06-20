@@ -112,7 +112,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
   };
 
   return (
-    <div className="fixed left-0 right-0 top-0 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300 md:hidden">
+    <div className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300 md:hidden">
       <MoreOptionsSvg
         onClick={() => setMenu((x) => (x === "MORE" ? "HIDDEN" : "MORE"))}
         role="button"
