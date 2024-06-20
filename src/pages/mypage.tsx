@@ -52,9 +52,6 @@ const MyPage: NextPage = () => {
       try {
         const newName = localName;
         const response = await updateName(email, newName);
-        console.log("여기임");
-        console.log(response);
-        console.log(newName);
 
         setName(response.newName);
       } catch (error) {
@@ -121,7 +118,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
   const [menu, setMenu] = useState<MenuState>("HIDDEN");
 
   const logOut = useBoundStore((x) => x.logOut);
-  var router = useRouter();
+  const router = useRouter();
 
   const handleLogOut = () => {
     void logOut();

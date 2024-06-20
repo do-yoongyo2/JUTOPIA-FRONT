@@ -96,12 +96,10 @@ export async function updateName(
   username: string,
 ): Promise<IResUpdate> {
   try {
-    console.log("--------aldja=--=-=");
-    console.log(username);
     const resp: AxiosResponse<IResUpdate> = await axios.put(
       `http://${URL}:3001/api/users/updateName`,
       {
-        newname: username,
+        newName: username,
         email: email,
       },
     );
