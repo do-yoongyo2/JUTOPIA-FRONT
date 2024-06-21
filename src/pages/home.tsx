@@ -7,6 +7,7 @@ import Profile from "~/components/HomeProfile";
 import WeeklyCalendar from "~/components/WeeklyCalender";
 import Card from "~/components/HomeCard";
 import MarketIssues from "~/components/HomeMarketIssues";
+import DomesticStock from "~/components/DomesticStock";
 
 const Home: NextPage = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -32,8 +33,8 @@ const Home: NextPage = () => {
           <div className="pt-[40px]"></div>
           <WeeklyCalendar></WeeklyCalendar>
           <div className="pt-[40px]"></div>
-          <div className="flex flex-row justify-evenly">
-            <Card title="시장 지표" content="시장 지표 api 연결" />
+          <div className="flex flex-row justify-between max-[768px]:flex-col">
+            <Card title="시장 지표" content={<DomesticStock />} />
             <Card
               title="최신 금융 칼럼(with 신한투자증권)"
               content={
