@@ -115,20 +115,24 @@ const MarketIssues: React.FC = () => {
             title={selectedItem.title}
             detail={
               <>
-                <p>
-                  <strong>게시판:</strong> {selectedItem.bbs_name}
-                </p>
-                <p>
-                  <strong>작성자:</strong> {selectedItem.writer}
-                </p>
-                <p>
-                  <strong>발행일:</strong> {selectedItem.reg_date}
-                </p>
-                <hr className="mb-3 mt-3" />
-                <p>
-                  <strong>내용:</strong> {selectedItem.content}
-                </p>
-                <hr className="mb-3 mt-3" />
+                <div className="h-64 overflow-y-scroll">
+                  <div className="px-3">
+                    <p>
+                      <strong>게시판:</strong> {selectedItem.bbs_name}
+                    </p>
+                    <p>
+                      <strong>작성자:</strong> {selectedItem.writer}
+                    </p>
+                    <p>
+                      <strong>발행일:</strong> {selectedItem.reg_date}
+                    </p>
+                    <hr className="mb-3 mt-3" />
+                    <p>
+                      <strong>내용:</strong> {selectedItem.content}
+                    </p>
+                  </div>
+                </div>
+                <hr className="mb-4 mt-4" />
                 <p className="text-xl">
                   자세히 확인하고 싶으시면{" "}
                   <a
