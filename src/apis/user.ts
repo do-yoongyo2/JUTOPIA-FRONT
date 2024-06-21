@@ -30,7 +30,7 @@ export async function login(
 ): Promise<IResLogin> {
   try {
     const resp: AxiosResponse<IResLogin> = await axios.post(
-      `http://${URL}:3001/api/users/login`,
+      `http://${URL}:3000/api/users/login`,
       {
         email: email,
         password: password,
@@ -55,7 +55,7 @@ export async function signup(
 ): Promise<IResSignup> {
   try {
     const resp: AxiosResponse<IResSignup> = await axios.post(
-      `http://${URL}:3001/api/users/signup`,
+      `http://${URL}:3000/api/users/signup`,
       {
         username: name, // 서버에서 username 필드로 사용하므로 이름을 username으로 전달합니다.
         email: email,
@@ -77,7 +77,7 @@ export async function signup(
 export async function readSinceJoinDate(email: string): Promise<IResJoinDate> {
   try {
     const resp: AxiosResponse<IResJoinDate> = await axios.get(
-      `http://${URL}:3001/api/users/days/email/${email}`,
+      `http://${URL}:3000/api/users/days/email/${email}`,
     );
     return resp.data;
   } catch (error) {
@@ -97,7 +97,7 @@ export async function updateName(
 ): Promise<IResUpdate> {
   try {
     const resp: AxiosResponse<IResUpdate> = await axios.put(
-      `http://${URL}:3001/api/users/updateName`,
+      `http://${URL}:3000/api/users/updateName`,
       {
         newName: username,
         email: email,
