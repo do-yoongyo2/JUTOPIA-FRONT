@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 interface DescriptionFrameProps {
@@ -33,7 +34,7 @@ export const Modal = ({
 }: {
   toggleModal: () => void;
   title: string;
-  detail: string;
+  detail: string | ReactNode;
 }) => {
   return (
     <div
