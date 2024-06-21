@@ -115,7 +115,7 @@ const MarketIssues: React.FC = () => {
             title={selectedItem.title}
             detail={
               <>
-                <div className="h-64 overflow-y-scroll">
+                <div className="container">
                   <div className="px-3">
                     <p>
                       <strong>게시판:</strong> {selectedItem.bbs_name}

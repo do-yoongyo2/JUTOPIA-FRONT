@@ -16,6 +16,7 @@ interface ListItem {
 const DomesticStock = () => {
   const [data, setData] = useState<ListItem | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const stockNum = ["0001", "1001", "2001"];
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const DomesticStock = () => {
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
+        setError("Error fetching data");
         setLoading(false);
       });
   }, []);
@@ -35,6 +37,8 @@ const DomesticStock = () => {
     <>
       {loading ? (
         <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
       ) : (
         <>
           <div className="relative z-[-1] overflow-x-auto px-[10px] pt-[10px] shadow-md sm:rounded-lg">
