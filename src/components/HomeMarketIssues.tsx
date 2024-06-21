@@ -78,22 +78,22 @@ const MarketIssues: React.FC = () => {
             >
               <th
                 scope="row"
-                className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 dark:text-white"
               >
                 {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
                 <div className="flex items-center justify-between">
-                  {item.title}
+                  <span className="mr-2">{item.title}</span>
                   <button
                     type="button"
-                    className="mb-2 me-2 rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                     onClick={() => handleDetailClick(item)}
                   >
                     자세히
                   </button>
                 </div>
               </th>
-              <td className="px-6 py-4">{item.reg_date}</td>
-              <td className="px-6 py-4 text-right">
+              <td className="px-2 py-2">{item.reg_date}</td>
+              <td className="px-2 py-2 text-right">
                 <a
                   href={item.attachment_url}
                   className="font-medium text-blue-600 hover:underline dark:text-blue-500"
@@ -124,10 +124,12 @@ const MarketIssues: React.FC = () => {
                 <p>
                   <strong>발행일:</strong> {selectedItem.reg_date}
                 </p>
+                <hr className="mb-3 mt-3" />
                 <p>
                   <strong>내용:</strong> {selectedItem.content}
                 </p>
-                <p>
+                <hr className="mb-3 mt-3" />
+                <p className="text-xl">
                   자세히 확인하고 싶으시면{" "}
                   <a
                     href={selectedItem.attachment_url}
