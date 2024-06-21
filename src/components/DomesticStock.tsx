@@ -81,9 +81,9 @@ const DomesticStock = () => {
                     <>
                       {/*0일 때*/}
                       <span>
-                        {data["0001"].output.bstp_nmix_prdy_vrss}
+                        {data[elem].output.bstp_nmix_prdy_vrss}
                         <span className="ml-[10px]">
-                          {data["0001"].output.bstp_nmix_prdy_ctrt}%
+                          {data[elem].output.bstp_nmix_prdy_ctrt}%
                         </span>
                       </span>
                     </>
