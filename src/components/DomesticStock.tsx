@@ -43,7 +43,7 @@ const DomesticStock = () => {
         <>
           <div className="relative z-[-1] overflow-x-auto px-[10px] pt-[10px] shadow-md sm:rounded-lg">
             {stockNum.map((elem) => (
-              <>
+              <div key={elem}>
                 <div className="text-sm">
                   {elem === "0001"
                     ? "코스피"
@@ -89,7 +89,7 @@ const DomesticStock = () => {
                     </>
                   )}
                 </div>
-              </>
+              </div>
             ))}
           </div>
         </>
