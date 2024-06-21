@@ -1,43 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { fetchMarketIssuesApi } from "../apis/marketIssuesApi"; // 수정된 경로
+import { Modal, ModalBackdrop } from "./styled"; // 수정된 경로
 
 interface ListItem {
-  bbsName: string;
+  id: number;
+  bbs_name: string;
   title: string;
-  regDate: string;
-  messageId: string;
-  attachmentUrl: string;
-}
-
-interface ApiResponse {
-  dataHeader: {
-    successCode: string;
-    resultCode: string;
-    resultMessage: string;
-    category: string;
-  };
-  dataBody: {
-    list: ListItem[];
-  };
+  writer: string;
+  reg_date: string;
+  attachment_url: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const MarketIssues: React.FC = () => {
   const [data, setData] = useState<ListItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<ListItem | null>(null);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleDetailClick = (item: ListItem) => {
+    setSelectedItem(item);
+    toggleModal();
+  };
 
   useEffect(() => {
     fetchMarketIssuesApi()
       .then((response) => {
-        const responseData = response.data as ApiResponse;
+        const responseData = response.data as ListItem[];
         console.log(responseData);
-        setData(responseData.dataBody.list.slice(0, 4));
+        setData(responseData.slice(0, 4)); // 4개의 데이터만 사용
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        console.log(error.response);
         setError("Error fetching data");
         setLoading(false);
       });
@@ -69,9 +71,9 @@ const MarketIssues: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {data.map((item) => (
             <tr
-              key={index}
+              key={item.id}
               className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
             >
               <th
@@ -81,23 +83,19 @@ const MarketIssues: React.FC = () => {
                 {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
                 <div className="flex items-center justify-between">
                   {item.title}
-                  <a
-                    href={`/details/${item.messageId}`}
-                    className="ml-4 inline-flex"
+                  <button
+                    type="button"
+                    className="mb-2 me-2 rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    onClick={() => handleDetailClick(item)}
                   >
-                    <button
-                      type="button"
-                      className="mb-2 me-2 rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-                    >
-                      자세히
-                    </button>
-                  </a>
+                    자세히
+                  </button>
                 </div>
               </th>
-              <td className="px-6 py-4">{item.regDate}</td>
+              <td className="px-6 py-4">{item.reg_date}</td>
               <td className="px-6 py-4 text-right">
                 <a
-                  href={item.attachmentUrl}
+                  href={item.attachment_url}
                   className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -109,6 +107,43 @@ const MarketIssues: React.FC = () => {
           ))}
         </tbody>
       </table>
+      {isModalOpen && selectedItem && (
+        <>
+          <ModalBackdrop display="block" onClick={toggleModal} />
+          <Modal
+            toggleModal={toggleModal}
+            title={selectedItem.title}
+            detail={
+              <>
+                <p>
+                  <strong>게시판:</strong> {selectedItem.bbs_name}
+                </p>
+                <p>
+                  <strong>작성자:</strong> {selectedItem.writer}
+                </p>
+                <p>
+                  <strong>발행일:</strong> {selectedItem.reg_date}
+                </p>
+                <p>
+                  <strong>내용:</strong> {selectedItem.content}
+                </p>
+                <p>
+                  자세히 확인하고 싶으시면{" "}
+                  <a
+                    href={selectedItem.attachment_url}
+                    className="text-blue-600 hover:underline dark:text-blue-500"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    다운로드
+                  </a>
+                  후 PDF 파일을 확인하세요.
+                </p>
+              </>
+            }
+          />
+        </>
+      )}
     </div>
   );
 };
