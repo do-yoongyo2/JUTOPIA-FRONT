@@ -31,17 +31,13 @@ const Home: NextPage = () => {
           <Profile />
 
           <div className="pt-[40px]"></div>
-          <WeeklyCalendar></WeeklyCalendar>
+          <WeeklyCalendar />
           <div className="pt-[40px]"></div>
           <div className="flex flex-row justify-between max-[768px]:flex-col">
             <Card title="시장 지표" content={<DomesticStock />} />
             <Card
               title="최신 금융 칼럼(with 신한투자증권)"
-              content={
-                <>
-                  <MarketIssues />
-                </>
-              }
+              content={<MarketIssues />}
             />
           </div>
         </div>
