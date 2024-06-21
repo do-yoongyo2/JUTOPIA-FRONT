@@ -34,7 +34,7 @@ const ProblemUnit1_0 = ({ progressbarColor }: { progressbarColor: string }) => {
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
       {!lessonComplete ? (
         <>
-          <div className="flex grow flex-col items-center gap-5">
+          <div className="flex grow flex-col items-center gap-0">
             <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
               <ProgressBar
                 correctAnswerCount={currentStep + 1}
@@ -43,16 +43,27 @@ const ProblemUnit1_0 = ({ progressbarColor }: { progressbarColor: string }) => {
                 color={progressbarColor}
               />
             </div>
-            <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
+            <h1 className="mt-1 font-['TTLaundryGothicB'] text-2xl font-bold  sm:text-3xl">
               계좌 개설하기
             </h1>
 
-            <RenderComponent
-              onNext={onNext}
-              onFinish={onFinish}
-              onPrev={onPrev}
-            />
-            {/* {currentStep > 0 && (
+            <div
+              style={{
+                backgroundImage: 'url("/UNIT1_0/BgPhone.png")',
+                backgroundSize: "cover",
+                height: 640,
+                padding: "40px",
+
+                paddingBottom: "20px",
+                boxSizing: "border-box",
+              }}
+            >
+              <RenderComponent
+                onNext={onNext}
+                onFinish={onFinish}
+                onPrev={onPrev}
+              />
+              {/* {currentStep > 0 && (
               <button
                 onClick={onPrev}
                 className="mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
@@ -60,6 +71,7 @@ const ProblemUnit1_0 = ({ progressbarColor }: { progressbarColor: string }) => {
                 이전
               </button>
             )} */}
+            </div>
           </div>
 
           <QuitMessage
@@ -98,7 +110,7 @@ const LessonComplete = () => {
             width={100}
             height={100}
           />
-          <h1 className="text-center text-xl text-shinhan-blue">
+          <h1 className="text-center font-['TTLaundryGothicB'] text-xl  text-shinhan-blue">
             신한투자증권 바로가기
           </h1>
         </div>
@@ -108,7 +120,7 @@ const LessonComplete = () => {
         <div className="mx-auto flex max-w-5xl sm:justify-between">
           <Link
             className={
-              "flex w-full items-center justify-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
+              " flex w-full items-center justify-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-['TTLaundryGothicB'] font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
             }
             href="/tutorial"
           >

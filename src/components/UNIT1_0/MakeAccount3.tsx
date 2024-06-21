@@ -46,7 +46,7 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   ];
   return (
     <div>
-      <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white p-0">
+      <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white p-0">
         <Joyride
           steps={steps}
           run={true}
@@ -61,8 +61,8 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             },
           }}
         />
-        <div className="py-6">
-          <div className="mt-5 bg-shnhan-whitegray-back p-4">
+        <div className="py-3">
+          <div className="mt-1 bg-shnhan-whitegray-back p-4">
             <span className="rounded-xl bg-shinhan-back p-1 text-xs font-bold text-shinhan-blue">
               BEST
             </span>
@@ -115,7 +115,7 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
           </div>
         </div>
 
-        <div className="">
+        <div className="mt-3">
           <hr />
         </div>
         <div className="ml-3 flex items-center justify-between p-1">
@@ -127,19 +127,19 @@ const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             <div className="ml-5 text-xs font-semibold text-black">잔고</div>
           </div>
           <div className="flex items-center">
-            <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
+            <div className="rounded-lg bg-shinhan-blue p-2 text-xs font-semibold text-white">
               메뉴
             </div>
           </div>
         </div>
-      </div>
-      <div className=" flex justify-center">
-        <button
-          onClick={onPrev}
-          className="mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        >
-          이전
-        </button>
+        <div className=" flex justify-center">
+          <button
+            onClick={onPrev}
+            className="mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          >
+            이전
+          </button>
+        </div>
       </div>
     </div>
   );

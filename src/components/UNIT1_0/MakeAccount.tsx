@@ -29,7 +29,7 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
 
   return (
     <div>
-      <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
+      <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white">
         <Joyride
           steps={steps}
           run={true}
@@ -136,7 +136,7 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
           </div>
         </div>
 
-        <div className="mt-2">
+        <div className="mt-5">
           <hr />
         </div>
         <div className="ml-3 flex items-center justify-between p-1">

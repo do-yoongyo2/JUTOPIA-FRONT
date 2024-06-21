@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -86,6 +86,14 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
       disableBeacon: true,
     },
   ];
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -110,7 +118,7 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
   return (
     <div
       ref={containerRef}
-      className="relative h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white !pr-0"
+      className="relative  ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white !pr-0"
     >
       <div className="relative">
         <Joyride
@@ -510,7 +518,7 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
         </div>
       </div>
 
-      <div className="mt-0">
+      <div className="mt-5">
         <hr />
       </div>
       <div className="ml-3 flex items-center justify-between p-1">

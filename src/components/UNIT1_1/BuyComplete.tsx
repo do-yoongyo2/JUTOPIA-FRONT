@@ -32,7 +32,7 @@ const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
   ];
 
   return (
-    <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
+    <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white ">
       <Joyride
         steps={steps}
         run={true}
@@ -149,7 +149,7 @@ const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
         </div>
       </div>
 
-      <div className="mt-1 h-[180px] text-center text-sm ">
+      <div className="mt-1 h-[115px] text-center text-sm ">
         <table className="w-full border-collapse">
           <thead className="bg-shnhan-whitegray-back text-gray-500">
             <tr>
@@ -193,7 +193,7 @@ const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-0">
+      <div className="mt-5">
         <hr />
       </div>
       <div className="ml-3 flex items-center justify-between p-1">
@@ -205,7 +205,7 @@ const BuyComplete: React.FC<BuyProps> = ({ onFinish, onPrev }) => {
           <div className="ml-5 text-xs font-semibold text-black">잔고</div>
         </div>
         <div className="flex items-center">
-          <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
+          <div className="rounded-lg bg-shinhan-blue p-2 text-xs font-semibold text-white">
             메뉴
           </div>
         </div>

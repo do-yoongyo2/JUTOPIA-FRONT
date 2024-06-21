@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -80,6 +80,12 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
       disableBeacon: true,
     },
   ];
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -105,7 +111,7 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
   return (
     <div
       ref={containerRef}
-      className="relative h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white !pr-0"
+      className="relative ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white !pr-0"
     >
       <div className="relative">
         <Joyride
@@ -527,7 +533,7 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
           </div>
         </div>
       </div>
-      <div className="mt-0">
+      <div className="mt-5">
         <hr />
       </div>
       <div className="ml-3 flex items-center justify-between p-1">
@@ -539,7 +545,7 @@ const Buy: React.FC<BuyProps> = ({ onNext }) => {
           <div className="ml-5 text-xs font-semibold text-black">잔고</div>
         </div>
         <div className="flex items-center">
-          <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
+          <div className="rounded-lg bg-shinhan-blue p-2 text-xs font-semibold text-white">
             메뉴
           </div>
         </div>
