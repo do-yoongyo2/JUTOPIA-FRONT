@@ -37,7 +37,7 @@ const MakeAccount7: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   ];
   return (
     <div>
-      <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white p-4">
+      <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white p-4">
         <Joyride
           steps={steps}
           run={true}
@@ -52,7 +52,7 @@ const MakeAccount7: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             },
           }}
         />
-        <div className="py-6">
+        <div className="py-3">
           <h2 className="text-base font-bold text-black">
             계좌 비밀번호를
             <br />
@@ -99,14 +99,14 @@ const MakeAccount7: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             다음
           </button>
         </div>
-      </div>
-      <div className=" flex justify-center">
-        <button
-          onClick={onPrev}
-          className="mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        >
-          이전
-        </button>
+        <div className=" flex justify-center">
+          <button
+            onClick={onPrev}
+            className="mt-0 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          >
+            이전
+          </button>
+        </div>
       </div>
     </div>
   );

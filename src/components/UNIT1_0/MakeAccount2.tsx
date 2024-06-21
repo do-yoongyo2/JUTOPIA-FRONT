@@ -31,7 +31,7 @@ const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   ];
   return (
     <div>
-      <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
+      <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white">
         <Joyride
           steps={steps}
           run={true}
@@ -51,7 +51,7 @@ const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             <h2 className="text-base font-bold text-black">
               미리 준비해주세요
             </h2>
-            <ul id="prepareMessage" className="mt-5 space-y-4">
+            <ul id="prepareMessage" className="mt-3 space-y-4">
               <li className="flex items-center">
                 <span className="mr-3 rounded-lg bg-shinhan-back p-2 text-white">
                   📘
@@ -77,10 +77,10 @@ const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
                 </div>
               </li>
             </ul>
-            <button className="mt-5 h-[30px] w-full rounded-lg bg-shinhan-back text-xs font-semibold text-shinhan-blue ">
+            <button className="mt-3 h-[30px] w-full rounded-lg bg-shinhan-back text-xs font-semibold text-shinhan-blue ">
               자녀 계좌 만들기
             </button>
-            <div id="readMessage" className="mt-5 text-xs">
+            <div id="readMessage" className="mt-3 text-xs">
               • 비대면 계좌개설은 내국인 개인만 가능 <br />
               <div className="mt-1">
                 • 이용 가능시간: 24시간 365일 <br />
@@ -99,14 +99,14 @@ const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             <button
               id="clickButton2"
               onClick={onNext}
-              className="mt-5 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-semibold text-white"
+              className="mt-3 h-[35px] w-full rounded-lg bg-shinhan-button text-xs font-semibold text-white"
             >
               시작하기
             </button>
           </div>
         </div>
 
-        <div className="mt-1">
+        <div className="mt-6">
           <hr />
         </div>
         <div className="ml-3 flex items-center justify-between p-1">
@@ -118,19 +118,19 @@ const MakeAccount2: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             <div className="ml-5 text-xs font-semibold text-black">잔고</div>
           </div>
           <div className="flex items-center">
-            <div className="rounded-lg bg-shinhan-blue p-3 text-xs font-semibold text-white">
+            <div className="rounded-lg bg-shinhan-blue p-2 text-xs font-semibold text-white">
               메뉴
             </div>
           </div>
         </div>
-      </div>
-      <div className=" flex justify-center">
-        <button
-          onClick={onPrev}
-          className="mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        >
-          이전
-        </button>
+        <div className=" flex justify-center">
+          <button
+            onClick={onPrev}
+            className=" flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          >
+            이전
+          </button>
+        </div>
       </div>
     </div>
   );
