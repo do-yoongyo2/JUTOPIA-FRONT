@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { fetchMarketIssuesApi } from "../apis/marketIssuesApi"; // 수정된 경로
-import { Modal, ModalBackdrop } from "./styled"; // 수정된 경로
+import { fetchMarketIssuesApi } from "../apis/marketIssuesApi";
+import { Modal, ModalBackdrop } from "./styled";
+import he from "he"; // he 라이브러리 import
 
 interface ListItem {
   id: number;
@@ -128,7 +129,8 @@ const MarketIssues: React.FC = () => {
                     </p>
                     <hr className="mb-3 mt-3" />
                     <p>
-                      <strong>내용:</strong> {selectedItem.content}
+                      <strong>내용:</strong> {he.decode(selectedItem.content)}{" "}
+                      {/* he.decode를 사용하여 HTML 엔티티 디코딩 */}
                     </p>
                   </div>
                 </div>
