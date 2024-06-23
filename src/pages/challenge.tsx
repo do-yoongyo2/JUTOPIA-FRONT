@@ -17,6 +17,7 @@ const Challenge: NextPage = () => {
   return (
     <div className="font-ttlaundrygothicb">
       <LeftBar selectedTab="챌린지" />
+
       <BottomBar selectedTab="챌린지" />
     </div>
   );
