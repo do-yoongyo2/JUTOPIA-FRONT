@@ -1,5 +1,4 @@
-// src/components/PostCard.js
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 interface PostCardProps {
@@ -21,6 +20,12 @@ const PostCard: React.FC<PostCardProps> = ({
   commentsCount,
   likesCount,
 }) => {
+  const [liked, setLiked] = useState(false);
+
+  const handleLikeClick = () => {
+    setLiked(!liked);
+  };
+
   return (
     <div className="mx-auto max-w-lg overflow-hidden rounded-xl bg-white shadow-md">
       <div className="flex items-center p-4">
@@ -62,15 +67,15 @@ const PostCard: React.FC<PostCardProps> = ({
           />
           <span>{commentsCount} Comments</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={handleLikeClick}>
           <Image
-            className="mr-2"
-            src="/challenge/like1.png"
+            className="mr-2 cursor-pointer"
+            src={liked ? "/challenge/like2.png" : "/challenge/like1.png"}
             alt="Likes"
             width={24}
             height={24}
           />
-          <span>{likesCount} Likes</span>
+          <span>{liked ? likesCount + 1 : likesCount} Likes</span>
         </div>
       </div>
       <div className="px-4 py-2">
