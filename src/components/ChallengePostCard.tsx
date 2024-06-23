@@ -26,6 +26,7 @@ const PostCard: React.FC<PostCardProps> = ({
     useState(commentsCount);
   const [currentLikesCount, setCurrentLikesCount] = useState(likesCount);
   const [showComments, setShowComments] = useState(false);
+  const [showOverflowMenu, setShowOverflowMenu] = useState(false);
 
   const handleLikeClick = () => {
     const newLiked = !liked;
@@ -58,6 +59,10 @@ const PostCard: React.FC<PostCardProps> = ({
     setShowComments(!showComments);
   };
 
+  const toggleMenu = () => {
+    setShowOverflowMenu(!showOverflowMenu);
+  };
+
   return (
     <div className="mx-auto max-w-lg overflow-hidden rounded-xl bg-white shadow-md">
       <div className="flex items-center p-4">
@@ -68,9 +73,43 @@ const PostCard: React.FC<PostCardProps> = ({
           width={40}
           height={40}
         />
-        <div className="ml-4">
-          <div className="text-lg font-medium">{userName}</div>
-          <div className="text-sm text-gray-500">{postTime}</div>
+        <div className="ml-4 flex flex-1 items-center justify-between">
+          <div>
+            <div className="text-lg font-medium">{userName}</div>
+            <div className="text-sm text-gray-500">{postTime}</div>
+          </div>
+          <div className="relative ml-4">
+            <button
+              id="dropdownDefaultButton"
+              className="inline-flex items-center rounded-lg hover:ring-2 hover:ring-gray-300"
+              type="button"
+              onClick={toggleMenu}
+            >
+              <Image
+                src="/Challenge/overflow-menu.png"
+                alt="Overflow"
+                width={24}
+                height={24}
+                className="cursor-pointer"
+              />
+            </button>
+            {showOverflowMenu && (
+              <div className="absolute right-0 z-10 mt-2 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow-lg">
+                <ul className="py-2 text-sm text-gray-700">
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                      수정
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                      삭제
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="px-4">
