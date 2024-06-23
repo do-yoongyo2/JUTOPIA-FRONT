@@ -50,16 +50,17 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <div className="px-4">
         <p className="text-gray-700">{postContent}</p>
-        <div className="mt-4 flex flex-col sm:flex-row">
+        <div className="-mx-1 mt-4 flex flex-wrap">
           {postImages.map((image, index) => (
-            <Image
-              key={index}
-              className="rounded-md object-cover"
-              src={image}
-              alt={`Post image ${index + 1}`}
-              width={300}
-              height={128}
-            />
+            <div key={index} className="w-1/2 p-1">
+              <Image
+                className="rounded-md object-cover"
+                src={image}
+                alt={`Post image ${index + 1}`}
+                width={300}
+                height={128}
+              />
+            </div>
           ))}
         </div>
       </div>
