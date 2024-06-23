@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import CommentLikeSection from "./ChallengePostCommentLikeSection";
+import OverflowMenu from "./ChallengeOverflowMenu";
 
 interface PostCardProps {
   userName: string;
@@ -20,47 +22,12 @@ const PostCard: React.FC<PostCardProps> = ({
   commentsCount,
   likesCount,
 }) => {
-  const [liked, setLiked] = useState(false);
-  const [comment, setComment] = useState("");
-  const [currentCommentsCount, setCurrentCommentsCount] =
-    useState(commentsCount);
-  const [currentLikesCount, setCurrentLikesCount] = useState(likesCount);
-  const [showComments, setShowComments] = useState(false);
-  const [showOverflowMenu, setShowOverflowMenu] = useState(false);
-
-  const handleLikeClick = () => {
-    const newLiked = !liked;
-    setLiked(newLiked);
-    setCurrentLikesCount(
-      newLiked ? currentLikesCount + 1 : currentLikesCount - 1,
-    );
+  const handleEdit = () => {
+    console.log("Edit clicked");
   };
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setComment(e.target.value);
-  };
-
-  const handleCommentUpload = () => {
-    if (!comment.trim()) return; // 빈 코멘트는 업로드하지 않음
-
-    // 코멘트 업로드 로직 추가
-    console.log("Comment uploaded:", comment);
-    setComment(""); // 코멘트 필드 초기화
-    setCurrentCommentsCount(currentCommentsCount + 1); // 코멘트 숫자 증가
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleCommentUpload();
-    }
-  };
-
-  const toggleComments = () => {
-    setShowComments(!showComments);
-  };
-
-  const toggleMenu = () => {
-    setShowOverflowMenu(!showOverflowMenu);
+  const handleDelete = () => {
+    console.log("Delete clicked");
   };
 
   return (
@@ -78,38 +45,7 @@ const PostCard: React.FC<PostCardProps> = ({
             <div className="text-lg font-medium">{userName}</div>
             <div className="text-sm text-gray-500">{postTime}</div>
           </div>
-          <div className="relative ml-4">
-            <button
-              id="dropdownDefaultButton"
-              className="inline-flex items-center rounded-lg hover:ring-2 hover:ring-gray-300"
-              type="button"
-              onClick={toggleMenu}
-            >
-              <Image
-                src="/Challenge/overflow-menu.png"
-                alt="Overflow"
-                width={24}
-                height={24}
-                className="cursor-pointer"
-              />
-            </button>
-            {showOverflowMenu && (
-              <div className="absolute right-0 z-10 mt-2 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow-lg">
-                <ul className="py-2 text-sm text-gray-700">
-                  <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                      수정
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                      삭제
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+          <OverflowMenu onEdit={handleEdit} onDelete={handleDelete} />
         </div>
       </div>
       <div className="px-4">
@@ -127,60 +63,11 @@ const PostCard: React.FC<PostCardProps> = ({
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-between px-4 py-2">
-        <div
-          className="flex cursor-pointer items-center"
-          onClick={toggleComments}
-        >
-          <Image
-            className="mr-2"
-            src="/challenge/comment.png"
-            alt="Comments"
-            width={24}
-            height={24}
-          />
-          <span>{currentCommentsCount} Comments</span>
-        </div>
-        <div className="flex items-center" onClick={handleLikeClick}>
-          <Image
-            className="mr-2 cursor-pointer"
-            src={liked ? "/challenge/like2.png" : "/challenge/like1.png"}
-            alt="Likes"
-            width={24}
-            height={24}
-          />
-          <span>{currentLikesCount} Likes</span>
-        </div>
-      </div>
-      {showComments && (
-        <div className="px-4 py-2">
-          {/* 여기서 실제 코멘트 리스트를 렌더링합니다. */}
-          <div className="rounded-md bg-gray-100 p-2">
-            <p>Comment 1</p>
-            <p>Comment 2</p>
-            {/* 실제 코멘트 데이터로 대체 */}
-          </div>
-        </div>
-      )}
       <div className="px-4 py-2">
-        <div className="flex items-center rounded-md border border-gray-300 p-2">
-          <input
-            className="w-full border-none focus:outline-none"
-            type="text"
-            placeholder="Write comment"
-            value={comment}
-            onChange={handleCommentChange}
-            onKeyPress={handleKeyPress} // 엔터 키 감지 이벤트 핸들러 추가
-          />
-          <div className="ml-2 cursor-pointer" onClick={handleCommentUpload}>
-            <Image
-              src="/challenge/comment-upload.png"
-              alt="Upload Comment"
-              width={24}
-              height={24}
-            />
-          </div>
-        </div>
+        <CommentLikeSection
+          initialComments={commentsCount}
+          initialLikes={likesCount}
+        />
       </div>
     </div>
   );
