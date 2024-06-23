@@ -21,9 +21,20 @@ const PostCard: React.FC<PostCardProps> = ({
   likesCount,
 }) => {
   const [liked, setLiked] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleLikeClick = () => {
     setLiked(!liked);
+  };
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
+  };
+
+  const handleCommentUpload = () => {
+    // 코멘트 업로드 로직 추가
+    console.log("Comment uploaded:", comment);
+    setComment(""); // 코멘트 필드 초기화
   };
 
   return (
@@ -79,11 +90,23 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
       </div>
       <div className="px-4 py-2">
-        <input
-          className="w-full rounded-md border border-gray-300 p-2"
-          type="text"
-          placeholder="Write comment"
-        />
+        <div className="flex items-center rounded-md border border-gray-300 p-2">
+          <input
+            className="w-full border-none focus:outline-none"
+            type="text"
+            placeholder="Write comment"
+            value={comment}
+            onChange={handleCommentChange}
+          />
+          <div className="ml-2 cursor-pointer" onClick={handleCommentUpload}>
+            <Image
+              src="/challenge/comment-upload.png"
+              alt="Upload Comment"
+              width={24}
+              height={24}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
