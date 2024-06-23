@@ -25,6 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const [currentCommentsCount, setCurrentCommentsCount] =
     useState(commentsCount);
   const [currentLikesCount, setCurrentLikesCount] = useState(likesCount);
+  const [showComments, setShowComments] = useState(false);
 
   const handleLikeClick = () => {
     const newLiked = !liked;
@@ -51,6 +52,10 @@ const PostCard: React.FC<PostCardProps> = ({
     if (e.key === "Enter") {
       handleCommentUpload();
     }
+  };
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
   };
 
   return (
@@ -84,7 +89,10 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
       </div>
       <div className="flex items-center justify-between px-4 py-2">
-        <div className="flex items-center">
+        <div
+          className="flex cursor-pointer items-center"
+          onClick={toggleComments}
+        >
           <Image
             className="mr-2"
             src="/challenge/comment.png"
@@ -105,6 +113,16 @@ const PostCard: React.FC<PostCardProps> = ({
           <span>{currentLikesCount} Likes</span>
         </div>
       </div>
+      {showComments && (
+        <div className="px-4 py-2">
+          {/* 여기서 실제 코멘트 리스트를 렌더링합니다. */}
+          <div className="rounded-md bg-gray-100 p-2">
+            <p>Comment 1</p>
+            <p>Comment 2</p>
+            {/* 실제 코멘트 데이터로 대체 */}
+          </div>
+        </div>
+      )}
       <div className="px-4 py-2">
         <div className="flex items-center rounded-md border border-gray-300 p-2">
           <input
