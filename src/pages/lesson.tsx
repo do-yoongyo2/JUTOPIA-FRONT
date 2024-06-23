@@ -14,7 +14,7 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      {/* <ProblemUnitDescription
+      <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_0}
         titles={descriptionData.titles2_0}
         nextIndexes={descriptionData.nextIndexes2_0}
@@ -22,7 +22,7 @@ const Lesson: NextPage = () => {
         imageIndexes={descriptionData.imageIndexes2_0}
         backgroundColor="#0046ff"
         progressbarColor="blue"
-      /> */}
+      />
 
       {/* <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_1}
