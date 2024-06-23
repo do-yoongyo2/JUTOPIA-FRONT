@@ -22,9 +22,16 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState("");
+  const [currentCommentsCount, setCurrentCommentsCount] =
+    useState(commentsCount);
+  const [currentLikesCount, setCurrentLikesCount] = useState(likesCount);
 
   const handleLikeClick = () => {
-    setLiked(!liked);
+    const newLiked = !liked;
+    setLiked(newLiked);
+    setCurrentLikesCount(
+      newLiked ? currentLikesCount + 1 : currentLikesCount - 1,
+    );
   };
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,9 +39,12 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   const handleCommentUpload = () => {
+    if (!comment.trim()) return; // 빈 코멘트는 업로드하지 않음
+
     // 코멘트 업로드 로직 추가
     console.log("Comment uploaded:", comment);
     setComment(""); // 코멘트 필드 초기화
+    setCurrentCommentsCount(currentCommentsCount + 1); // 코멘트 숫자 증가
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,7 +92,7 @@ const PostCard: React.FC<PostCardProps> = ({
             width={24}
             height={24}
           />
-          <span>{commentsCount} Comments</span>
+          <span>{currentCommentsCount} Comments</span>
         </div>
         <div className="flex items-center" onClick={handleLikeClick}>
           <Image
@@ -92,7 +102,7 @@ const PostCard: React.FC<PostCardProps> = ({
             width={24}
             height={24}
           />
-          <span>{liked ? likesCount + 1 : likesCount} Likes</span>
+          <span>{currentLikesCount} Likes</span>
         </div>
       </div>
       <div className="px-4 py-2">
