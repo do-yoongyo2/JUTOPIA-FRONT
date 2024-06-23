@@ -37,6 +37,12 @@ const PostCard: React.FC<PostCardProps> = ({
     setComment(""); // 코멘트 필드 초기화
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleCommentUpload();
+    }
+  };
+
   return (
     <div className="mx-auto max-w-lg overflow-hidden rounded-xl bg-white shadow-md">
       <div className="flex items-center p-4">
@@ -97,6 +103,7 @@ const PostCard: React.FC<PostCardProps> = ({
             placeholder="Write comment"
             value={comment}
             onChange={handleCommentChange}
+            onKeyPress={handleKeyPress} // 엔터 키 감지 이벤트 핸들러 추가
           />
           <div className="ml-2 cursor-pointer" onClick={handleCommentUpload}>
             <Image
