@@ -24,26 +24,24 @@ const Home: NextPage = () => {
   return (
     <div className="font-ttlaundrygothicb">
       <TopBar menuName="Home" />
-      <LeftBar selectedTab="홈" />
-
-      <div className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
-        <div className="flex max-w-[65rem] grow flex-col">
-          <Profile />
-
-          <div className="pt-[40px]"></div>
-          <WeeklyCalendar />
-          <div className="pt-[40px]"></div>
-          <div className="flex flex-row justify-between max-[768px]:flex-col">
-            <Card title="시장 지표" content={<DomesticStock />} />
-            <Card
-              title="최신 금융 칼럼(with 신한투자증권)"
-              content={<MarketIssues />}
-            />
+      <div className="lg:flex">
+        <LeftBar selectedTab="홈" className="hidden lg:block" />
+        <div className="flex flex-col sm:p-6 sm:pt-10 lg:ml-64 lg:flex-row lg:justify-center lg:gap-12">
+          <div className="flex max-w-[65rem] grow flex-col">
+            <Profile />
+            <WeeklyCalendar />
+            <div className="m-5 flex flex-col gap-6 md:flex-row md:justify-between">
+              <Card title="시장 지표" content={<DomesticStock />} />
+              <Card
+                title="최신 금융 칼럼(with 신한투자증권)"
+                content={<MarketIssues />}
+              />
+            </div>
           </div>
         </div>
       </div>
-
-      <BottomBar selectedTab="홈" />
+      <div className="pt-[90px]"></div>
+      <BottomBar selectedTab="홈" className="lg:hidden" />
     </div>
   );
 };

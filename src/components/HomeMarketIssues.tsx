@@ -58,13 +58,13 @@ const MarketIssues: React.FC = () => {
       <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
         <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-4 py-3">
               제목
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-4 py-3">
               발행일
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-4 py-3">
               PDF 파일
               <span className="sr-only">Download</span>
             </th>
@@ -78,9 +78,8 @@ const MarketIssues: React.FC = () => {
             >
               <th
                 scope="row"
-                className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 dark:text-white"
+                className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
               >
-                {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
                 <div className="flex items-center justify-between">
                   <span className="mr-2">{item.title}</span>
                   <button
@@ -92,8 +91,8 @@ const MarketIssues: React.FC = () => {
                   </button>
                 </div>
               </th>
-              <td className="px-2 py-2">{item.reg_date}</td>
-              <td className="px-2 py-2 text-right">
+              <td className="px-4 py-2">{item.reg_date}</td>
+              <td className="px-4 py-2 text-right">
                 <a
                   href={item.attachment_url}
                   className="font-medium text-blue-600 hover:underline dark:text-blue-500"
@@ -114,26 +113,24 @@ const MarketIssues: React.FC = () => {
             toggleModal={toggleModal}
             title={selectedItem.title}
             detail={
-              <>
-                <div className="container">
-                  <div className="px-3">
-                    <p>
-                      <strong>게시판:</strong> {selectedItem.bbs_name}
-                    </p>
-                    <p>
-                      <strong>작성자:</strong> {selectedItem.writer}
-                    </p>
-                    <p>
-                      <strong>발행일:</strong> {selectedItem.reg_date}
-                    </p>
-                    <hr className="mb-3 mt-3" />
-                    <p>
-                      <strong>내용:</strong> {selectedItem.content}
-                    </p>
-                  </div>
+              <div className="p-4">
+                <div className="mb-4">
+                  <p>
+                    <strong>게시판:</strong> {selectedItem.bbs_name}
+                  </p>
+                  <p>
+                    <strong>작성자:</strong> {selectedItem.writer}
+                  </p>
+                  <p>
+                    <strong>발행일:</strong> {selectedItem.reg_date}
+                  </p>
                 </div>
-                <hr className="mb-4 mt-4" />
-                <p className="text-xl">
+                <hr className="mb-4" />
+                <p>
+                  <strong>내용:</strong> {selectedItem.content}
+                </p>
+                <hr className="my-4" />
+                <p className="text-lg">
                   자세히 확인하고 싶으시면{" "}
                   <a
                     href={selectedItem.attachment_url}
@@ -145,7 +142,7 @@ const MarketIssues: React.FC = () => {
                   </a>
                   후 PDF 파일을 확인하세요.
                 </p>
-              </>
+              </div>
             }
           />
         </>
