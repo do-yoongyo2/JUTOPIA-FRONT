@@ -16,6 +16,8 @@ const ProblemUnitDescription = ({
   images,
   imageIndexes,
   progressbarColor,
+  increaseLessonsCompleted,
+  status,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -24,6 +26,8 @@ const ProblemUnitDescription = ({
   images: string[];
   imageIndexes: number[];
   progressbarColor: string;
+  increaseLessonsCompleted: (count: number) => void;
+  status: string;
 }) => {
   const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
@@ -56,6 +60,14 @@ const ProblemUnitDescription = ({
       transformWrapperRef.current.resetTransform();
     }
   }, [imageIndex]);
+
+  useEffect(() => {
+    if (lessonComplete) {
+      if (status === "active") {
+        increaseLessonsCompleted(1);
+      }
+    }
+  }, [lessonComplete, increaseLessonsCompleted]);
 
   const LessonComplete = () => {
     return (
