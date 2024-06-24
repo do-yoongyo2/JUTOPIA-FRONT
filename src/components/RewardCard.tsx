@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 interface RewardCardProps {
@@ -26,7 +27,7 @@ const RewardCard: React.FC<RewardCardProps> = ({
   return (
     <div className="rounded-lg border p-4 shadow-lg">
       <h2 className="mb-4 text-xl font-bold">{title}</h2>
-      <img
+      <Image
         src={imageUrl}
         alt={title}
         className={`mb-4 h-40 w-full transform cursor-pointer rounded-lg object-contain transition-transform duration-300 hover:scale-105 ${!completed ? "grayscale" : ""}`}
@@ -43,7 +44,7 @@ const RewardCard: React.FC<RewardCardProps> = ({
           ></div>
           <div className="z-50 max-w-md transform rounded-lg bg-white p-8 shadow-lg transition-all duration-300">
             <h2 className="mb-4 text-2xl font-bold">{title}</h2>
-            <img
+            <Image
               src={imageUrl}
               alt={title}
               className={`mb-4 h-60 w-full rounded-lg object-cover ${!completed ? "grayscale" : ""}`}

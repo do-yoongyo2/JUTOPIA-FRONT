@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CharacterExplain from "./CharacterExplain";
-import { DescriptionItem } from "~/data/description";
+import type { DescriptionItem } from "~/data/description";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Link from "next/link";
@@ -31,7 +32,7 @@ const ProblemUnitDescription = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [titleIndex, setTitleIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
-  const transformWrapperRef = useRef(null);
+  const transformWrapperRef = useRef<any>(null);
 
   const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
@@ -47,10 +48,11 @@ const ProblemUnitDescription = ({
 
   useEffect(() => {
     if (imageIndexes.includes(currentIndex)) setImageIndex((prev) => prev + 1);
-  }, [currentIndex]);
+  }, [currentIndex, imageIndexes]);
 
   useEffect(() => {
     if (transformWrapperRef.current) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       transformWrapperRef.current.resetTransform();
     }
   }, [imageIndex]);
@@ -103,6 +105,7 @@ const ProblemUnitDescription = ({
                 ref={transformWrapperRef}
               >
                 <TransformComponent>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     className="h-[45vh] w-[100vw] cursor-pointer object-contain"
                     alt="설명 이미지"

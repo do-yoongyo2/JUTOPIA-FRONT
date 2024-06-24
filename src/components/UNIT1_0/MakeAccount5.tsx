@@ -1,6 +1,7 @@
 import React from "react";
 import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 interface MakeAccountProps {
@@ -42,7 +43,7 @@ const MakeAccount5: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
         />
         <div className="py-3">
           <div id="checkMessage" className="mt-20 flex flex-col items-center">
-            <img
+            <Image
               className="w-[70px]"
               src="/UNIT1_0/iconShinhan7.jpg"
               alt="icon7"
