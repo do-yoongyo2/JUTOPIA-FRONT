@@ -21,6 +21,7 @@ const MarketIssues: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ListItem | null>(null);
+  const [visibleItems, setVisibleItems] = useState<number>(10); // 초기값을 10으로 설정
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -36,7 +37,7 @@ const MarketIssues: React.FC = () => {
       .then((response) => {
         const responseData = response.data as ListItem[];
         console.log(responseData);
-        setData(responseData.slice(0, 4)); // 4개의 데이터만 사용
+        setData(responseData);
         setLoading(false);
       })
       .catch((error) => {
@@ -45,6 +46,10 @@ const MarketIssues: React.FC = () => {
         setLoading(false);
       });
   }, []);
+
+  const loadMoreItems = () => {
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + 10);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -56,58 +61,73 @@ const MarketIssues: React.FC = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-        <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              제목
-            </th>
-            <th scope="col" className="px-6 py-3">
-              발행일
-            </th>
-            <th scope="col" className="px-6 py-3">
-              PDF 파일
-              <span className="sr-only">Download</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item) => (
-            <tr
-              key={item.id}
-              className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-            >
-              <th
-                scope="row"
-                className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 dark:text-white"
-              >
-                {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
-                <div className="flex items-center justify-between">
-                  <span className="mr-2">{item.title}</span>
-                  <button
-                    type="button"
-                    className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-                    onClick={() => handleDetailClick(item)}
-                  >
-                    자세히
-                  </button>
-                </div>
+      <div className="max-h-60 overflow-y-auto">
+        {" "}
+        {/* Y축 스크롤 추가 */}
+        <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+          <thead className="sticky top-0 z-10 bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+            {" "}
+            {/* sticky 클래스 추가로 제목 행 고정 */}
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                제목
               </th>
-              <td className="px-2 py-2">{item.reg_date}</td>
-              <td className="px-2 py-2 text-right">
-                <a
-                  href={item.attachment_url}
-                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Download
-                </a>
-              </td>
+              <th scope="col" className="px-6 py-3">
+                발행일
+              </th>
+              <th scope="col" className="px-6 py-3">
+                PDF 파일
+                <span className="sr-only">Download</span>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.slice(0, visibleItems).map((item) => (
+              <tr
+                key={item.id}
+                className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+              >
+                <th
+                  scope="row"
+                  className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 dark:text-white"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="mr-2">{item.title}</span>
+                    <button
+                      type="button"
+                      className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                      onClick={() => handleDetailClick(item)}
+                    >
+                      자세히
+                    </button>
+                  </div>
+                </th>
+                <td className="px-2 py-2">{item.reg_date}</td>
+                <td className="px-2 py-2 text-right">
+                  <a
+                    href={item.attachment_url}
+                    className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {visibleItems < data.length && ( // 더보기 버튼 표시 조건
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={loadMoreItems}
+            className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+          >
+            더보기
+          </button>
+        </div>
+      )}
       {isModalOpen && selectedItem && (
         <>
           <ModalBackdrop display="block" onClick={toggleModal} />
@@ -116,7 +136,7 @@ const MarketIssues: React.FC = () => {
             title={selectedItem.title}
             detail={
               <>
-                <div className="scroll-box">
+                <div className="container">
                   <div className="px-3">
                     <p>
                       <strong>게시판:</strong> {selectedItem.bbs_name}
@@ -130,7 +150,6 @@ const MarketIssues: React.FC = () => {
                     <hr className="mb-3 mt-3" />
                     <p>
                       <strong>내용:</strong> {he.decode(selectedItem.content)}{" "}
-                      {/* he.decode를 사용하여 HTML 엔티티 디코딩 */}
                     </p>
                   </div>
                 </div>
