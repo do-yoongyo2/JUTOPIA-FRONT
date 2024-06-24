@@ -9,18 +9,12 @@ import {
   GoldenBookSvg,
   GoldenDumbbellSvg,
   GoldenTreasureSvg,
-  GoldenTrophySvg,
   LessonCompletionSvg0,
-  LessonCompletionSvg1,
-  LessonCompletionSvg2,
-  LessonCompletionSvg3,
   LockSvg,
   StarSvg,
   LockedTreasureSvg,
-  LockedTrophySvg,
   UpArrowSvg,
   ActiveTreasureSvg,
-  ActiveTrophySvg,
   ActiveDumbbellSvg,
 } from "~/components/Svgs";
 import { TutorialTopBar } from "~/components/TutorialTopBar";
@@ -445,7 +439,7 @@ const TileTooltip = ({
 
 const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   const [selectedTile, setSelectedTile] = useState<null | number>(null);
-  const [currentLearning, setCurrentLearning] = useState<number>(0); //최종
+  // const [currentLearning, setCurrentLearning] = useState<number>(0); //최종
 
   useEffect(() => {
     const unselectTile = () => setSelectedTile(null);
@@ -475,7 +469,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
           response = await readUserCurrentLearning(email);
         }
         const current = response.userCurrentLearning;
-        setCurrentLearning(current);
+        // setCurrentLearning(current);
         setLessonsCompleted(current);
         console.log("Fetched data:", current);
       } catch (error) {
