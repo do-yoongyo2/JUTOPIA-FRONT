@@ -33,10 +33,14 @@ const ProblemUnitQuiz = ({
   problem,
   backgroundColor,
   progressbarColor,
+  increaseLessonsCompleted,
+  status,
 }: {
   problem: ProblemItem;
   backgroundColor: string;
   progressbarColor: string;
+  increaseLessonsCompleted: (count: number) => void;
+  status: string;
 }) => {
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0); // 맞춘 문제 수
   const totalCorrectAnswersNeeded = Object.keys(problem).length; // 필요한 총 정답 수
@@ -130,6 +134,14 @@ const ProblemUnitQuiz = ({
       transformWrapperRef.current.resetTransform();
     }
   }, [currentProblemIndex]);
+
+  useEffect(() => {
+    if (isComplete) {
+      if (status === "active") {
+        increaseLessonsCompleted(1);
+      }
+    }
+  }, [isComplete, increaseLessonsCompleted]);
 
   return isComplete ? (
     <LessonComplete backgroundColor={backgroundColor} />

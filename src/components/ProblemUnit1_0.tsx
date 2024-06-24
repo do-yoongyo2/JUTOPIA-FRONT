@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import Link from "next/link";
@@ -6,12 +6,27 @@ import Image from "next/image";
 import RenderComponent from "./UNIT1_0/RenderComponent";
 
 // const pages = [Accounts, Accounts2, Accounts3];
-const ProblemUnit1_0 = ({ progressbarColor }: { progressbarColor: string }) => {
+const ProblemUnit1_0 = ({
+  progressbarColor,
+  increaseLessonsCompleted,
+  status,
+}: {
+  progressbarColor: string;
+  increaseLessonsCompleted: (count: number) => void;
+  status: string;
+}) => {
   const totalCorrectAnswersNeeded = 8;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
 
+  useEffect(() => {
+    if (lessonComplete) {
+      if (status === "active") {
+        increaseLessonsCompleted(1);
+      }
+    }
+  }, [lessonComplete, increaseLessonsCompleted]);
   const onNext = () => {
     if (currentStep < totalCorrectAnswersNeeded - 1) {
       setCurrentStep((prevStep) => prevStep + 1);

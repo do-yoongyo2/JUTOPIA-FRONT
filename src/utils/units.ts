@@ -9,7 +9,24 @@ export type Unit = {
 
 export type Tile =
   | {
-      type: "star" | "dumbbell" | "book" | "trophy";
+      type:
+        | "1.0"
+        | "1.1"
+        | "1.2"
+        | "2.0"
+        | "2.1"
+        | "2.2"
+        | "2.3"
+        | "2.4"
+        | "3.0"
+        | "3.1"
+        | "3.2"
+        | "3.3"
+        | "3.4"
+        | "3.5"
+        | "3.6"
+        | "3.7"
+        | "4.0";
       description: string;
     }
   | { type: "treasure" };
@@ -19,65 +36,65 @@ export type TileType = Tile["type"];
 export const units: readonly Unit[] = [
   {
     unitNumber: 1,
-    description: "Form basic sentences, greet people",
+    description: "계좌 개설하기, 매수하기, 매도하기",
     backgroundColor: "bg-[#0046ff]",
     textColor: "text-[#0046ff]",
     borderColor: "border-[#0046ff]",
     tiles: [
       {
-        type: "star",
-        description: "Form basic sentences",
+        type: "1.0",
+        description: "계좌 개설하기",
       },
       {
-        type: "book",
-        description: "Good morning",
+        type: "1.1",
+        description: "삼성전자 매수하기",
       },
       {
-        type: "star",
-        description: "Greet people",
+        type: "1.2",
+        description: "삼성전자 매도하기",
       },
       { type: "treasure" },
-      { type: "book", description: "A date" },
-      { type: "trophy", description: "Unit 1 review" },
     ],
   },
   {
     unitNumber: 2,
-    description: "Get around in a city",
+    description: "금융 기초 지식, 기업 분석, 주식 분석",
     backgroundColor: "bg-[#ce82ff]",
     textColor: "text-[#ce82ff]",
     borderColor: "border-[#a568cc]",
     tiles: [
-      { type: "star", description: "Get around in a city" },
-      { type: "dumbbell", description: "Personalized practice" },
-      { type: "book", description: "One thing" },
+      { type: "2.0", description: "기본 경제 지식" },
+      { type: "2.1", description: "주식 시장, 종류" },
+      { type: "2.2", description: "주식 외 ETF, 채권" },
+      { type: "2.3", description: "기업 분석" },
+      { type: "2.4", description: "기업 분석 퀴즈" },
       { type: "treasure" },
-      { type: "star", description: "Get around in a city" },
-      { type: "book", description: "A very big family" },
-      { type: "star", description: "Greet people" },
-      { type: "book", description: "The red jacket" },
-      { type: "treasure" },
-      { type: "dumbbell", description: "Personalized practice" },
-      { type: "trophy", description: "Unit 2 review" },
     ],
   },
   {
     unitNumber: 3,
-    description: "Order food and drink",
+    description: "재무제표",
     backgroundColor: "bg-[#00cd9c]",
     textColor: "text-[#00cd9c]",
     borderColor: "border-[#00a47d]",
     tiles: [
-      { type: "star", description: "Order food and drink" },
-      { type: "book", description: "The passport" },
-      { type: "star", description: "Order food and drinks" },
+      { type: "3.0", description: "재무제표" },
+      { type: "3.1", description: "재무제표 분석" },
+      { type: "3.2", description: "손익계산서" },
+      { type: "3.3", description: "재무상태표" },
+      { type: "3.4", description: "손익계산서와 재무상태표 크로스 분석" },
+      { type: "3.5", description: "손익계산서와 재무상태표 크로스 분석2" },
+      { type: "3.6", description: "손익계산서와 재무상태표 크로스 분석" },
+      { type: "3.7", description: "손익계산서와 재무상태표 크로스 분석2" },
       { type: "treasure" },
-      { type: "book", description: "The honeymoon" },
-      { type: "star", description: "Get around in a city" },
-      { type: "treasure" },
-      { type: "dumbbell", description: "Personalized practice" },
-      { type: "book", description: "Doctor Eddy" },
-      { type: "trophy", description: "Unit 2 review" },
     ],
+  },
+  {
+    unitNumber: 4,
+    description: "퀴즈",
+    backgroundColor: "bg-[#FF9EAA]",
+    textColor: "text-[#FF9EAA]",
+    borderColor: "border-[#FF9EAA]",
+    tiles: [{ type: "4.0", description: "퀴즈" }, { type: "treasure" }],
   },
 ];
