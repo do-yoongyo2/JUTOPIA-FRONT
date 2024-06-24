@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchMarketIssuesApi } from "../apis/marketIssuesApi";
 import { Modal, ModalBackdrop } from "./styled";
 import he from "he";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 interface ListItem {
   id: number;
@@ -69,9 +71,13 @@ const MarketIssues: React.FC = () => {
                 제목
               </th>
               <th scope="col" className="hidden px-4 py-3 md:table-cell">
+                {" "}
+                {/* 모바일에서 숨기기 */}
                 발행일
               </th>
               <th scope="col" className="hidden px-4 py-3 md:table-cell">
+                {" "}
+                {/* 모바일에서 숨기기 */}
                 PDF 파일
                 <span className="sr-only">Download</span>
               </th>
@@ -88,12 +94,11 @@ const MarketIssues: React.FC = () => {
                   className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
                 >
                   <div className="flex items-center justify-between">
-                    <span
-                      className="mr-2 w-40 truncate md:w-auto"
-                      title={item.title}
-                    >
-                      {item.title}
-                    </span>
+                    <Tippy content={item.title}>
+                      <span className="mr-2 w-40 truncate md:w-auto">
+                        {item.title}
+                      </span>
+                    </Tippy>
                     <button
                       type="button"
                       className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
@@ -105,8 +110,11 @@ const MarketIssues: React.FC = () => {
                 </th>
                 <td className="hidden px-4 py-2 md:table-cell">
                   {item.reg_date}
-                </td>
+                </td>{" "}
+                {/* 모바일에서 숨기기 */}
                 <td className="hidden px-4 py-2 text-right md:table-cell">
+                  {" "}
+                  {/* 모바일에서 숨기기 */}
                   <a
                     href={item.attachment_url}
                     className="font-medium text-blue-600 hover:underline dark:text-blue-500"
