@@ -23,7 +23,7 @@ export const ModalBackdrop = styled.div<ModalDisplayProps>`
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: 50;
   display: ${(props: ModalDisplayProps) => props.display};
 `;
 
