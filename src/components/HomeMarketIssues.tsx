@@ -117,17 +117,18 @@ const MarketIssues: React.FC = () => {
             ))}
           </tbody>
         </table>
+        {visibleItems < data.length && ( // 더보기 버튼 표시 조건
+          <div className="mb-2 mt-2 flex justify-center">
+            <button
+              onClick={loadMoreItems}
+              className="rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+            >
+              더보기
+            </button>
+          </div>
+        )}
       </div>
-      {visibleItems < data.length && ( // 더보기 버튼 표시 조건
-        <div className="mt-4 flex justify-center">
-          <button
-            onClick={loadMoreItems}
-            className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-          >
-            더보기
-          </button>
-        </div>
-      )}
+
       {isModalOpen && selectedItem && (
         <>
           <ModalBackdrop display="block" onClick={toggleModal} />
