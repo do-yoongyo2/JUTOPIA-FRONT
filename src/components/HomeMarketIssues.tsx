@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchMarketIssuesApi } from "../apis/marketIssuesApi";
 import { Modal, ModalBackdrop } from "./styled";
-import he from "he"; // he 라이브러리 import
+import he from "he";
 
 interface ListItem {
   id: number;
@@ -21,7 +21,7 @@ const MarketIssues: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ListItem | null>(null);
-  const [visibleItems, setVisibleItems] = useState<number>(10); // 초기값을 10으로 설정
+  const [visibleItems, setVisibleItems] = useState<number>(10);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -62,20 +62,16 @@ const MarketIssues: React.FC = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="max-h-60 overflow-y-auto">
-        {" "}
-        {/* Y축 스크롤 추가 */}
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-            {" "}
-            {/* sticky 클래스 추가로 제목 행 고정 */}
             <tr>
               <th scope="col" className="px-4 py-3">
                 제목
               </th>
-              <th scope="col" className="px-4 py-3">
+              <th scope="col" className="hidden px-4 py-3 md:table-cell">
                 발행일
               </th>
-              <th scope="col" className="px-4 py-3">
+              <th scope="col" className="hidden px-4 py-3 md:table-cell">
                 PDF 파일
                 <span className="sr-only">Download</span>
               </th>
@@ -91,9 +87,13 @@ const MarketIssues: React.FC = () => {
                   scope="row"
                   className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
                 >
-                  {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
                   <div className="flex items-center justify-between">
-                    <span className="mr-2">{item.title}</span>
+                    <span
+                      className="mr-2 w-40 truncate md:w-auto"
+                      title={item.title}
+                    >
+                      {item.title}
+                    </span>
                     <button
                       type="button"
                       className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
@@ -103,8 +103,10 @@ const MarketIssues: React.FC = () => {
                     </button>
                   </div>
                 </th>
-                <td className="px-4 py-2">{item.reg_date}</td>
-                <td className="px-4 py-2 text-right">
+                <td className="hidden px-4 py-2 md:table-cell">
+                  {item.reg_date}
+                </td>
+                <td className="hidden px-4 py-2 text-right md:table-cell">
                   <a
                     href={item.attachment_url}
                     className="font-medium text-blue-600 hover:underline dark:text-blue-500"
@@ -118,7 +120,7 @@ const MarketIssues: React.FC = () => {
             ))}
           </tbody>
         </table>
-        {visibleItems < data.length && ( // 더보기 버튼 표시 조건
+        {visibleItems < data.length && (
           <div className="mb-2 mt-2 flex justify-center">
             <button
               onClick={loadMoreItems}
