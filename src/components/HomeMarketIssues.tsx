@@ -138,7 +138,7 @@ const MarketIssues: React.FC = () => {
             title={selectedItem.title}
             detail={
               <>
-                <div className="container">
+                <div className="scroll-box">
                   <div className="px-3">
                     <p>
                       <strong>게시판:</strong> {selectedItem.bbs_name}
