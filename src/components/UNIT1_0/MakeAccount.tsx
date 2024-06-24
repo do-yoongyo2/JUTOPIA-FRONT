@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { HiOutlineBell } from "react-icons/hi2";
 import { FiSearch } from "react-icons/fi";
 import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 
@@ -69,7 +69,7 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
               만나서 반가워요!
             </div>
             <div className="ml-10 w-[80px]">
-              <Image src="/UNIT1_0/iconShinhan.png" alt="img" />
+              <img src="/UNIT1_0/iconShinhan.png" alt="img" />
             </div>
           </div>
           <button className="h-[30px] w-full rounded-lg bg-shinhan-blue text-xs font-semibold text-white">
@@ -86,42 +86,42 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
             <div className="flex h-[64px] w-[77px] flex-col justify-end rounded-lg border-2 p-2 font-semibold shadow-md">
               <div className="text-xs text-gray-600">환전 신청</div>
               <div className="mt-1 w-[30px] self-end">
-                <Image src="/UNIT1_0/iconShinhan1.jpg" alt="icon1" />
+                <img src="/UNIT1_0/iconShinhan1.jpg" alt="icon1" />
               </div>
             </div>
 
             <div className="flex h-[64px] w-[77px] flex-col justify-end rounded-lg border-2 p-2 font-semibold shadow-md">
               <div className="text-xs text-gray-600">신용 신청</div>
               <div className="mt-1 w-[30px] self-end">
-                <Image src="/UNIT1_0/iconShinhan2.jpg" alt="icon2" />
+                <img src="/UNIT1_0/iconShinhan2.jpg" alt="icon2" />
               </div>
             </div>
 
             <div className="flex h-[64px] w-[77px] flex-col justify-end rounded-lg border-2 p-2 font-semibold shadow-md">
               <div className="text-xs text-gray-600">계좌 권리 현황</div>
               <div className=" w-[15px] self-end">
-                <Image src="/UNIT1_0/iconShinhan3.jpg" alt="icon3" />
+                <img src="/UNIT1_0/iconShinhan3.jpg" alt="icon3" />
               </div>
             </div>
 
             <div className="flex h-[64px] w-[77px] flex-col justify-end rounded-lg border-2 p-2 font-semibold shadow-md">
               <div className="text-xs text-gray-600">이벤트</div>
               <div className="mt-1 w-[30px] self-end">
-                <Image src="/UNIT1_0/iconShinhan4.jpg" alt="icon4" />
+                <img src="/UNIT1_0/iconShinhan4.jpg" alt="icon4" />
               </div>
             </div>
 
             <div className="flex h-[64px] w-[77px] flex-col justify-end rounded-lg border-2 p-2 font-semibold shadow-md">
               <div className="text-xs text-gray-600">국내 배당 내역</div>
               <div className=" w-[13px] self-end">
-                <Image src="/UNIT1_0/iconShinhan5.jpg" alt="icon5" />
+                <img src="/UNIT1_0/iconShinhan5.jpg" alt="icon5" />
               </div>
             </div>
 
             <div className="flex h-[64px] w-[77px] flex-col justify-end rounded-lg border-2 p-2 font-semibold shadow-md">
               <div className="text-xs text-gray-600">고객상담</div>
               <div className="mt-1 w-[30px] self-end">
-                <Image src="/UNIT1_0/iconShinhan6.jpg" alt="icon6" />
+                <img src="/UNIT1_0/iconShinhan6.jpg" alt="icon6" />
               </div>
             </div>
           </div>

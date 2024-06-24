@@ -3,7 +3,6 @@ import TopBar from "~/components/TopBar";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 const ChallengeDetail: NextPage = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -23,7 +22,7 @@ const ChallengeDetail: NextPage = () => {
         return (
           <div className="mx-auto max-w-sm overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg">
             <div className="bg-gray-200">
-              <Image
+              <img
                 src="/bgimage.jpg"
                 alt="챌린지 이미지"
                 className=" w-full object-cover"
@@ -52,7 +51,7 @@ const ChallengeDetail: NextPage = () => {
         return (
           <div className="mx-auto max-w-sm overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg">
             <div className="bg-gray-200">
-              <Image
+              <img
                 src="/bgimage.jpg"
                 alt="챌린지 이미지"
                 className=" w-full object-cover"
@@ -73,7 +72,7 @@ const ChallengeDetail: NextPage = () => {
         return (
           <div className="mx-auto max-w-sm overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg">
             <div className="bg-gray-200">
-              <Image
+              <img
                 src="/bgimage.jpg"
                 alt="챌린지 이미지"
                 className=" w-full object-cover"
