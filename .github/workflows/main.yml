@@ -21,14 +21,21 @@ jobs:
           script: |
             cd /home/ubuntu/jutopia-front-cicd
             git pull origin main
-            cd /home/ubuntu/jutopia-front-cicd
+
             # Install NVM and Node.js on the remote server
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 22.0.0
             nvm use 22.0.0
+
+            # Check Node.js and npm versions
             node -v
             npm -v
-            npm i --force
+
+            # Install dependencies and build the project
+            npm install --force
             npm run build
+
+            # Restart or start the frontend application with pm2
+            pm2 restart frontend || pm2 start npm --name frontend -- run start
