@@ -1,9 +1,9 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import React from "react";
-import ProblemUnitDescription from "~/components/ProblemUnitDescription";
-import ProblemUnitQuiz from "~/components/ProblemUnitQuiz";
-import * as descriptionData from "~/data/description";
-import * as problemData from "~/data/problem";
+// import ProblemUnitDescription from "~/components/ProblemUnitDescription";
+// import ProblemUnitQuiz from "~/components/ProblemUnitQuiz";
+// import * as descriptionData from "~/data/description";
+// import * as problemData from "~/data/problem";
 
 const Lesson: NextPage = () => {
   return (
@@ -14,7 +14,7 @@ const Lesson: NextPage = () => {
           유닛 1,2,3,4  
       */}
 
-      <ProblemUnitDescription
+      {/* <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_0}
         titles={descriptionData.titles2_0}
         nextIndexes={descriptionData.nextIndexes2_0}
@@ -22,7 +22,7 @@ const Lesson: NextPage = () => {
         imageIndexes={descriptionData.imageIndexes2_0}
         backgroundColor="#0046ff"
         progressbarColor="blue"
-      />
+      /> */}
 
       {/* <ProblemUnitDescription
         descriptionArr={descriptionData.descriptionArr2_1}

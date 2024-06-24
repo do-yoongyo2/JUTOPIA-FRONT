@@ -3,8 +3,9 @@ import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { IoArrowRedoOutline } from "react-icons/io5";
 import { MdOutlineSwipeLeft } from "react-icons/md";
 import TextTypingAni from "./TextTypingAni";
-import { DescriptionItem } from "./../data/description";
+import type { DescriptionItem } from "./../data/description";
 import { DescriptionFrame } from "./styled";
+import Image from "next/image";
 
 const CharacterExplain = ({
   onNext,
@@ -85,7 +86,7 @@ const CharacterExplain = ({
         />
         <div className="container mx-auto block max-w-[70vw] items-center justify-between sm:flex">
           <div className="block sm:flex">
-            <img
+            <Image
               className="m-[15px] h-[7rem] w-[7rem] rounded-[100%] border-4 border-solid border-white object-cover"
               src="character_finger.webp"
               alt="Character pointing"

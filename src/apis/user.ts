@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosResponse } from "axios";
 import Error from "next/error";
 
 // const URL = "52.78.236.23";
