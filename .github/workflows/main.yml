@@ -19,22 +19,23 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/ubuntu/jutopia-front-cicd
-            git pull origin main
-
             # Install NVM and Node.js on the remote server
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
             export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 22.0.0
-            nvm use 22.0.0
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+            nvm install 20.12.2
+            nvm use 20.12.2
+            npm install -g pm2
 
             # Check Node.js and npm versions
             node -v
             npm -v
+            
+            cd /home/ubuntu/jutopia-front-cicd
+            git pull origin main
 
             # Install dependencies and build the project
-            npm install --force
+            npm i --force
             npm run build
 
             # Restart or start the frontend application with pm2
