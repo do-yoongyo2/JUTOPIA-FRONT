@@ -1,4 +1,4 @@
- import type { NextPage } from "next";
+import type { NextPage } from "next";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import TopBar from "~/components/TopBar";
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
     <div className="font-ttlaundrygothicb">
       <TopBar menuName="Home" />
 
- />
+      <LeftBar selectedTab="홈" />
       <div className="flex flex-col sm:p-6 sm:pt-10 lg:ml-64 lg:flex-row lg:justify-center lg:gap-12">
         <div className="flex max-w-[65rem] grow flex-col">
           <Profile />
