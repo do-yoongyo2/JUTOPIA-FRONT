@@ -35,7 +35,9 @@ const Profile: React.FC = () => {
         <h2 className="mt-2 text-sm font-semibold sm:text-lg">
           주토피아와 함께한 지 {daysSinceJoined}일
         </h2>
-        <h2 className="mt-2 text-lg font-semibold">이번 주 총 N일 학습 완🔥</h2>
+        <h2 className="mt-2 text-sm font-semibold sm:text-lg">
+          이번 주 총 N일 학습 완🔥
+        </h2>
       </div>
     </div>
   );
