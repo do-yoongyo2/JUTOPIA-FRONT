@@ -65,17 +65,17 @@ const MarketIssues: React.FC = () => {
         {" "}
         {/* Y축 스크롤 추가 */}
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-          <thead className="sticky top-0 z-10 bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             {" "}
             {/* sticky 클래스 추가로 제목 행 고정 */}
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3">
                 제목
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3">
                 발행일
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3">
                 PDF 파일
                 <span className="sr-only">Download</span>
               </th>
@@ -89,8 +89,9 @@ const MarketIssues: React.FC = () => {
               >
                 <th
                   scope="row"
-                  className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 dark:text-white"
+                  className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
                 >
+                  {/* 제목과 버튼을 감싸는 flex 컨테이너 추가 */}
                   <div className="flex items-center justify-between">
                     <span className="mr-2">{item.title}</span>
                     <button
@@ -102,8 +103,8 @@ const MarketIssues: React.FC = () => {
                     </button>
                   </div>
                 </th>
-                <td className="px-2 py-2">{item.reg_date}</td>
-                <td className="px-2 py-2 text-right">
+                <td className="px-4 py-2">{item.reg_date}</td>
+                <td className="px-4 py-2 text-right">
                   <a
                     href={item.attachment_url}
                     className="font-medium text-blue-600 hover:underline dark:text-blue-500"
