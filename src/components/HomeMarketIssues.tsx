@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { fetchMarketIssuesApi } from "../apis/marketIssuesApi";
 import { Modal, ModalBackdrop } from "./styled";
-import he from "he";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
@@ -17,6 +16,10 @@ interface ListItem {
   updatedAt: string;
 }
 
+function truncate(str: string, maxlength: number): string {
+  return str.length > maxlength ? str.slice(0, maxlength - 1) + "…" : str;
+}
+
 const MarketIssues: React.FC = () => {
   const [data, setData] = useState<ListItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -24,6 +27,7 @@ const MarketIssues: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ListItem | null>(null);
   const [visibleItems, setVisibleItems] = useState<number>(10);
+  const tableRef = useRef<HTMLDivElement>(null);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -62,22 +66,27 @@ const MarketIssues: React.FC = () => {
   }
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div
+      ref={tableRef}
+      className="relative overflow-x-auto shadow-md sm:rounded-lg"
+    >
       <div className="max-h-60 overflow-y-auto">
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-4 py-3">
+              <th scope="col" className="truncate px-4 py-3">
                 제목
               </th>
-              <th scope="col" className="hidden px-4 py-3 md:table-cell">
-                {" "}
-                {/* 모바일에서 숨기기 */}
+              <th
+                scope="col"
+                className="hidden table-fixed px-4 py-3 md:table-cell"
+              >
                 발행일
               </th>
-              <th scope="col" className="hidden px-4 py-3 md:table-cell">
-                {" "}
-                {/* 모바일에서 숨기기 */}
+              <th
+                scope="col"
+                className="hidden table-fixed px-4 py-3 md:table-cell"
+              >
                 PDF 파일
                 <span className="sr-only">Download</span>
               </th>
@@ -94,9 +103,23 @@ const MarketIssues: React.FC = () => {
                   className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
                 >
                   <div className="flex items-center justify-between">
-                    <Tippy content={item.title}>
+                    <Tippy
+                      className="overflow-hidden"
+                      content={item.title}
+                      appendTo={tableRef.current}
+                      popperOptions={{
+                        modifiers: [
+                          {
+                            name: "preventOverflow",
+                            options: {
+                              boundary: tableRef.current,
+                            },
+                          },
+                        ],
+                      }}
+                    >
                       <span className="mr-2 w-40 truncate md:w-auto">
-                        {item.title}
+                        {truncate(item.title, 40)}
                       </span>
                     </Tippy>
                     <button
@@ -161,7 +184,13 @@ const MarketIssues: React.FC = () => {
                     </p>
                     <hr className="mb-3 mt-3" />
                     <p>
-                      <strong>내용:</strong> {he.decode(selectedItem.content)}{" "}
+                      <strong>내용:</strong>
+                      {/* {he.decode(selectedItem.content)} */}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: selectedItem.content,
+                        }}
+                      ></div>
                     </p>
                   </div>
                 </div>
