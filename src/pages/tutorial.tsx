@@ -30,11 +30,15 @@ import { LoginScreen, useLoginScreen } from "~/components/LoginScreen";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import type { Tile, TileType, Unit } from "~/utils/units";
 import { units } from "~/utils/units";
+import {
+  readUserCurrentLearning,
+  createUserCurrentLearning,
+} from "~/apis/userCurrentLearning";
 
 type TileStatus = "LOCKED" | "ACTIVE" | "COMPLETE";
 
 const tileStatus = (tile: Tile, lessonsCompleted: number): TileStatus => {
-  const lessonsPerTile = 4;
+  const lessonsPerTile = 1;
   const tilesCompleted = Math.floor(lessonsCompleted / lessonsPerTile);
   const tiles = units.flatMap((unit) => unit.tiles);
   const tileIndex = tiles.findIndex((t) => t === tile);
@@ -56,7 +60,7 @@ const TileIcon = ({
   status: TileStatus;
 }): JSX.Element => {
   switch (tileType) {
-    case "star":
+    case "1.0": //첫화면
       return status === "COMPLETE" ? (
         <CheckmarkSvg />
       ) : status === "ACTIVE" ? (
@@ -64,7 +68,7 @@ const TileIcon = ({
       ) : (
         <LockSvg />
       );
-    case "book":
+    case "1.1":
       return status === "COMPLETE" ? (
         <GoldenBookSvg />
       ) : status === "ACTIVE" ? (
@@ -72,7 +76,7 @@ const TileIcon = ({
       ) : (
         <LockedBookSvg />
       );
-    case "dumbbell":
+    case "1.2":
       return status === "COMPLETE" ? (
         <GoldenDumbbellSvg />
       ) : status === "ACTIVE" ? (
@@ -80,6 +84,119 @@ const TileIcon = ({
       ) : (
         <LockedDumbbellSvg />
       );
+    case "2.0":
+      return status === "COMPLETE" ? (
+        <CheckmarkSvg />
+      ) : status === "ACTIVE" ? (
+        <StarSvg />
+      ) : (
+        <LockSvg />
+      );
+    case "2.1":
+      return status === "COMPLETE" ? (
+        <GoldenBookSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveBookSvg />
+      ) : (
+        <LockedBookSvg />
+      );
+    case "2.2":
+      return status === "COMPLETE" ? (
+        <GoldenDumbbellSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveDumbbellSvg />
+      ) : (
+        <LockedDumbbellSvg />
+      );
+    case "2.3":
+      return status === "COMPLETE" ? (
+        <CheckmarkSvg />
+      ) : status === "ACTIVE" ? (
+        <StarSvg />
+      ) : (
+        <LockSvg />
+      );
+    case "2.4":
+      return status === "COMPLETE" ? (
+        <GoldenBookSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveBookSvg />
+      ) : (
+        <LockedBookSvg />
+      );
+    case "3.0":
+      return status === "COMPLETE" ? (
+        <CheckmarkSvg />
+      ) : status === "ACTIVE" ? (
+        <StarSvg />
+      ) : (
+        <LockSvg />
+      );
+    case "3.1":
+      return status === "COMPLETE" ? (
+        <GoldenBookSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveBookSvg />
+      ) : (
+        <LockedBookSvg />
+      );
+    case "3.2":
+      return status === "COMPLETE" ? (
+        <GoldenDumbbellSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveDumbbellSvg />
+      ) : (
+        <LockedDumbbellSvg />
+      );
+    case "3.3":
+      return status === "COMPLETE" ? (
+        <CheckmarkSvg />
+      ) : status === "ACTIVE" ? (
+        <StarSvg />
+      ) : (
+        <LockSvg />
+      );
+    case "3.4":
+      return status === "COMPLETE" ? (
+        <GoldenBookSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveBookSvg />
+      ) : (
+        <LockedBookSvg />
+      );
+    case "3.5":
+      return status === "COMPLETE" ? (
+        <GoldenDumbbellSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveDumbbellSvg />
+      ) : (
+        <LockedDumbbellSvg />
+      );
+    case "3.6":
+      return status === "COMPLETE" ? (
+        <CheckmarkSvg />
+      ) : status === "ACTIVE" ? (
+        <StarSvg />
+      ) : (
+        <LockSvg />
+      );
+    case "3.7":
+      return status === "COMPLETE" ? (
+        <GoldenBookSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveBookSvg />
+      ) : (
+        <LockedBookSvg />
+      );
+    case "4.0":
+      return status === "COMPLETE" ? (
+        <GoldenBookSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveBookSvg />
+      ) : (
+        <LockedBookSvg />
+      );
+
     case "treasure":
       return status === "COMPLETE" ? (
         <GoldenTreasureSvg />
@@ -87,14 +204,6 @@ const TileIcon = ({
         <ActiveTreasureSvg />
       ) : (
         <LockedTreasureSvg />
-      );
-    case "trophy":
-      return status === "COMPLETE" ? (
-        <GoldenTrophySvg />
-      ) : status === "ACTIVE" ? (
-        <ActiveTrophySvg />
-      ) : (
-        <LockedTrophySvg />
       );
   }
 };
@@ -186,6 +295,7 @@ const TileTooltip = ({
   description,
   status,
   closeTooltip,
+  tileType,
 }: {
   selectedTile: number | null;
   index: number;
@@ -194,6 +304,7 @@ const TileTooltip = ({
   description: string;
   status: TileStatus;
   closeTooltip: () => void;
+  tileType: TileType;
 }) => {
   const tileTooltipRef = useRef<HTMLDivElement | null>(null);
 
@@ -215,6 +326,48 @@ const TileTooltip = ({
   const activeBackgroundColor = unit?.backgroundColor ?? "bg-green-500";
   const activeTextColor = unit?.textColor ?? "text-green-500";
 
+  // 타일 타입에 따른 href
+  const getHrefByTileType = (type: TileType, status: TileStatus) => {
+    const statusParam = `status=${status.toLowerCase()}`;
+    switch (type) {
+      case "1.0":
+        return `/lesson?type=1.0&${statusParam}`;
+      case "1.1":
+        return `/lesson?type=1.1&${statusParam}`;
+      case "1.2":
+        return `/lesson?type=1.2&${statusParam}`;
+      case "2.0":
+        return `/lesson?type=2.0&${statusParam}`;
+      case "2.1":
+        return `/lesson?type=2.1&${statusParam}`;
+      case "2.2":
+        return `/lesson?type=2.2&${statusParam}`;
+      case "2.3":
+        return `/lesson?type=2.3&${statusParam}`;
+      case "2.4":
+        return `/lesson?type=2.4&${statusParam}`;
+      case "3.0":
+        return `/lesson?type=3.0&${statusParam}`;
+      case "3.1":
+        return `/lesson?type=3.1&${statusParam}`;
+      case "3.2":
+        return `/lesson?type=3.2&${statusParam}`;
+      case "3.3":
+        return `/lesson?type=3.3&${statusParam}`;
+      case "3.4":
+        return `/lesson?type=3.4&${statusParam}`;
+      case "3.5":
+        return `/lesson?type=3.5&${statusParam}`;
+      case "3.6":
+        return `/lesson?type=3.6&${statusParam}`;
+      case "3.7":
+        return `/lesson?type=3.7&${statusParam}`;
+      case "4.0":
+        return `/lesson?type=4.0&${statusParam}`;
+      default:
+        return `/lesson&${statusParam}`;
+    }
+  };
   return (
     <div
       className={[
@@ -262,13 +415,13 @@ const TileTooltip = ({
         </div>
         {status === "ACTIVE" ? (
           <Link
-            href="/lesson"
+            href={getHrefByTileType(tileType, status)}
             className={[
               "flex w-full items-center justify-center rounded-xl border-b-4 border-gray-200 bg-white p-3 uppercase",
               activeTextColor,
             ].join(" ")}
           >
-            Start +10 XP
+            Start
           </Link>
         ) : status === "LOCKED" ? (
           <button
@@ -279,10 +432,10 @@ const TileTooltip = ({
           </button>
         ) : (
           <Link
-            href="/lesson"
+            href={getHrefByTileType(tileType, status)}
             className="flex w-full items-center justify-center rounded-xl border-b-4 border-yellow-200 bg-white p-3 uppercase text-yellow-400"
           >
-            Practice +5 XP
+            Practice
           </Link>
         )}
       </div>
@@ -292,6 +445,7 @@ const TileTooltip = ({
 
 const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   const [selectedTile, setSelectedTile] = useState<null | number>(null);
+  const [currentLearning, setCurrentLearning] = useState<number>(0); //최종
 
   useEffect(() => {
     const unselectTile = () => setSelectedTile(null);
@@ -302,11 +456,37 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   const closeTooltip = useCallback(() => setSelectedTile(null), []);
 
   const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted);
+  const setLessonsCompleted = useBoundStore((x) => x.setLessonsCompleted);
+
   const increaseLessonsCompleted = useBoundStore(
     (x) => x.increaseLessonsCompleted,
   );
   const increaseLingots = useBoundStore((x) => x.increaseLingots);
+  const email = useBoundStore((x) => x.email);
 
+  useEffect(() => {
+    async function fetchCurrentLearning() {
+      try {
+        console.log("Fetching current learning for email:", email);
+        let response = await readUserCurrentLearning(email);
+        if (!response || !response.userCurrentLearning) {
+          console.log("No current learning data, creating new...");
+          await createUserCurrentLearning(email);
+          response = await readUserCurrentLearning(email);
+        }
+        const current = response.userCurrentLearning;
+        setCurrentLearning(current);
+        setLessonsCompleted(current);
+        console.log("Fetched data:", current);
+      } catch (error) {
+        console.error("Failed to fetch or create current learning", error);
+      }
+    }
+
+    fetchCurrentLearning().catch((error) => {
+      console.error("Unhandled error:", error);
+    });
+  }, [setLessonsCompleted, email]);
   return (
     <>
       <UnitHeader
@@ -317,25 +497,29 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
       />
       <div className="relative mb-8 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4">
         {unit.tiles.map((tile, i): JSX.Element => {
+          console.log(lessonsCompleted);
           const status = tileStatus(tile, lessonsCompleted);
           return (
             <Fragment key={i}>
               {(() => {
                 switch (tile.type) {
-                  case "star":
-                  case "book":
-                  case "dumbbell":
-                  case "trophy":
-                    if (tile.type === "trophy" && status === "COMPLETE") {
-                      return (
-                        <div className="relative">
-                          <TileIcon tileType={tile.type} status={status} />
-                          <div className="absolute left-0 right-0 top-6 flex justify-center text-lg font-bold text-yellow-700">
-                            {unit.unitNumber}
-                          </div>
-                        </div>
-                      );
-                    }
+                  case "1.0":
+                  case "1.1":
+                  case "1.2":
+                  case "2.0":
+                  case "2.1":
+                  case "2.2":
+                  case "2.3":
+                  case "2.4":
+                  case "3.0":
+                  case "3.1":
+                  case "3.2":
+                  case "3.3":
+                  case "3.4":
+                  case "3.5":
+                  case "3.6":
+                  case "3.7":
+                  case "4.0":
                     return (
                       <div
                         className={[
@@ -351,7 +535,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                           <HoverLabel text="Start" textColor={unit.textColor} />
                         ) : null}
                         <LessonCompletionSvg
-                          lessonsCompleted={lessonsCompleted}
+                          lessonsCompleted={1}
                           status={status}
                         />
                         <button
@@ -384,7 +568,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                         ].join(" ")}
                         onClick={() => {
                           if (status === "ACTIVE") {
-                            increaseLessonsCompleted(4);
+                            increaseLessonsCompleted(email, 1);
                             increaseLingots(1);
                           }
                         }}
@@ -408,18 +592,31 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                 tilesLength={unit.tiles.length}
                 description={(() => {
                   switch (tile.type) {
-                    case "book":
-                    case "dumbbell":
-                    case "star":
+                    case "1.0":
+                    case "1.1":
+                    case "1.2":
+                    case "2.0":
+                    case "2.1":
+                    case "2.2":
+                    case "2.3":
+                    case "2.4":
+                    case "3.0":
+                    case "3.1":
+                    case "3.2":
+                    case "3.3":
+                    case "3.4":
+                    case "3.5":
+                    case "3.6":
+                    case "3.7":
+                    case "4.0":
                       return tile.description;
-                    case "trophy":
-                      return `Unit ${unit.unitNumber} review`;
                     case "treasure":
                       return "";
                   }
                 })()}
                 status={status}
                 closeTooltip={closeTooltip}
+                tileType={tile.type}
               />
             </Fragment>
           );
@@ -520,15 +717,10 @@ const LessonCompletionSvg = ({
   if (status !== "ACTIVE") {
     return null;
   }
-  switch (lessonsCompleted % 4) {
-    case 0:
-      return <LessonCompletionSvg0 style={style} />;
+  switch (lessonsCompleted) {
     case 1:
-      return <LessonCompletionSvg1 style={style} />;
-    case 2:
-      return <LessonCompletionSvg2 style={style} />;
-    case 3:
-      return <LessonCompletionSvg3 style={style} />;
+      return <LessonCompletionSvg0 style={style} />;
+
     default:
       return null;
   }
