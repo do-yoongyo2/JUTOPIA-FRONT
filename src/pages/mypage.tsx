@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import ChallengeGrid from "~/components/ChallengeGrid";
-import TopBar from "~/components/TopBar";
 import { updateName } from "~/apis/user";
 
 const MyPage: NextPage = () => {
@@ -39,7 +38,7 @@ const MyPage: NextPage = () => {
       // 로그인 상태인 경우 서버에서 데이터 가져와서 설정
       setLocalName(name); // 초기 localName 설정
     }
-  }, [loggedIn]);
+  }, [loggedIn, name]);
 
   if (!isHydrated) {
     // 초기 로딩 상태 표시 또는 빈 상태로 렌더링

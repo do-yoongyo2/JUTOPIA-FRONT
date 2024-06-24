@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
-import { useRouter, NextRouter } from "next/router";
+import { useRouter } from "next/router";
+import type { NextRouter } from "next/router";
 import React, { useEffect } from "react";
 import BusinessCategories from "~/components/BusinessCategory";
 import HeroHome from "~/components/HeroHome";
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
         console.log("failed at index page:", err);
       });
     }
-  }, [loggedIn]);
+  }, [loggedIn, router]);
 
   // Animation variants
   const buttonVariants = {

@@ -7,7 +7,7 @@ export interface Problem {
   answer: string;
   solutionDetail?: string;
 }
-interface ProblemItem {
+export interface ProblemItem {
   [key: string]: Problem;
 }
 export const problem3_0: ProblemItem = data;

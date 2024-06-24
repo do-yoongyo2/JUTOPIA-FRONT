@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { readSinceJoinDate } from "~/apis/user";
+import Image from "next/image";
 
 const Profile: React.FC = () => {
   const username = useBoundStore((x) => x.name);
@@ -25,7 +26,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="flex flex-row items-center justify-evenly rounded-lg bg-gradient-to-r from-blue-500 to-blue-400 p-5 text-white shadow-lg">
-      <img
+      <Image
         src="UNIT2_3/축하원숭이.png"
         alt="Profile"
         className="h-40 w-40 rounded-full border-4 border-white shadow-md"

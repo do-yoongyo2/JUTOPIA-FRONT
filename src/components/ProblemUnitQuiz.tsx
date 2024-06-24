@@ -4,9 +4,8 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CheckAnswer from "~/components/LessonCheckAnswer";
-import { Problem } from "~/data/problem";
+import type { Problem, ProblemItem } from "~/data/problem";
 import Link from "next/link";
-import Image from "next/image";
 
 const LessonComplete = ({ backgroundColor }: { backgroundColor: string }) => {
   return (
@@ -35,7 +34,7 @@ const ProblemUnitQuiz = ({
   backgroundColor,
   progressbarColor,
 }: {
-  problem: any;
+  problem: ProblemItem;
   backgroundColor: string;
   progressbarColor: string;
 }) => {
@@ -53,6 +52,7 @@ const ProblemUnitQuiz = ({
   const transformWrapperRef = useRef(null);
 
   const problemKeys: string[] = Object.keys(problem);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const currentProblem: Problem | null = problemKeys[currentProblemIndex]
     ? problem[problemKeys[currentProblemIndex]]
     : null;
@@ -103,7 +103,7 @@ const ProblemUnitQuiz = ({
     setIsChecked(false);
     if (retryMode) {
       if (incorrectAnswers.length > 0) {
-        setCurrentProblemIndex(incorrectAnswers[0]!);
+        setCurrentProblemIndex(incorrectAnswers[0]);
         setIncorrectAnswers(incorrectAnswers.slice(1));
       } else {
         setRetryMode(false);
@@ -115,7 +115,7 @@ const ProblemUnitQuiz = ({
       } else {
         if (incorrectAnswers.length > 0) {
           setRetryMode(true);
-          setCurrentProblemIndex(incorrectAnswers[0]!);
+          setCurrentProblemIndex(incorrectAnswers[0]);
           setIncorrectAnswers(incorrectAnswers.slice(1));
         } else {
           setIsComplete(true);
@@ -126,6 +126,7 @@ const ProblemUnitQuiz = ({
 
   useEffect(() => {
     if (transformWrapperRef.current) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       transformWrapperRef.current.resetTransform();
     }
   }, [currentProblemIndex]);
@@ -167,6 +168,7 @@ const ProblemUnitQuiz = ({
                 ref={transformWrapperRef}
               >
                 <TransformComponent>
+                  {/*eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     className="h-[300px] w-[100vw] cursor-pointer object-contain"
                     src={currentProblem.problemImage}

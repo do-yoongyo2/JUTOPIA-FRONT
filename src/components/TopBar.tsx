@@ -37,10 +37,7 @@ const TopBar = (props: TopBarProps) => {
           <MoreOptionsSvg />
         </div>
         {menu === "MORE" && (
-          <div
-            className="absolute left-0 right-0 top-full z-40 bg-white opacity-100 transition duration-300"
-            aria-hidden={menu === "HIDDEN"}
-          >
+          <div className="absolute left-0 right-0 top-full z-40 bg-white opacity-100 transition duration-300">
             <div className="flex grow flex-col">
               <div
                 className="flex items-center gap-2 p-2 font-bold text-gray-700"

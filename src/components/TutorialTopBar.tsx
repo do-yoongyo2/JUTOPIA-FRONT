@@ -1,8 +1,9 @@
-import type { ComponentProps } from "react";
+// import type { ComponentProps } from "react";
 import React, { useState } from "react";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useRouter } from "next/router";
-import { FireSvg, GemSvg, MoreOptionsSvg, LogoutIconSvg } from "./Svgs";
+import { MoreOptionsSvg, LogoutIconSvg } from "./Svgs";
+// import { FireSvg, GemSvg } from "./Svgs";
 
 // const EmptyFireTopBarSvg = (props: ComponentProps<"svg">) => {
 //   return (
@@ -44,8 +45,8 @@ export const TutorialTopBar = ({
   borderColor?: `border-${string}`;
 }) => {
   const [menu, setMenu] = useState<MenuState>("HIDDEN");
-  const streak = useBoundStore((x) => x.streak);
-  const lingots = useBoundStore((x) => x.lingots);
+  //const streak = useBoundStore((x) => x.streak);
+  //const lingots = useBoundStore((x) => x.lingots);
 
   const logOut = useBoundStore((x) => x.logOut);
   const router = useRouter();
